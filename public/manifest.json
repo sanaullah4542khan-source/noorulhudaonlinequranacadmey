@@ -1,0 +1,44 @@
+{
+  "id": "/",
+  "name": "Noor Ul Huda Online Quran Academy",
+  "short_name": "Noor Ul Huda",
+  "description": "Learn Holy Quran online with certified 1-on-1 scholars, interactive Tajweed, and live digital classroom.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#faf9f5",
+  "theme_color": "#064232",
+  "categories": ["education", "lifestyle", "books"],
+  "icons": [
+    {
+      "src": "/noor-ul-huda-logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/noor-ul-huda-logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/noor-ul-huda-logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/noor-ul-huda-logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/noor-ul-huda-logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

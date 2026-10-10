@@ -1,0 +1,6 @@
+{
+  "name": "Noor Ul Huda Quran Academy",
+  "description": "A modern, premium online Quran and Islamic learning academy offering personalized 1-on-1 classes, male and female qualified teachers, Tajweed, Hifz, Islamic studies, and tailored pathways for children, adults, and new Muslims.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

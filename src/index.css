@@ -1,0 +1,356 @@
+@import "tailwindcss";
+
+@variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-heading: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-nav: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-button: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-serif: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-poppins: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-inter: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-arabic: 'Cairo', 'Amiri', 'Traditional Arabic', serif;
+  --font-cairo: 'Cairo', sans-serif;
+  --font-nastaliq: 'Noto Nastaliq Urdu', 'Amiri', 'Traditional Arabic', serif;
+}
+
+@layer base {
+  :root {
+    --color-emerald-deep: #064232;
+    --color-emerald-primary: #0b513f;
+    --color-emerald-surface: #0f634e;
+    --color-emerald-darkest: #04241b;
+    --color-gold-accent: #c69b32;
+    --color-gold-muted: #d9ad3d;
+    --color-gold-soft: #fdf6e2;
+    --color-ivory-bg: #faf9f5;
+    --color-ivory-card: #ffffff;
+    --color-text-main: #13241d;
+    --color-text-muted: #4e655c;
+    
+    /* Typography Tokens */
+    --font-heading: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-nav: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-button: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-serif: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-poppins: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-inter: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-arabic: 'Amiri', 'Traditional Arabic', serif;
+    --font-cinzel: 'Cinzel', Georgia, serif;
+    --font-outfit: 'Outfit', sans-serif;
+  }
+
+  .dark {
+    --color-emerald-deep: #04241b;
+    --color-emerald-primary: #06382b;
+    --color-emerald-surface: #0a4838;
+    --color-emerald-darkest: #02140f;
+    --color-gold-accent: #facc15;
+    --color-gold-muted: #eab308;
+    --color-gold-soft: #123326;
+    --color-ivory-bg: #041c15;
+    --color-ivory-card: #072a20;
+    --color-text-main: #f3f4f6;
+    --color-text-muted: #9fb3ab;
+    color-scheme: dark;
+  }
+
+  body {
+    font-family: var(--font-body);
+    font-weight: 400; /* Inter Regular */
+    line-height: 1.625;
+    letter-spacing: -0.011em;
+    color: var(--color-text-main);
+    background-color: var(--color-ivory-bg);
+    overflow-x: hidden;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  html.dark body {
+    background-color: #041c15;
+    color: #f3f4f6;
+  }
+
+  /* Major Headings: Poppins SemiBold */
+  h1, h2, h3, h4, h5, h6, .font-heading, .font-serif {
+    font-family: var(--font-heading);
+    font-weight: 600; /* Poppins SemiBold */
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+
+  /* Navigation & Buttons: Poppins Medium */
+  nav,
+  nav a,
+  nav button,
+  button,
+  .btn,
+  .font-nav,
+  .font-button,
+  [role="button"] {
+    font-family: var(--font-nav);
+    font-weight: 500; /* Poppins Medium */
+    letter-spacing: 0.005em;
+  }
+
+  p, li, input, textarea, select {
+    font-family: var(--font-body);
+    font-weight: 400; /* Inter Regular */
+  }
+
+  .font-heading {
+    font-family: var(--font-heading);
+    font-weight: 600; /* Poppins SemiBold */
+  }
+
+  .font-body {
+    font-family: var(--font-body);
+    font-weight: 400; /* Inter Regular */
+  }
+
+  .font-nav {
+    font-family: var(--font-nav);
+    font-weight: 500; /* Poppins Medium */
+  }
+
+  .font-button {
+    font-family: var(--font-button);
+    font-weight: 500; /* Poppins Medium */
+  }
+
+  .font-poppins {
+    font-family: var(--font-poppins);
+  }
+
+  .font-inter {
+    font-family: var(--font-inter);
+  }
+
+  .font-arabic {
+    font-family: var(--font-arabic);
+  }
+
+  .font-nastaliq {
+    font-family: var(--font-nastaliq);
+    line-height: 2.2;
+    letter-spacing: 0;
+  }
+
+  .font-cinzel {
+    font-family: var(--font-cinzel);
+  }
+
+  .font-outfit {
+    font-family: var(--font-outfit);
+  }
+}
+
+/* Vibrant Course Card Glow and Accents */
+.card-glow-emerald:hover {
+  box-shadow: 0 20px 40px -15px rgba(5, 150, 105, 0.25), 0 0 0 1px rgba(16, 185, 129, 0.3);
+}
+.card-glow-blue:hover {
+  box-shadow: 0 20px 40px -15px rgba(37, 99, 235, 0.25), 0 0 0 1px rgba(59, 130, 246, 0.3);
+}
+.card-glow-purple:hover {
+  box-shadow: 0 20px 40px -15px rgba(147, 51, 234, 0.25), 0 0 0 1px rgba(168, 85, 247, 0.3);
+}
+.card-glow-teal:hover {
+  box-shadow: 0 20px 40px -15px rgba(13, 148, 136, 0.25), 0 0 0 1px rgba(20, 184, 166, 0.3);
+}
+.card-glow-rose:hover {
+  box-shadow: 0 20px 40px -15px rgba(225, 29, 72, 0.25), 0 0 0 1px rgba(244, 63, 94, 0.3);
+}
+.card-glow-indigo:hover {
+  box-shadow: 0 20px 40px -15px rgba(79, 70, 229, 0.25), 0 0 0 1px rgba(99, 102, 241, 0.3);
+}
+.card-glow-amber:hover {
+  box-shadow: 0 20px 40px -15px rgba(217, 119, 6, 0.25), 0 0 0 1px rgba(245, 158, 11, 0.3);
+}
+.card-glow-orange:hover {
+  box-shadow: 0 20px 40px -15px rgba(234, 88, 12, 0.25), 0 0 0 1px rgba(249, 115, 22, 0.3);
+}
+
+/* Subtle Islamic Star & Lattice Geometric Pattern */
+.bg-islamic-pattern {
+  background-image: radial-gradient(circle at 50% 50%, rgba(198, 155, 50, 0.08) 1px, transparent 1px),
+                    radial-gradient(circle at 0% 100%, rgba(6, 66, 50, 0.04) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+.bg-islamic-dark-pattern {
+  background-image: radial-gradient(circle at 50% 50%, rgba(217, 173, 61, 0.08) 1.2px, transparent 1.2px),
+                    linear-gradient(135deg, rgba(255, 255, 255, 0.02) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.02) 50%, rgba(255, 255, 255, 0.02) 75%, transparent 75%, transparent);
+  background-size: 32px 32px;
+}
+
+.islamic-arch-shape {
+  border-top-left-radius: 4rem;
+  border-top-right-radius: 4rem;
+}
+
+/* Subtle gold metallic shimmer text */
+.gold-gradient-text {
+  background: linear-gradient(135deg, #b38728 0%, #e6c564 45%, #b38728 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.emerald-gradient {
+  background: linear-gradient(145deg, #073a2c 0%, #0c4d3b 50%, #062f23 100%);
+}
+
+/* Glassmorphic subtle card */
+.glass-card {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(229, 227, 215, 0.7);
+}
+
+.glass-card-dark {
+  background: rgba(8, 44, 34, 0.75);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(217, 173, 61, 0.2);
+}
+
+/* Custom scrollbar for modern browsers */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f1efe8;
+}
+::-webkit-scrollbar-thumb {
+  background: #0b513f44;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #0b513f88;
+}
+
+/* Dark Mode Comprehensive Styling & Islamic Aesthetics */
+html.dark,
+body.dark {
+  background-color: #041c15;
+  color: #f1f5f3;
+}
+
+/* Light sections transform into rich Islamic dark backgrounds */
+.dark section.bg-white,
+.dark .bg-white {
+  background-color: #072c21;
+  color: #f1f5f3;
+  border-color: #0f4837;
+}
+
+.dark .bg-\[\#faf9f5\],
+.dark .bg-\[\#f5f4ed\],
+.dark .bg-\[\#fafafa\],
+.dark .bg-gray-50,
+.dark .bg-slate-50 {
+  background-color: #05221a;
+  color: #f1f5f3;
+  border-color: #0f4837;
+}
+
+.dark .text-\[\#064232\],
+.dark .text-\[\#13241d\] {
+  color: #f1f5f3;
+}
+
+.dark .text-\[\#4e655c\],
+.dark .text-gray-600,
+.dark .text-gray-500 {
+  color: #9ab4aa;
+}
+
+.dark .border-\[\#e5e3d7\],
+.dark .border-\[\#f0eee4\],
+.dark .border-gray-100,
+.dark .border-gray-200 {
+  border-color: #0e4535;
+}
+
+.dark input,
+.dark select,
+.dark textarea {
+  background-color: #05221a;
+  color: #ffffff;
+  border-color: #0e4535;
+}
+
+.dark input::placeholder,
+.dark textarea::placeholder {
+  color: #6b8a7f;
+}
+
+.dark .bg-\[\#facc15\],
+.dark .bg-\[\#facc15\] * {
+  color: #13241d !important;
+}
+
+.dark .bg-\[\#25D366\],
+.dark .bg-\[\#25D366\] * {
+  color: #ffffff !important;
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: #041c15;
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: #facc1533;
+}
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #facc1566;
+}
+
+/* ========================================================
+   RTL & Arabic / Urdu Localization Typography
+   ======================================================== */
+[dir="rtl"] {
+  text-align: right;
+}
+
+html[lang="ar"],
+body[lang="ar"],
+.lang-ar {
+  font-family: 'Cairo', 'Amiri', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  letter-spacing: 0;
+}
+
+html[lang="ar"] h1,
+html[lang="ar"] h2,
+html[lang="ar"] h3,
+html[lang="ar"] h4,
+html[lang="ar"] h5,
+html[lang="ar"] h6,
+html[lang="ar"] .font-heading {
+  font-family: 'Cairo', 'Amiri', sans-serif;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+html[lang="ar"] nav,
+html[lang="ar"] button,
+html[lang="ar"] .font-nav {
+  font-family: 'Cairo', sans-serif;
+  font-weight: 600;
+}
+
+html[lang="ur"],
+body[lang="ur"],
+.lang-ur {
+  font-family: 'Noto Nastaliq Urdu', 'Amiri', serif;
+}
+
+html[lang="ur"] .font-heading {
+  font-family: 'Noto Nastaliq Urdu', 'Amiri', serif;
+  line-height: 2.1;
+}
+
