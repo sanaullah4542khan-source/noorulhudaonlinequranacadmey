@@ -1,5 +1,5 @@
 import React from 'react';
-import { Phone, Mail, MessageCircle, Facebook, Instagram, Linkedin, GraduationCap } from 'lucide-react';
+import { Phone, Mail, MessageCircle, Facebook, Instagram, Linkedin, GraduationCap, ShieldCheck } from 'lucide-react';
 import { SAFIR_CONTACT, getSafirWhatsAppUrl } from '../data/safirData';
 import { useLanguage } from '../context/LanguageContext';
 import { LanguageSwitcher } from './LanguageSwitcher';
@@ -10,13 +10,15 @@ interface TopBarProps {
   onOpenStudentDashboard?: () => void;
   onOpenSystemModal?: () => void;
   onOpenAIAssistant?: () => void;
+  onOpenAdminLogin?: () => void;
 }
 
 export const TopBar: React.FC<TopBarProps> = ({
   onOpenFreeTrial,
   onOpenStudentDashboard,
   onOpenSystemModal,
-  onOpenAIAssistant
+  onOpenAIAssistant,
+  onOpenAdminLogin
 }) => {
   const { t, isRtl, isArabic, isUrdu } = useLanguage();
 
@@ -121,6 +123,19 @@ export const TopBar: React.FC<TopBarProps> = ({
         <div className="flex items-center gap-1.5 sm:gap-2.5 flex-shrink-0">
           <ThemeToggle variant="topbar" />
           <LanguageSwitcher variant="topbar" />
+
+          {/* Admin Login Button - Clearly Visible with Shield-Lock Icon */}
+          {onOpenAdminLogin && (
+            <button
+              id="topbar-admin-login-btn"
+              onClick={onOpenAdminLogin}
+              className="flex bg-[#042d22] hover:bg-[#074735] text-[#facc15] hover:text-white border border-[#facc15]/50 font-nav font-medium px-2 py-1 sm:px-3 sm:py-1.5 rounded-md text-[10.5px] sm:text-xs tracking-wide transition-all transform active:scale-95 items-center gap-1.5 shadow-sm cursor-pointer"
+              title="Authorized Academy Administrator Access"
+            >
+              <ShieldCheck className="w-3.5 h-3.5 text-[#facc15] flex-shrink-0" />
+              <span>Admin Login</span>
+            </button>
+          )}
 
           {/* Student Portal - Desktop only */}
           {onOpenStudentDashboard && (

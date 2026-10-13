@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Menu, X, Phone, MessageCircle, GraduationCap, Zap, Sparkles, Compass } from 'lucide-react';
+import { Menu, X, Phone, MessageCircle, GraduationCap, Zap, Sparkles, Compass, ShieldCheck } from 'lucide-react';
 import { SafirLogo } from './SafirLogo';
 import { TopBar } from './TopBar';
 import { SAFIR_CONTACT, getSafirWhatsAppUrl } from '../data/safirData';
@@ -15,6 +15,7 @@ interface NavbarProps {
   onOpenSystemModal?: () => void;
   onOpenAIAssistant?: () => void;
   onOpenLearningPath?: () => void;
+  onOpenAdminLogin?: () => void;
   onScrollToSection: (sectionId: string) => void;
 }
 
@@ -26,6 +27,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   onOpenSystemModal,
   onOpenAIAssistant,
   onOpenLearningPath,
+  onOpenAdminLogin,
   onScrollToSection
 }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -50,12 +52,13 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   return (
     <header className="sticky top-0 z-50 shadow-md">
-      {/* 1. Very Top Green Bar with Flag, Phone, Socials, Student Portal and Yellow Trial Button */}
+      {/* 1. Very Top Green Bar with Flag, Phone, Socials, Student Portal, Admin Login and Yellow Trial Button */}
       <TopBar
         onOpenFreeTrial={() => onOpenFreeTrial()}
         onOpenStudentDashboard={onOpenStudentDashboard}
         onOpenSystemModal={onOpenSystemModal}
         onOpenAIAssistant={onOpenAIAssistant}
+        onOpenAdminLogin={onOpenAdminLogin}
       />
 
       {/* 2. Main Navigation Bar */}
@@ -107,6 +110,17 @@ export const Navbar: React.FC<NavbarProps> = ({
                 <span>{isArabic ? 'البوابة' : isUrdu ? 'پورٹل' : 'Portals'}</span>
               </button>
             )}
+            {onOpenAdminLogin && (
+              <button
+                id="navbar-admin-login-btn"
+                onClick={onOpenAdminLogin}
+                className="px-2.5 sm:px-3 py-2 rounded-md bg-[#042d22] hover:bg-[#074735] text-[#facc15] hover:text-white border border-[#facc15]/50 font-nav font-semibold text-xs shadow-sm transition-all flex items-center gap-1.5 cursor-pointer"
+                title="Authorized Academy Administrator Access"
+              >
+                <ShieldCheck className="w-3.5 h-3.5 text-[#facc15] flex-shrink-0" />
+                <span>Admin Login</span>
+              </button>
+            )}
             <button
               onClick={() => onOpenFreeTrial()}
               className="px-3.5 py-2 bg-[#facc15] hover:bg-[#eab308] text-[#13241d] font-nav font-semibold text-xs rounded-md shadow-sm transition-all cursor-pointer"
@@ -115,8 +129,19 @@ export const Navbar: React.FC<NavbarProps> = ({
             </button>
           </div>
 
-          {/* Mobile Right Controls: Trial Button + Hamburger */}
+          {/* Mobile Right Controls: Admin + Trial Button + Hamburger */}
           <div className="lg:hidden flex items-center gap-1.5 sm:gap-2">
+            {onOpenAdminLogin && (
+              <button
+                id="navbar-mobile-admin-btn"
+                onClick={onOpenAdminLogin}
+                className="px-2 py-1.5 rounded-lg bg-[#042d22] text-[#facc15] hover:text-white border border-[#facc15]/50 font-nav text-xs font-semibold flex items-center gap-1 cursor-pointer active:scale-95 shadow-xs"
+                title="Admin Login"
+              >
+                <ShieldCheck className="w-3.5 h-3.5 text-[#facc15]" />
+                <span className="hidden xs:inline">Admin</span>
+              </button>
+            )}
             {onOpenAIAssistant && (
               <button
                 onClick={onOpenAIAssistant}
@@ -204,6 +229,19 @@ export const Navbar: React.FC<NavbarProps> = ({
                 >
                   <GraduationCap className="w-4 h-4 text-[#facc15]" />
                   <span>{isArabic ? '🎓 بوابة الطلاب والمعلمين وأولياء الأمور' : isUrdu ? '🎓 طلباء و اساتذہ پورٹل' : '🎓 Student, Parent & Teacher Portals'}</span>
+                </button>
+              )}
+              {onOpenAdminLogin && (
+                <button
+                  id="drawer-admin-login-btn"
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    onOpenAdminLogin();
+                  }}
+                  className="w-full py-2.5 bg-[#042d22] hover:bg-[#074735] text-[#facc15] border border-[#facc15]/50 font-nav font-bold text-xs rounded-xl text-center flex items-center justify-center gap-2 cursor-pointer shadow-sm"
+                >
+                  <ShieldCheck className="w-4 h-4 text-[#facc15]" />
+                  <span>{isArabic ? '🛡️ تسجيل دخول الإدارة' : isUrdu ? '🛡️ ایڈمن لاگ ان (محفوظ کنٹرول)' : '🛡️ Admin Login (Private Console)'}</span>
                 </button>
               )}
               <button

@@ -20,6 +20,7 @@ import { UnifiedPortalModal } from './components/UnifiedPortalModal';
 import { AIAssistantDrawer } from './components/AIAssistantDrawer';
 import { LearningPathWizard } from './components/LearningPathWizard';
 import { PwaInstallBanner } from './components/PwaInstallBanner';
+import { AdminLoginModal } from './components/AdminLoginModal';
 
 // Lazy-load heavy modals and auxiliary sections for Moment Speed performance
 const FreeTrialModal = lazy(() => import('./components/FreeTrialModal').then(m => ({ default: m.FreeTrialModal })));
@@ -33,6 +34,7 @@ export default function App() {
   const [isTrialModalOpen, setIsTrialModalOpen] = useState(false);
   const [selectedCourseForTrial, setSelectedCourseForTrial] = useState<string | undefined>(undefined);
   const [isStudentDashboardOpen, setIsStudentDashboardOpen] = useState(false);
+  const [isAdminLoginOpen, setIsAdminLoginOpen] = useState(false);
   const [isSystemModalOpen, setIsSystemModalOpen] = useState(false);
   const [isAIAssistantOpen, setIsAIAssistantOpen] = useState(false);
   const [isLearningPathOpen, setIsLearningPathOpen] = useState(false);
@@ -109,6 +111,7 @@ export default function App() {
         onSelectTab={setCurrentTab}
         onOpenFreeTrial={handleOpenFreeTrial}
         onOpenStudentDashboard={handleOpenStudentDashboard}
+        onOpenAdminLogin={() => setIsAdminLoginOpen(true)}
         onOpenSystemModal={handleOpenSystemModal}
         onOpenAIAssistant={() => setIsAIAssistantOpen(true)}
         onOpenLearningPath={() => setIsLearningPathOpen(true)}
@@ -285,7 +288,13 @@ export default function App() {
         )}
       </Suspense>
 
-      {/* 18. PWA Install Prompt Banner */}
+      {/* 18. Executive Administrator Login & Private Management Hub */}
+      <AdminLoginModal
+        isOpen={isAdminLoginOpen}
+        onClose={() => setIsAdminLoginOpen(false)}
+      />
+
+      {/* 19. PWA Install Prompt Banner */}
       <PwaInstallBanner />
 
       {/* 19. Floating AI Quran Tutor Trigger Button (Left on mobile, neatly stacked on desktop - prevents ANY collision with WhatsApp) */}

@@ -125,6 +125,41 @@ export interface LearningPath {
   updatedAt: string;
 }
 
+export interface ContactInquiry {
+  id: string;
+  name: string;
+  email?: string;
+  phone: string;
+  course: string;
+  message?: string;
+  createdAt: string;
+  status: 'new' | 'contacted' | 'enrolled';
+  emailDeliveryStatus: 'sent' | 'fallback_recorded' | 'failed' | 'pending';
+  deliveryNote?: string;
+}
+
+export interface TrialRequest {
+  id: string;
+  studentName: string;
+  parentName?: string;
+  learnerType: 'child' | 'adult' | 'beginner';
+  courseInterest: string;
+  courseTitle?: string;
+  teacherPreference: 'female' | 'male' | 'no-preference';
+  phoneNumber: string;
+  email?: string;
+  currentLevel?: string;
+  preferredDays?: string;
+  preferredTime?: string;
+  country?: string;
+  timezone?: string;
+  notes?: string;
+  createdAt: string;
+  status: 'new' | 'scheduled' | 'completed';
+  emailDeliveryStatus: 'sent' | 'fallback_recorded' | 'failed' | 'pending';
+  deliveryNote?: string;
+}
+
 export interface AcademyStore {
   users: UserAccount[];
   attendance: AttendanceItem[];
@@ -133,6 +168,8 @@ export interface AcademyStore {
   feeRecords: FeeRecord[];
   notifications: NotificationItem[];
   learningPaths: Record<string, LearningPath>;
+  contactInquiries: ContactInquiry[];
+  trialRequests: TrialRequest[];
   announcements: {
     id: string;
     title: string;
@@ -492,7 +529,9 @@ const initialData: AcademyStore = {
       date: '2026-09-24',
       priority: 'normal'
     }
-  ]
+  ],
+  contactInquiries: [],
+  trialRequests: []
 };
 
 class DatabaseManager {
@@ -506,7 +545,10 @@ class DatabaseManager {
     try {
       if (fs.existsSync(DB_FILE)) {
         const raw = fs.readFileSync(DB_FILE, 'utf-8');
-        return JSON.parse(raw);
+        const parsed = JSON.parse(raw);
+        if (!Array.isArray(parsed.contactInquiries)) parsed.contactInquiries = [];
+        if (!Array.isArray(parsed.trialRequests)) parsed.trialRequests = [];
+        return parsed;
       }
     } catch (err) {
       console.warn('Could not read existing database file, initializing seed data:', err);
@@ -715,6 +757,80 @@ class DatabaseManager {
     return this.data.announcements;
   }
 
+  // Contact Inquiries
+  getContactInquiries(): ContactInquiry[] {
+    return [...(this.data.contactInquiries || [])].sort(
+      (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+    );
+  }
+
+  addContactInquiry(inquiry: Omit<ContactInquiry, 'id' | 'createdAt' | 'status'>): ContactInquiry {
+    if (!Array.isArray(this.data.contactInquiries)) {
+      this.data.contactInquiries = [];
+    }
+    const newInquiry: ContactInquiry = {
+      id: `inq-${Date.now()}-${Math.floor(Math.random() * 1000)}`,
+      createdAt: new Date().toISOString(),
+      status: 'new',
+      ...inquiry
+    };
+    this.data.contactInquiries.unshift(newInquiry);
+    this.saveData(this.data);
+    return newInquiry;
+  }
+
+  updateContactInquiryStatus(
+    id: string,
+    status: ContactInquiry['status'],
+    emailDeliveryStatus?: ContactInquiry['emailDeliveryStatus'],
+    deliveryNote?: string
+  ): ContactInquiry | null {
+    const item = (this.data.contactInquiries || []).find(i => i.id === id);
+    if (!item) return null;
+    item.status = status;
+    if (emailDeliveryStatus) item.emailDeliveryStatus = emailDeliveryStatus;
+    if (deliveryNote) item.deliveryNote = deliveryNote;
+    this.saveData(this.data);
+    return item;
+  }
+
+  // Free Trial Requests
+  getTrialRequests(): TrialRequest[] {
+    return [...(this.data.trialRequests || [])].sort(
+      (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+    );
+  }
+
+  addTrialRequest(request: Omit<TrialRequest, 'id' | 'createdAt' | 'status'>): TrialRequest {
+    if (!Array.isArray(this.data.trialRequests)) {
+      this.data.trialRequests = [];
+    }
+    const newRequest: TrialRequest = {
+      id: `trl-${Date.now()}-${Math.floor(Math.random() * 1000)}`,
+      createdAt: new Date().toISOString(),
+      status: 'new',
+      ...request
+    };
+    this.data.trialRequests.unshift(newRequest);
+    this.saveData(this.data);
+    return newRequest;
+  }
+
+  updateTrialRequestStatus(
+    id: string,
+    status: TrialRequest['status'],
+    emailDeliveryStatus?: TrialRequest['emailDeliveryStatus'],
+    deliveryNote?: string
+  ): TrialRequest | null {
+    const item = (this.data.trialRequests || []).find(t => t.id === id);
+    if (!item) return null;
+    item.status = status;
+    if (emailDeliveryStatus) item.emailDeliveryStatus = emailDeliveryStatus;
+    if (deliveryNote) item.deliveryNote = deliveryNote;
+    this.saveData(this.data);
+    return item;
+  }
+
   // Academy metrics summary
   getAdminMetrics() {
     const totalStudents = this.data.users.filter(u => u.role === 'student').length;
@@ -722,6 +838,8 @@ class DatabaseManager {
     const totalParents = this.data.users.filter(u => u.role === 'parent').length;
     const activeSubmissions = this.data.audioSubmissions.length;
     const pendingReviews = this.data.audioSubmissions.filter(s => s.status === 'pending').length;
+    const totalInquiries = (this.data.contactInquiries || []).length;
+    const totalTrialRequests = (this.data.trialRequests || []).length;
     const paidFees = this.data.feeRecords
       .filter(f => f.status === 'paid')
       .reduce((sum, f) => sum + f.amount, 0);
@@ -735,6 +853,8 @@ class DatabaseManager {
       totalParents,
       activeSubmissions,
       pendingReviews,
+      totalInquiries,
+      totalTrialRequests,
       paidFees,
       pendingFees,
       recentAttendanceCount: this.data.attendance.length

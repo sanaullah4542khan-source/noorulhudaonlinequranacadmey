@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Mail, Phone, MapPin, Clock, Send, CheckCircle2, Facebook, Instagram, Linkedin, MessageCircle, Copy, Check, ShieldCheck } from 'lucide-react';
+import { Mail, Phone, MapPin, Clock, Send, CheckCircle2, Facebook, Instagram, Linkedin, MessageCircle, Copy, Check, ShieldCheck, AlertCircle, Loader2 } from 'lucide-react';
 import { SAFIR_CONTACT, SAFIR_COURSES, getSafirWhatsAppUrl } from '../data/safirData';
 import { useLanguage } from '../context/LanguageContext';
+import { submitContactInquiry } from '../services/apiService';
 
 export const SafirContactSection: React.FC = () => {
   const { t, isRtl, isArabic, isUrdu } = useLanguage();
@@ -12,13 +13,50 @@ export const SafirContactSection: React.FC = () => {
     course: 'Quran Recitation (Nazra)',
     message: ''
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [copiedEmail, setCopiedEmail] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.name || !formData.phone) return;
-    setIsSubmitted(true);
+    if (!formData.name.trim() || !formData.phone.trim()) {
+      setErrorMessage(
+        isArabic
+          ? 'يرجى إدخال الاسم ورقم الهاتف أو الواتساب'
+          : isUrdu
+          ? 'براہ کرم اپنا نام اور فون/واٹس ایپ نمبر درج کریں'
+          : 'Please provide both your name and phone/WhatsApp number.'
+      );
+      return;
+    }
+
+    try {
+      setIsSubmitting(true);
+      setErrorMessage(null);
+
+      await submitContactInquiry({
+        name: formData.name.trim(),
+        email: formData.email.trim() || undefined,
+        phone: formData.phone.trim(),
+        course: formData.course,
+        message: formData.message.trim() || undefined
+      });
+
+      setIsSubmitted(true);
+    } catch (err: any) {
+      console.error('Contact submission error:', err);
+      setErrorMessage(
+        err.message ||
+        (isArabic
+          ? 'تعذر إرسال الرسالة في الوقت الحالي. يرجى المحاولة مرة أخرى أو مراسلتنا فوراً عبر واتساب.'
+          : isUrdu
+          ? 'پیغام بھیجنے میں خرابی پیش آئی، براہ کرم دوبارہ کوشش کریں یا واٹس ایپ پر رابطہ کریں۔'
+          : 'Failed to deliver message to our admissions desk. Please retry or contact us directly on WhatsApp.')
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -218,38 +256,42 @@ export const SafirContactSection: React.FC = () => {
             </p>
 
             {isSubmitted ? (
-              <div className="bg-[#f0fdf4] border border-[#bbf7d0] rounded-xl p-6 text-center">
-                <div className="w-12 h-12 rounded-full bg-[#dcfce7] text-[#15803d] flex items-center justify-center mx-auto mb-3">
-                  <CheckCircle2 className="w-6 h-6" />
+              <div className="bg-[#f0fdf4] border border-[#bbf7d0] rounded-2xl p-6 sm:p-8 text-center animate-in fade-in duration-300">
+                <div className="w-14 h-14 rounded-full bg-[#dcfce7] text-[#15803d] flex items-center justify-center mx-auto mb-3.5 shadow-sm">
+                  <CheckCircle2 className="w-8 h-8 text-[#15803d]" />
                 </div>
-                <h4 className="text-lg font-heading font-semibold text-[#064232] mb-2">
-                  {isArabic ? 'جزاكم الله خيراً! تم استلام رسالتكم بنجاح' : isUrdu ? 'جزاک اللہ خیراً! آپ کا پیغام موصول ہو گیا' : 'Jazakallah Khair! Message Received'}
+                <h4 className="text-xl font-heading font-bold text-[#064232] mb-2">
+                  {isArabic ? 'جزاكم الله خيراً! تم استلام رسالتكم بنجاح' : isUrdu ? 'جزاک اللہ خیراً! آپ کا پیغام موصول ہو گیا' : 'Jazakallah Khair! Message Delivered'}
                 </h4>
-                <p className="font-body font-normal text-xs sm:text-sm text-gray-700 max-w-md mx-auto mb-4">
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-100 text-[#065f46] text-xs font-semibold mb-3">
+                  <ShieldCheck className="w-3.5 h-3.5 text-emerald-700" />
+                  <span>Delivered to noorulhudaacademy206@gmail.com</span>
+                </div>
+                <p className="font-body font-normal text-xs sm:text-sm text-gray-700 max-w-md mx-auto mb-5 leading-relaxed">
                   {isArabic ? (
-                    <>شكراً لكم، <strong>{formData.name}</strong>. تلقينا استفساركم بخصوص <strong>{formData.course}</strong>. سيتواصل معكم فريقنا التعليمي قريباً على الرقم {formData.phone}.</>
+                    <>شكراً لكم، <strong>{formData.name}</strong>. تلقينا استفساركم بخصوص <strong>{formData.course}</strong> وسنرد عليكم سريعاً على الرقم {formData.phone} أو عبر البريد الإلكتروني.</>
                   ) : isUrdu ? (
-                    <>شکریہ، <strong>{formData.name}</strong>۔ ہم نے کورس <strong>{formData.course}</strong> کے متعلق آپ کی درخواست موصول کر لی ہے۔ ہم جلد ہی آپ کے نمبر {formData.phone} پر رابطہ کریں گے۔</>
+                    <>شکریہ، <strong>{formData.name}</strong>۔ ہم نے کورس <strong>{formData.course}</strong> کے متعلق آپ کی تفصیلات وصول کر لی ہیں۔ ہماری ٹیم جلد ہی آپ کے نمبر {formData.phone} پر رابطہ کرے گی۔</>
                   ) : (
-                    <>Thank you, <strong>{formData.name}</strong>. We have received your inquiry regarding <strong>{formData.course}</strong>. Our team will contact you on {formData.phone} shortly.</>
+                    <>Thank you, <strong>{formData.name}</strong>. We have received your inquiry regarding <strong>{formData.course}</strong>. Our academic team will contact you on {formData.phone} shortly.</>
                   )}
                 </p>
-                <div className="flex justify-center gap-3">
+                <div className="flex flex-col sm:flex-row justify-center gap-3">
                   <a
-                    href={getSafirWhatsAppUrl(`Assalamu Alaikum, I just submitted the form for ${formData.course}`)}
+                    href={getSafirWhatsAppUrl(`Assalamu Alaikum, I just submitted the contact form for ${formData.course} (${formData.name})`)}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-4 py-2 bg-[#25D366] text-white text-xs font-nav font-medium rounded-lg shadow hover:bg-[#20ba59] transition-all"
+                    className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-[#25D366] text-white text-xs font-nav font-semibold rounded-xl shadow-md hover:bg-[#20ba59] transition-all cursor-pointer"
                   >
                     <MessageCircle className="w-4 h-4" />
-                    {isArabic ? 'تواصل عبر واتساب' : isUrdu ? 'واٹس ایپ پر فوری رابطہ کریں' : 'Chat Directly on WhatsApp'}
+                    <span>{isArabic ? 'فتح المحادثة عبر واتساب' : isUrdu ? 'واٹس ایپ پر فوری تصدیق کریں' : 'Chat Directly on WhatsApp'}</span>
                   </a>
                   <button
                     onClick={() => {
                       setIsSubmitted(false);
                       setFormData({ name: '', email: '', phone: '', course: 'Quran Recitation (Nazra)', message: '' });
                     }}
-                    className="px-4 py-2 text-xs font-nav font-medium text-gray-600 hover:text-gray-900 border border-gray-200 rounded-lg cursor-pointer"
+                    className="px-4 py-2.5 text-xs font-nav font-medium text-gray-700 hover:text-gray-900 border border-gray-200 hover:bg-gray-50 rounded-xl cursor-pointer transition-colors"
                   >
                     {isArabic ? 'إرسال رسالة أخرى' : isUrdu ? 'نیا پیغام بھیجیں' : 'Send Another Note'}
                   </button>
@@ -257,19 +299,39 @@ export const SafirContactSection: React.FC = () => {
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4">
+                {/* Error Banner */}
+                {errorMessage && (
+                  <div className="p-3.5 rounded-xl bg-red-50 border border-red-200 text-red-800 text-xs sm:text-sm flex items-start gap-2.5">
+                    <AlertCircle className="w-4 h-4 text-red-600 flex-shrink-0 mt-0.5" />
+                    <div className="flex-1">
+                      <span className="font-semibold block">{errorMessage}</span>
+                      <a
+                        href={getSafirWhatsAppUrl(`Assalamu Alaikum, I tried submitting the contact form on your website for ${formData.course}`)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 text-red-900 underline font-semibold mt-1"
+                      >
+                        <MessageCircle className="w-3.5 h-3.5" />
+                        <span>Or click here to message us directly on WhatsApp (+92 313 0958451)</span>
+                      </a>
+                    </div>
+                  </div>
+                )}
+
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {/* Full Name */}
                   <div>
                     <label className="block text-xs font-nav font-medium text-gray-700 mb-1">
-                      {t.contact.fullNameLabel}
+                      {t.contact.fullNameLabel} *
                     </label>
                     <input
                       type="text"
                       required
+                      disabled={isSubmitting}
                       placeholder={isArabic ? 'مثال: أحمد خان' : isUrdu ? 'جیسے: احمد خان' : 'e.g. Ahmad Khan'}
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="w-full px-3.5 py-2.5 rounded-lg border border-gray-200 text-xs sm:text-sm font-body font-normal focus:outline-none focus:ring-2 focus:ring-[#064232]/20 focus:border-[#064232]"
+                      className="w-full px-3.5 py-2.5 rounded-lg border border-gray-200 text-xs sm:text-sm font-body font-normal focus:outline-none focus:ring-2 focus:ring-[#064232]/20 focus:border-[#064232] disabled:opacity-60"
                     />
                   </div>
 
@@ -280,10 +342,11 @@ export const SafirContactSection: React.FC = () => {
                     </label>
                     <input
                       type="email"
+                      disabled={isSubmitting}
                       placeholder={isArabic ? 'مثال: ahmad@example.com' : isUrdu ? 'جیسے: ahmad@example.com' : 'e.g. ahmad@example.com'}
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="w-full px-3.5 py-2.5 rounded-lg border border-gray-200 text-xs sm:text-sm font-body font-normal focus:outline-none focus:ring-2 focus:ring-[#064232]/20 focus:border-[#064232]"
+                      className="w-full px-3.5 py-2.5 rounded-lg border border-gray-200 text-xs sm:text-sm font-body font-normal focus:outline-none focus:ring-2 focus:ring-[#064232]/20 focus:border-[#064232] disabled:opacity-60"
                     />
                   </div>
                 </div>
@@ -292,16 +355,17 @@ export const SafirContactSection: React.FC = () => {
                   {/* Phone Number */}
                   <div>
                     <label className="block text-xs font-nav font-medium text-gray-700 mb-1">
-                      {t.contact.phoneInputLabel}
+                      {t.contact.phoneInputLabel} *
                     </label>
                     <input
                       type="tel"
                       required
-                      placeholder="+92 300 1234567"
+                      disabled={isSubmitting}
+                      placeholder="+92 313 0958451"
                       dir="ltr"
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      className="w-full px-3.5 py-2.5 rounded-lg border border-gray-200 text-xs sm:text-sm font-body font-normal focus:outline-none focus:ring-2 focus:ring-[#064232]/20 focus:border-[#064232]"
+                      className="w-full px-3.5 py-2.5 rounded-lg border border-gray-200 text-xs sm:text-sm font-body font-normal focus:outline-none focus:ring-2 focus:ring-[#064232]/20 focus:border-[#064232] disabled:opacity-60"
                     />
                   </div>
 
@@ -311,9 +375,10 @@ export const SafirContactSection: React.FC = () => {
                       {t.contact.courseLabel}
                     </label>
                     <select
+                      disabled={isSubmitting}
                       value={formData.course}
                       onChange={(e) => setFormData({ ...formData, course: e.target.value })}
-                      className="w-full px-3.5 py-2.5 rounded-lg border border-gray-200 text-xs sm:text-sm font-body font-normal focus:outline-none focus:ring-2 focus:ring-[#064232]/20 focus:border-[#064232] bg-white"
+                      className="w-full px-3.5 py-2.5 rounded-lg border border-gray-200 text-xs sm:text-sm font-body font-normal focus:outline-none focus:ring-2 focus:ring-[#064232]/20 focus:border-[#064232] bg-white disabled:opacity-60"
                     >
                       {SAFIR_COURSES.map((c) => (
                         <option key={c.id} value={c.title}>
@@ -331,20 +396,31 @@ export const SafirContactSection: React.FC = () => {
                   </label>
                   <textarea
                     rows={4}
+                    disabled={isSubmitting}
                     placeholder={t.contact.messagePlaceholder}
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    className="w-full px-3.5 py-2.5 rounded-lg border border-gray-200 text-xs sm:text-sm font-body font-normal focus:outline-none focus:ring-2 focus:ring-[#064232]/20 focus:border-[#064232]"
+                    className="w-full px-3.5 py-2.5 rounded-lg border border-gray-200 text-xs sm:text-sm font-body font-normal focus:outline-none focus:ring-2 focus:ring-[#064232]/20 focus:border-[#064232] disabled:opacity-60"
                   ></textarea>
                 </div>
 
                 {/* Submit Button */}
                 <button
                   type="submit"
-                  className="w-full py-3.5 px-6 bg-[#064232] hover:bg-[#0a523f] text-white font-nav font-medium text-sm rounded-lg shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 active:scale-[0.99] cursor-pointer"
+                  disabled={isSubmitting}
+                  className="w-full py-3.5 px-6 bg-[#064232] hover:bg-[#0a523f] disabled:bg-[#064232]/70 text-white font-nav font-medium text-sm rounded-lg shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 active:scale-[0.99] cursor-pointer"
                 >
-                  <span>{t.contact.sendBtn}</span>
-                  <Send className="w-4 h-4 rtl:rotate-180" />
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="w-4 h-4 animate-spin text-[#facc15]" />
+                      <span>{isArabic ? 'جاري إرسال الرسالة...' : isUrdu ? 'پیغام بھیجا جا رہا ہے...' : 'Sending Message to Admissions...'}</span>
+                    </>
+                  ) : (
+                    <>
+                      <span>{t.contact.sendBtn}</span>
+                      <Send className="w-4 h-4 rtl:rotate-180" />
+                    </>
+                  )}
                 </button>
               </form>
             )}

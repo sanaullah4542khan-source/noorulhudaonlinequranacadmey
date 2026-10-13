@@ -33,6 +33,7 @@ import { useTheme } from '../context/ThemeContext';
 import { StudentProfile, HomeworkTask, StudentScheduleItem } from '../types';
 import { DEMO_STUDENT_PROFILES } from '../data/studentDashboardData';
 import { getSafirWhatsAppUrl } from '../data/safirData';
+import { StudentLearningJourney } from './StudentLearningJourney';
 
 interface StudentDashboardModalProps {
   isOpen: boolean;
@@ -504,28 +505,8 @@ export const StudentDashboardModal: React.FC<StudentDashboardModalProps> = ({ is
               {activeTab === 'progress' && (
                 <div className="space-y-6">
                   
-                  {/* Overall Graduation Progress Bar */}
-                  <div className={`p-6 rounded-3xl border ${
-                    isDark ? 'bg-[#062c21] border-[#0e4e3c]' : 'bg-white border-[#e5e3d7]'
-                  }`}>
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="text-xs font-bold uppercase tracking-wider text-[#064232] dark:text-emerald-300">
-                        {isRtl ? 'کورس کی مجموعی تکمیل' : 'Overall Course Completion Progress'}
-                      </span>
-                      <span className="font-mono text-sm font-black text-[#c69b32] dark:text-[#facc15]">
-                        {activeStudent.overallProgressPercentage}% Completed
-                      </span>
-                    </div>
-                    <div className="w-full h-3 bg-gray-200 dark:bg-black/30 rounded-full overflow-hidden">
-                      <div
-                        className="h-full bg-gradient-to-r from-[#064232] via-[#085a44] to-[#facc15] rounded-full transition-all duration-1000"
-                        style={{ width: `${activeStudent.overallProgressPercentage}%` }}
-                      ></div>
-                    </div>
-                    <p className="text-[11px] text-gray-500 dark:text-emerald-200/70 mt-2">
-                      Target Milestone: Completion of current Juz with full Tajweed rules application by next monthly evaluation.
-                    </p>
-                  </div>
+                  {/* Gamified Learning Journey Progress Bar & Hifz Milestones */}
+                  <StudentLearningJourney student={activeStudent} isDark={isDark} />
 
                   {/* 3 Pillars of Quranic Learning: Sabaq, Sabqi, Manzil */}
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">

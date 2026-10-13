@@ -225,6 +225,7 @@ export interface StudentProfile {
     skill: string;
     mastery: number;
   }[];
+  learningJourney?: StudentLearningJourney;
   schedules: StudentScheduleItem[];
   homework: HomeworkTask[];
   recentClassLogs: {
@@ -234,6 +235,39 @@ export interface StudentProfile {
     rating: number;
     teacherNotes: string;
   }[];
+}
+
+export interface LearningJourneyMilestone {
+  id: string;
+  stageNumber: number;
+  title: string;
+  arabicTitle: string;
+  subtitle: string;
+  status: 'completed' | 'in-progress' | 'upcoming' | 'locked';
+  progressPercentage: number;
+  completedLessons: number;
+  totalLessons: number;
+  juzOrSurah: string;
+  rewardBadge: string;
+  rewardTitle: string;
+  xpPoints: number;
+  dateOrEta?: string;
+  teacherRemarks?: string;
+  topicsCovered: string[];
+}
+
+export interface StudentLearningJourney {
+  currentStage: number;
+  totalStages: number;
+  completedLessons: number;
+  targetLessons: number;
+  overallJourneyPercentage: number;
+  hasanatPoints: number;
+  studentLevel: number;
+  levelTitle: string;
+  nextMilestoneTitle: string;
+  nextMilestoneRemainingLessons: number;
+  milestones: LearningJourneyMilestone[];
 }
 
 export type UserRole = 'student' | 'parent' | 'teacher' | 'admin';

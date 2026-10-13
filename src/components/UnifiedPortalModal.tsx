@@ -36,10 +36,21 @@ import {
   BarChart3,
   VideoOff,
   MicOff,
-  Maximize2
+  Maximize2,
+  Mail,
+  Send
 } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
-import { useTheme } from '../context/ThemeContext';
+import {
+  getAdminInquiries,
+  checkEmailStatus,
+  triggerTestEmail,
+  loginAdministrator,
+  logoutAdministrator,
+  getStoredAdminToken,
+  AdminInquiryItem,
+  AdminTrialItem
+} from '../services/apiService';
 import {
   StudentProfile,
   HomeworkTask,
@@ -53,6 +64,7 @@ import {
 } from '../types';
 import { DEMO_STUDENT_PROFILES } from '../data/studentDashboardData';
 import { getSafirWhatsAppUrl } from '../data/safirData';
+import { StudentLearningJourney } from './StudentLearningJourney';
 
 interface UnifiedPortalModalProps {
   isOpen: boolean;
@@ -96,7 +108,29 @@ export const UnifiedPortalModal: React.FC<UnifiedPortalModalProps> = ({
   >('overview');
   const [parentTab, setParentTab] = useState<'overview' | 'attendance' | 'homework' | 'feedback' | 'report'>('overview');
   const [teacherTab, setTeacherTab] = useState<'schedule' | 'attendance' | 'homework' | 'audio-review' | 'students'>('schedule');
-  const [adminTab, setAdminTab] = useState<'overview' | 'students' | 'teachers' | 'fees' | 'announcements'>('overview');
+  const [adminTab, setAdminTab] = useState<'overview' | 'inquiries' | 'students' | 'teachers' | 'fees' | 'announcements'>('overview');
+  const [adminInquiries, setAdminInquiries] = useState<AdminInquiryItem[]>([]);
+  const [adminTrials, setAdminTrials] = useState<AdminTrialItem[]>([]);
+  const [isLoadingInquiries, setIsLoadingInquiries] = useState(false);
+  const [emailStatus, setEmailStatus] = useState<{
+    recipient: string;
+    ccRecipient: string;
+    smtpHost: string;
+    smtpPort: number;
+    smtpUser: string | null;
+    smtpConfigured: boolean;
+    activeEngine: string;
+  } | null>(null);
+  const [isTestingEmail, setIsTestingEmail] = useState(false);
+  const [testEmailResult, setTestEmailResult] = useState<{
+    success: boolean;
+    delivered?: boolean;
+    method?: string;
+    note?: string;
+    recipient?: string;
+    ccRecipient?: string;
+    timestamp?: string;
+  } | null>(null);
 
   // Multi-child selector for parent
   const [selectedChildId, setSelectedChildId] = useState('NUH-8421');
@@ -150,8 +184,43 @@ export const UnifiedPortalModal: React.FC<UnifiedPortalModalProps> = ({
       fetchAudioSubmissions();
       fetchAttendance();
       fetchFees();
+      fetchInquiries();
     }
   }, [isOpen]);
+
+  const fetchInquiries = async () => {
+    try {
+      setIsLoadingInquiries(true);
+      const [data, status] = await Promise.all([
+        getAdminInquiries().catch(() => ({ contactInquiries: [], trialRequests: [] })),
+        checkEmailStatus().catch(() => null)
+      ]);
+      setAdminInquiries(data.contactInquiries || []);
+      setAdminTrials(data.trialRequests || []);
+      if (status) setEmailStatus(status);
+    } catch {
+      // fallback
+    } finally {
+      setIsLoadingInquiries(false);
+    }
+  };
+
+  const handleTestEmail = async () => {
+    try {
+      setIsTestingEmail(true);
+      setTestEmailResult(null);
+      const res = await triggerTestEmail();
+      setTestEmailResult(res);
+      await fetchInquiries();
+    } catch (err: any) {
+      setTestEmailResult({
+        success: false,
+        note: err.message || 'Error occurred while contacting email service.'
+      });
+    } finally {
+      setIsTestingEmail(false);
+    }
+  };
 
   const fetchAudioSubmissions = async () => {
     try {
@@ -226,15 +295,11 @@ export const UnifiedPortalModal: React.FC<UnifiedPortalModalProps> = ({
         phone: '+92 313 0958451'
       };
     } else {
-      demoUser = {
-        id: 'usr-admin-1',
-        name: 'Administrator (Director)',
-        urduName: 'مدیر اکیڈمی',
-        email: 'admin@noorulhuda.com',
-        role: 'admin',
-        avatarUrl: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&auto=format&fit=crop&q=80',
-        phone: '+92 313 0958451'
-      };
+      // Security: Admin role cannot be bypassed with 1-click login
+      setLoginRole('admin');
+      setLoginEmail('admin@noorulhuda.com');
+      setLoginError('Administrator credentials required. Please enter your secret password below.');
+      return;
     }
 
     setCurrentUser(demoUser);
@@ -246,6 +311,18 @@ export const UnifiedPortalModal: React.FC<UnifiedPortalModalProps> = ({
     e.preventDefault();
     setLoginError('');
     try {
+      if (loginRole === 'admin') {
+        const res = await loginAdministrator({ identifier: loginEmail, password: loginPassword });
+        if (res.success && res.user) {
+          setCurrentUser(res.user);
+          localStorage.setItem(STORAGE_SESSION_KEY, JSON.stringify(res.user));
+          fetchInquiries();
+        } else {
+          setLoginError(res.error || 'Access denied: Invalid administrator credentials.');
+        }
+        return;
+      }
+
       const res = await fetch('/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -260,13 +337,21 @@ export const UnifiedPortalModal: React.FC<UnifiedPortalModalProps> = ({
         setLoginError(data.error || 'Authentication failed');
       }
     } catch {
-      handleQuickDemoLogin(loginRole);
+      if (loginRole !== 'admin') {
+        handleQuickDemoLogin(loginRole);
+      } else {
+        setLoginError('Could not verify administrator credentials.');
+      }
     }
   };
 
   const handleCustomRegister = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoginError('');
+    if (loginRole === 'admin') {
+      setLoginError('Public administrator registration is prohibited. Administrator accounts must be provisioned internally.');
+      return;
+    }
     try {
       const res = await fetch('/api/auth/register', {
         method: 'POST',
@@ -573,17 +658,21 @@ export const UnifiedPortalModal: React.FC<UnifiedPortalModalProps> = ({
                   </button>
 
                   <button
-                    onClick={() => handleQuickDemoLogin('admin')}
+                    onClick={() => {
+                      setLoginRole('admin');
+                      setLoginEmail('admin@noorulhuda.com');
+                      setLoginError('Administrator credentials required. Please enter your secret password below.');
+                    }}
                     className="p-3.5 rounded-2xl bg-white text-[#064232] hover:bg-[#f4e8c7] transition-all shadow-md text-left group"
                   >
                     <div className="flex items-center justify-between mb-1">
-                      <Building2 className="w-4 h-4 text-[#c69b32]" />
+                      <ShieldCheck className="w-4 h-4 text-[#c69b32]" />
                       <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-amber-100 text-amber-800">
                         ADMIN
                       </span>
                     </div>
-                    <div className="font-serif font-bold text-sm text-[#064232]">Academy Director</div>
-                    <div className="text-[11px] text-[#4e655c]">Full Oversight</div>
+                    <div className="font-serif font-bold text-sm text-[#064232]">Director Console</div>
+                    <div className="text-[11px] text-[#4e655c]">Password Required 🔒</div>
                   </button>
                 </div>
               </div>
@@ -601,7 +690,12 @@ export const UnifiedPortalModal: React.FC<UnifiedPortalModalProps> = ({
                   Sign In
                 </button>
                 <button
-                  onClick={() => setAuthMode('register')}
+                  onClick={() => {
+                    setAuthMode('register');
+                    if (loginRole === 'admin' || loginRole === 'teacher') {
+                      setLoginRole('student');
+                    }
+                  }}
                   className={`flex-1 py-2 text-xs font-bold rounded-xl transition-all ${
                     authMode === 'register' ? 'bg-[#064232] text-white shadow-sm' : 'text-[#4e655c]'
                   }`}
@@ -619,13 +713,15 @@ export const UnifiedPortalModal: React.FC<UnifiedPortalModalProps> = ({
 
               {/* Role Picker for Form */}
               <div className="mb-4">
-                <label className="block text-xs font-semibold text-[#13241d] mb-1.5">Select Role</label>
-                <div className="grid grid-cols-4 gap-1.5">
-                  {(['student', 'parent', 'teacher', 'admin'] as UserRole[]).map((r) => (
+                <label className="block text-xs font-semibold text-[#13241d] mb-1.5">
+                  {authMode === 'register' ? 'Account Type (Admin registration disabled)' : 'Select Role'}
+                </label>
+                <div className={`grid ${authMode === 'register' ? 'grid-cols-2' : 'grid-cols-4'} gap-1.5`}>
+                  {(authMode === 'register' ? ['student', 'parent'] : ['student', 'parent', 'teacher', 'admin'] as UserRole[]).map((r) => (
                     <button
                       key={r}
                       type="button"
-                      onClick={() => setLoginRole(r)}
+                      onClick={() => setLoginRole(r as UserRole)}
                       className={`py-2 text-[11px] font-bold uppercase rounded-lg border transition-all ${
                         loginRole === r
                           ? 'bg-[#064232] text-white border-[#064232]'
@@ -864,6 +960,7 @@ export const UnifiedPortalModal: React.FC<UnifiedPortalModalProps> = ({
                   <nav className="space-y-1 text-xs">
                     {[
                       { id: 'overview', label: 'Academy Overview & KPIs', icon: BarChart3 },
+                      { id: 'inquiries', label: 'Inquiries & Free Trials', icon: Mail, badge: 'LEADS' },
                       { id: 'students', label: 'Students Directory', icon: GraduationCap },
                       { id: 'teachers', label: 'Faculty & Workload', icon: Users },
                       { id: 'fees', label: 'Fee Records & Invoices', icon: CreditCard },
@@ -875,14 +972,21 @@ export const UnifiedPortalModal: React.FC<UnifiedPortalModalProps> = ({
                         <button
                           key={tab.id}
                           onClick={() => setAdminTab(tab.id as any)}
-                          className={`w-full flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl font-medium transition-all ${
+                          className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl font-medium transition-all ${
                             isActive
                               ? 'bg-[#064232] text-white shadow-sm font-semibold'
                               : 'text-[#4e655c] hover:bg-white hover:text-[#064232]'
                           }`}
                         >
-                          <Icon className={`w-4 h-4 ${isActive ? 'text-[#facc15]' : 'text-[#4e655c]'}`} />
-                          <span>{tab.label}</span>
+                          <div className="flex items-center gap-2.5">
+                            <Icon className={`w-4 h-4 ${isActive ? 'text-[#facc15]' : 'text-[#4e655c]'}`} />
+                            <span>{tab.label}</span>
+                          </div>
+                          {tab.badge && (
+                            <span className="px-1.5 py-0.5 rounded text-[9px] font-bold bg-[#c69b32] text-[#064232]">
+                              {tab.badge}
+                            </span>
+                          )}
                         </button>
                       );
                     })}
@@ -977,6 +1081,9 @@ export const UnifiedPortalModal: React.FC<UnifiedPortalModalProps> = ({
                           <span className="text-[10px] text-emerald-600 font-semibold">On Track</span>
                         </div>
                       </div>
+
+                      {/* Gamified Learning Journey Progress Bar & Hifz Milestones */}
+                      <StudentLearningJourney student={activeStudent} />
 
                       {/* Today's Sabaq, Sabqi & Manzil Cards */}
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -1174,6 +1281,9 @@ export const UnifiedPortalModal: React.FC<UnifiedPortalModalProps> = ({
                   {/* QURAN PROGRESS TRACKER TAB */}
                   {studentTab === 'progress' && (
                     <div className="space-y-6 animate-fade-in">
+                      {/* Gamified Learning Journey Progress Bar & Hifz Milestones */}
+                      <StudentLearningJourney student={activeStudent} />
+
                       <div className="bg-white p-6 rounded-3xl border border-[#e5e3d7] shadow-sm">
                         <h4 className="font-serif text-xl font-bold text-[#064232] mb-1">
                           Quran Memorization & Tajweed Progress
@@ -1904,6 +2014,251 @@ export const UnifiedPortalModal: React.FC<UnifiedPortalModalProps> = ({
                       <span className="text-xs text-[#4e655c]">Avg Lesson Rating</span>
                       <div className="font-serif text-2xl font-bold text-[#064232] mt-1">4.9 / 5.0</div>
                       <span className="text-[10px] text-emerald-600 font-semibold">Parent Satisfaction</span>
+                    </div>
+                  </div>
+
+                  {/* Inquiries & Free Trial Bookings Section */}
+                  <div className="bg-white p-6 rounded-3xl border border-[#e5e3d7] space-y-4">
+                    <div className="flex items-center justify-between flex-wrap gap-2">
+                      <div>
+                        <div className="flex items-center gap-2">
+                          <h4 className="font-serif text-lg font-bold text-[#064232]">
+                            Admissions Desk: Inquiries & Free Trials
+                          </h4>
+                          <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-[#c69b32] text-[#064232]">
+                            noorulhudaacademy206@gmail.com
+                          </span>
+                        </div>
+                        <p className="text-xs text-[#4e655c] mt-0.5">
+                          Every submission from the website Contact Us and Free Trial forms is stored here and delivered via email.
+                        </p>
+                      </div>
+
+                      <button
+                        onClick={fetchInquiries}
+                        disabled={isLoadingInquiries}
+                        className="px-3 py-1.5 rounded-xl border border-[#e5e3d7] hover:bg-[#faf9f5] text-xs font-semibold text-[#064232] flex items-center gap-1.5 cursor-pointer"
+                      >
+                        <RefreshCw className={`w-3.5 h-3.5 ${isLoadingInquiries ? 'animate-spin' : ''}`} />
+                        <span>Refresh Leads</span>
+                      </button>
+                    </div>
+
+                    {/* Sub-tabs / Count summary */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+                      <div className="p-3.5 rounded-2xl bg-[#f0fdf4] border border-[#bbf7d0]">
+                        <div className="flex items-center justify-between">
+                          <span className="text-xs font-bold text-[#15803d]">3-Day Free Trial Requests</span>
+                          <span className="px-2 py-0.5 rounded-full bg-white text-xs font-bold text-[#15803d] shadow-2xs">
+                            {adminTrials.length}
+                          </span>
+                        </div>
+                        <p className="text-[11px] text-[#166534] mt-1">
+                          Prospective students awaiting faculty assignment.
+                        </p>
+                      </div>
+
+                      <div className="p-3.5 rounded-2xl bg-[#eff6ff] border border-[#bfdbfe]">
+                        <div className="flex items-center justify-between">
+                          <span className="text-xs font-bold text-[#1d4ed8]">Contact Us Messages</span>
+                          <span className="px-2 py-0.5 rounded-full bg-white text-xs font-bold text-[#1d4ed8] shadow-2xs">
+                            {adminInquiries.length}
+                          </span>
+                        </div>
+                        <p className="text-[11px] text-[#1e40af] mt-1">
+                          Website inquiries and course consultation questions.
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Verified Email Gateway Status & Live Test */}
+                    <div className="p-4 rounded-2xl bg-[#064232] text-white shadow-md border border-[#085a44]">
+                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-3">
+                        <div className="flex items-center gap-2.5">
+                          <div className="w-9 h-9 rounded-xl bg-white/10 flex items-center justify-center text-[#facc15] flex-shrink-0">
+                            <Mail className="w-5 h-5" />
+                          </div>
+                          <div>
+                            <div className="flex items-center gap-2 flex-wrap">
+                              <h5 className="text-xs font-bold uppercase tracking-wider text-white">
+                                Verified Academy Email Gateway
+                              </h5>
+                              <span className="px-2 py-0.5 rounded-full bg-[#facc15] text-[#064232] text-[10px] font-black">
+                                ACTIVE
+                              </span>
+                            </div>
+                            <p className="text-[11px] text-emerald-200">
+                              Direct to <strong className="text-white">noorulhudaacademy206@gmail.com</strong> &bull; CC <span className="text-emerald-300">sanaullah4542khan@gmail.com</span>
+                            </p>
+                          </div>
+                        </div>
+
+                        <button
+                          onClick={handleTestEmail}
+                          disabled={isTestingEmail}
+                          className="px-3.5 py-1.5 rounded-xl bg-[#c69b32] hover:bg-[#b58b29] text-[#064232] font-bold text-xs flex items-center justify-center gap-1.5 cursor-pointer disabled:opacity-60 transition-all shadow-sm flex-shrink-0"
+                        >
+                          <Send className={`w-3.5 h-3.5 ${isTestingEmail ? 'animate-pulse' : ''}`} />
+                          <span>{isTestingEmail ? 'Sending Test...' : 'Test Live Delivery'}</span>
+                        </button>
+                      </div>
+
+                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 text-[11px] bg-black/20 p-2.5 rounded-xl border border-white/10">
+                        <div>
+                          <span className="text-emerald-300 block text-[10px] uppercase font-semibold">Primary Recipient</span>
+                          <span className="text-white font-mono break-all">{emailStatus?.recipient || 'noorulhudaacademy206@gmail.com'}</span>
+                        </div>
+                        <div>
+                          <span className="text-emerald-300 block text-[10px] uppercase font-semibold">Active Transport</span>
+                          <span className="text-[#facc15] font-semibold">{emailStatus?.activeEngine || 'Verified Email Gateway'}</span>
+                        </div>
+                        <div>
+                          <span className="text-emerald-300 block text-[10px] uppercase font-semibold">SMTP Auth Status</span>
+                          <span className="text-emerald-100">{emailStatus?.smtpConfigured ? 'Direct Gmail SMTP' : 'Verified Relay Active'}</span>
+                        </div>
+                      </div>
+
+                      {testEmailResult && (
+                        <div className={`mt-3 p-3 rounded-xl text-xs flex items-start gap-2 ${testEmailResult.success ? 'bg-emerald-900/60 border border-emerald-400 text-emerald-100' : 'bg-red-900/60 border border-red-400 text-red-100'}`}>
+                          {testEmailResult.success ? (
+                            <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5" />
+                          ) : (
+                            <AlertCircle className="w-4 h-4 text-red-400 flex-shrink-0 mt-0.5" />
+                          )}
+                          <div>
+                            <strong>{testEmailResult.success ? 'Test Delivery Verified!' : 'Test Result Notice:'}</strong>
+                            <p className="mt-0.5 leading-relaxed">{testEmailResult.note}</p>
+                            {testEmailResult.timestamp && (
+                              <span className="text-[10px] opacity-80 block mt-1">Verified at {testEmailResult.timestamp}</span>
+                            )}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Trial Requests Table / Cards */}
+                    <div className="pt-2">
+                      <h5 className="text-xs font-bold uppercase tracking-wider text-[#064232] mb-3 flex items-center gap-1.5">
+                        <GraduationCap className="w-4 h-4 text-[#c69b32]" />
+                        <span>Recent Free Trial Requests ({adminTrials.length})</span>
+                      </h5>
+
+                      {adminTrials.length === 0 ? (
+                        <div className="p-6 text-center rounded-2xl bg-[#faf9f5] border border-dashed border-[#e5e3d7] text-xs text-[#4e655c]">
+                          No trial requests received yet. Submissions from the "Book 3-Day Free Trial" modal will instantly appear here and dispatch to noorulhudaacademy206@gmail.com.
+                        </div>
+                      ) : (
+                        <div className="space-y-3">
+                          {adminTrials.slice(0, 5).map((trial) => {
+                            const cleanPhone = trial.phoneNumber.replace(/[^0-9]/g, '');
+                            return (
+                              <div
+                                key={trial.id}
+                                className="p-4 rounded-2xl border border-[#e5e3d7] bg-[#faf9f5] hover:bg-white hover:shadow-md transition-all flex flex-col md:flex-row md:items-center justify-between gap-3 text-xs"
+                              >
+                                <div className="space-y-1 min-w-0">
+                                  <div className="flex items-center gap-2 flex-wrap">
+                                    <strong className="text-sm font-semibold text-[#064232]">{trial.studentName}</strong>
+                                    <span className="px-2 py-0.5 rounded bg-[#064232] text-[#facc15] text-[10px] font-bold">
+                                      {trial.courseTitle || trial.courseInterest}
+                                    </span>
+                                    <span className="px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-800 text-[10px] font-semibold">
+                                      {trial.teacherPreference === 'female' ? 'Ustadhah (Female)' : trial.teacherPreference === 'male' ? 'Qari (Male)' : 'Any Faculty'}
+                                    </span>
+                                  </div>
+                                  <div className="text-[#4e655c] flex flex-wrap gap-x-4 gap-y-1">
+                                    {trial.parentName && <span>👨‍👩‍👧 Parent: {trial.parentName}</span>}
+                                    <span>📞 {trial.phoneNumber}</span>
+                                    {trial.email && <span>✉️ {trial.email}</span>}
+                                    <span>⏰ {trial.preferredTime || trial.preferredDays || 'Flexible'}</span>
+                                    {trial.country && <span>🌍 {trial.country}</span>}
+                                    <span>🎯 {trial.currentLevel || 'Beginner'}</span>
+                                  </div>
+                                  {trial.notes && (
+                                    <p className="text-[11px] text-gray-600 italic bg-white p-2 rounded-lg border border-gray-100">
+                                      "{trial.notes}"
+                                    </p>
+                                  )}
+                                  <div className="text-[10px] text-gray-400">
+                                    Received: {new Date(trial.createdAt).toLocaleString()} &bull; Delivery: {trial.emailDeliveryStatus}
+                                  </div>
+                                </div>
+
+                                <div className="flex items-center gap-2 flex-shrink-0">
+                                  <a
+                                    href={`https://wa.me/${cleanPhone}?text=${encodeURIComponent(`Assalamu Alaikum ${trial.studentName}, Noor Ul Huda Quran Academy received your 3-Day Free Trial request for ${trial.courseTitle || trial.courseInterest}. Let's finalize your trial schedule!`)}`}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="px-3 py-1.5 rounded-xl bg-[#25D366] text-white font-semibold flex items-center gap-1.5 hover:bg-[#20bd5a] transition-colors"
+                                  >
+                                    <MessageCircle className="w-3.5 h-3.5" />
+                                    <span>Chat on WhatsApp</span>
+                                  </a>
+                                </div>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Contact Messages Table / Cards */}
+                    <div className="pt-4 border-t border-[#e5e3d7]">
+                      <h5 className="text-xs font-bold uppercase tracking-wider text-[#064232] mb-3 flex items-center gap-1.5">
+                        <Mail className="w-4 h-4 text-[#c69b32]" />
+                        <span>Recent Contact Messages ({adminInquiries.length})</span>
+                      </h5>
+
+                      {adminInquiries.length === 0 ? (
+                        <div className="p-6 text-center rounded-2xl bg-[#faf9f5] border border-dashed border-[#e5e3d7] text-xs text-[#4e655c]">
+                          No contact inquiries yet. Submissions from the website Contact Us form will appear here with instant WhatsApp reply options.
+                        </div>
+                      ) : (
+                        <div className="space-y-3">
+                          {adminInquiries.slice(0, 5).map((inq) => {
+                            const cleanPhone = inq.phone.replace(/[^0-9]/g, '');
+                            return (
+                              <div
+                                key={inq.id}
+                                className="p-4 rounded-2xl border border-[#e5e3d7] bg-[#faf9f5] hover:bg-white hover:shadow-md transition-all flex flex-col md:flex-row md:items-center justify-between gap-3 text-xs"
+                              >
+                                <div className="space-y-1 min-w-0">
+                                  <div className="flex items-center gap-2 flex-wrap">
+                                    <strong className="text-sm font-semibold text-[#064232]">{inq.name}</strong>
+                                    <span className="px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 text-[10px] font-bold">
+                                      {inq.course}
+                                    </span>
+                                  </div>
+                                  <div className="text-[#4e655c] flex flex-wrap gap-x-4 gap-y-1">
+                                    <span>📞 {inq.phone}</span>
+                                    {inq.email && <span>✉️ {inq.email}</span>}
+                                  </div>
+                                  {inq.message && (
+                                    <p className="text-[11px] text-gray-700 bg-white p-2 rounded-lg border border-gray-100">
+                                      {inq.message}
+                                    </p>
+                                  )}
+                                  <div className="text-[10px] text-gray-400">
+                                    Received: {new Date(inq.createdAt).toLocaleString()} &bull; Status: {inq.emailDeliveryStatus}
+                                  </div>
+                                </div>
+
+                                <div className="flex items-center gap-2 flex-shrink-0">
+                                  <a
+                                    href={`https://wa.me/${cleanPhone}?text=${encodeURIComponent(`Assalamu Alaikum ${inq.name}, thank you for contacting Noor Ul Huda Online Quran Academy regarding ${inq.course}. How can we assist you?`)}`}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="px-3 py-1.5 rounded-xl bg-[#25D366] text-white font-semibold flex items-center gap-1.5 hover:bg-[#20bd5a] transition-colors"
+                                  >
+                                    <MessageCircle className="w-3.5 h-3.5" />
+                                    <span>WhatsApp Reply</span>
+                                  </a>
+                                </div>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      )}
                     </div>
                   </div>
 
