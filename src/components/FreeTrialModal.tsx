@@ -130,11 +130,11 @@ ${notes ? `- Additional Notes: ${notes}` : ''}`;
     >
       <div
         id="free-trial-modal-container"
-        className="relative w-full max-w-xl bg-white rounded-3xl shadow-2xl border border-[#e5e3d7] overflow-hidden my-8 text-left rtl:text-right"
+        className="relative w-full max-w-xl bg-white rounded-3xl shadow-2xl border border-[#DDE5DF] overflow-hidden my-8 text-left rtl:text-right"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="bg-[#064232] text-white p-6 sm:p-7 relative">
+        <div className="bg-[#022C22] text-white p-6 sm:p-7 relative border-b border-[#065F46]">
           <button
             id="close-trial-modal-btn"
             onClick={onClose}
@@ -144,13 +144,13 @@ ${notes ? `- Additional Notes: ${notes}` : ''}`;
             <X className="w-5 h-5" />
           </button>
 
-          <span className="inline-block px-3 py-1 rounded-full bg-[#c69b32] text-[#064232] text-xs font-bold uppercase tracking-wider mb-2">
+          <span className="inline-block px-3 py-1 rounded-full bg-[#D4AF37] text-[#064E3B] text-xs font-bold uppercase tracking-wider mb-2">
             {t.trialModal.noCardNeeded}
           </span>
           <h3 className="font-serif text-2xl sm:text-3xl font-bold text-white mb-1">
             {t.trialModal.title}
           </h3>
-          <p className="text-emerald-100 text-xs sm:text-sm">
+          <p className="text-[#DDE5DF] text-xs sm:text-sm">
             {t.trialModal.subtitle}
           </p>
         </div>
@@ -179,7 +179,7 @@ ${notes ? `- Additional Notes: ${notes}` : ''}`;
 
             {/* Learner Type Selector */}
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-[#064232] mb-2">
+              <label className="block text-xs font-bold uppercase tracking-wider text-[#064E3B] mb-2">
                 {isRtl ? 'کلاس کس کے لیے ہے؟' : 'Who is the class for?'}
               </label>
               <div className="grid grid-cols-3 gap-2">
@@ -195,8 +195,8 @@ ${notes ? `- Additional Notes: ${notes}` : ''}`;
                     onClick={() => setLearnerType(item.id as any)}
                     className={`py-2 px-3 rounded-xl text-xs font-semibold border transition-all ${
                       learnerType === item.id
-                        ? 'bg-[#064232] text-white border-[#064232] shadow-sm'
-                        : 'bg-[#faf9f5] text-[#4e655c] border-[#e5e3d7] hover:bg-[#f1efe8]'
+                        ? 'bg-[#064E3B] text-white border-[#064E3B] shadow-sm'
+                        : 'bg-[#F8F7F1] text-[#17211D]/70 border-[#DDE5DF] hover:bg-white hover:text-[#064E3B]'
                     }`}
                   >
                     {item.label}
@@ -208,7 +208,7 @@ ${notes ? `- Additional Notes: ${notes}` : ''}`;
             {/* Student & Parent Name */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
-                <label htmlFor="trial-student-name" className="block text-xs font-semibold text-[#13241d] mb-1">
+                <label htmlFor="trial-student-name" className="block text-xs font-semibold text-[#17211D] mb-1">
                   {t.trialModal.fullName} *
                 </label>
                 <input
@@ -219,12 +219,12 @@ ${notes ? `- Additional Notes: ${notes}` : ''}`;
                   value={studentName}
                   onChange={(e) => setStudentName(e.target.value)}
                   placeholder={isRtl ? 'مثال: ابراہیم خان' : 'e.g. Ibrahim Khan'}
-                  className="w-full px-4 py-2.5 rounded-xl border border-[#e5e3d7] text-sm focus:outline-none focus:border-[#064232] bg-[#faf9f5] disabled:opacity-60"
+                  className="w-full px-4 py-2.5 rounded-xl border border-[#DDE5DF] text-sm focus:outline-none focus:border-[#064E3B] bg-[#F8F7F1] text-[#17211D] disabled:opacity-60"
                 />
               </div>
 
               <div>
-                <label htmlFor="trial-parent-name" className="block text-xs font-semibold text-[#13241d] mb-1">
+                <label htmlFor="trial-parent-name" className="block text-xs font-semibold text-[#17211D] mb-1">
                   {isArabic ? 'اسم ولي الأمر (اختياري للأطفال)' : isUrdu ? 'والد / سرپرست کا نام (اختیاری)' : 'Parent / Guardian Name'}
                 </label>
                 <input
@@ -234,14 +234,14 @@ ${notes ? `- Additional Notes: ${notes}` : ''}`;
                   value={parentName}
                   onChange={(e) => setParentName(e.target.value)}
                   placeholder={isRtl ? 'مثال: محمد خان' : 'e.g. Muhammad Khan'}
-                  className="w-full px-4 py-2.5 rounded-xl border border-[#e5e3d7] text-sm focus:outline-none focus:border-[#064232] bg-[#faf9f5] disabled:opacity-60"
+                  className="w-full px-4 py-2.5 rounded-xl border border-[#DDE5DF] text-sm focus:outline-none focus:border-[#064E3B] bg-[#F8F7F1] text-[#17211D] disabled:opacity-60"
                 />
               </div>
             </div>
 
             {/* Course Interest */}
             <div>
-              <label htmlFor="trial-course-select" className="block text-xs font-semibold text-[#13241d] mb-1">
+              <label htmlFor="trial-course-select" className="block text-xs font-semibold text-[#17211D] mb-1">
                 {t.trialModal.course} *
               </label>
               <select
@@ -249,7 +249,7 @@ ${notes ? `- Additional Notes: ${notes}` : ''}`;
                 disabled={isSubmitting}
                 value={courseInterest}
                 onChange={(e) => setCourseInterest(e.target.value)}
-                className="w-full px-4 py-2.5 rounded-xl border border-[#e5e3d7] text-sm focus:outline-none focus:border-[#064232] bg-[#faf9f5] disabled:opacity-60"
+                className="w-full px-4 py-2.5 rounded-xl border border-[#DDE5DF] text-sm focus:outline-none focus:border-[#064E3B] bg-[#F8F7F1] text-[#17211D] disabled:opacity-60"
               >
                 {COURSES_DATA.map((course) => (
                   <option key={course.id} value={course.id}>
@@ -402,27 +402,27 @@ ${notes ? `- Additional Notes: ${notes}` : ''}`;
                 value={notes}
                 onChange={(e) => setNotes(e.target.value)}
                 placeholder={isArabic ? 'أي تفاصيل عن الطالب أو الأوقات المناسبة...' : isUrdu ? 'کوئی خاص ہدف یا اوقات کی تفصیل...' : 'Any specific goals, child age, or preferred time slot...'}
-                className="w-full px-3 py-2 rounded-xl border border-[#e5e3d7] text-xs focus:outline-none focus:border-[#064232] bg-[#faf9f5] disabled:opacity-60"
+                className="w-full px-3 py-2 rounded-xl border border-[#DDE5DF] text-xs focus:outline-none focus:border-[#064E3B] bg-[#F8F7F1] text-[#17211D] disabled:opacity-60"
               />
             </div>
 
             {/* Action Buttons */}
-            <div className="pt-3 border-t border-[#e5e3d7] flex flex-col sm:flex-row gap-3">
+            <div className="pt-3 border-t border-[#DDE5DF] flex flex-col sm:flex-row gap-3">
               <button
                 type="submit"
                 disabled={isSubmitting}
                 id="submit-trial-request-btn"
-                className="flex-1 py-3 px-4 rounded-xl font-semibold text-xs sm:text-sm text-[#064232] bg-gradient-to-r from-[#e6c564] to-[#c69b32] hover:brightness-105 active:scale-95 shadow-md flex items-center justify-center gap-2 disabled:opacity-70 cursor-pointer"
+                className="flex-1 py-3 px-4 rounded-xl font-bold text-xs sm:text-sm text-white bg-[#064E3B] hover:bg-[#065F46] border border-[#D4AF37]/50 active:scale-95 shadow-md flex items-center justify-center gap-2 disabled:opacity-70 cursor-pointer transition-all"
               >
                 {isSubmitting ? (
                   <>
-                    <Loader2 className="w-4 h-4 animate-spin text-[#064232]" />
+                    <Loader2 className="w-4 h-4 animate-spin text-[#D4AF37]" />
                     <span>{isArabic ? 'جاري حجز التجربة...' : isUrdu ? 'ٹرائل محفوظ ہو رہا ہے...' : 'Reserving Free Trial...'}</span>
                   </>
                 ) : (
                   <>
                     <span>{t.trialModal.submit}</span>
-                    <ArrowRight className="w-4 h-4 rtl:rotate-180" />
+                    <ArrowRight className="w-4 h-4 rtl:rotate-180 text-[#D4AF37]" />
                   </>
                 )}
               </button>
@@ -439,32 +439,32 @@ ${notes ? `- Additional Notes: ${notes}` : ''}`;
               </a>
             </div>
 
-            <div className="flex items-center justify-center gap-2 text-[11px] text-[#4e655c]">
-              <ShieldCheck className="w-3.5 h-3.5 text-[#064232]" />
+            <div className="flex items-center justify-center gap-2 text-[11px] text-[#17211D]/70">
+              <ShieldCheck className="w-3.5 h-3.5 text-[#064E3B]" />
               <span>{isArabic ? '100% مجاناً • دون أي بطاقة ائتمانية • أوقات مرنة' : isUrdu ? '100% مفت • کوئی کریڈٹ کارڈ مطلوب نہیں • لچکدار اوقات' : 'Zero commitment. No automatic billing. Complete peace of mind.'}</span>
             </div>
           </form>
         ) : (
           /* Confirmation State */
           <div className="p-8 text-center space-y-5 animate-in fade-in duration-300">
-            <div className="w-16 h-16 rounded-full bg-[#064232]/10 text-[#064232] flex items-center justify-center mx-auto shadow-sm">
-              <CheckCircle2 className="w-10 h-10 text-[#064232]" />
+            <div className="w-16 h-16 rounded-full bg-[#064E3B]/10 text-[#064E3B] flex items-center justify-center mx-auto shadow-sm border border-[#064E3B]/20">
+              <CheckCircle2 className="w-10 h-10 text-[#064E3B]" />
             </div>
 
-            <h4 className="font-serif text-2xl font-bold text-[#064232]">
+            <h4 className="font-serif text-2xl font-bold text-[#064E3B]">
               {isArabic ? `جزاكم الله خيراً، ${studentName || 'يا طالب العلم'}!` : isUrdu ? `جزاکم اللہ خیراً، ${studentName || 'طالب علم'}!` : `JazakAllahu Khairan, ${studentName || 'Learner'}!`}
             </h4>
 
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-100 text-[#065f46] text-xs font-semibold">
-              <ShieldCheck className="w-3.5 h-3.5 text-emerald-700" />
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#064E3B]/10 text-[#064E3B] text-xs font-semibold border border-[#064E3B]/20">
+              <ShieldCheck className="w-3.5 h-3.5 text-[#D4AF37]" />
               <span>Free Trial Delivered to noorulhudaacademy206@gmail.com</span>
             </div>
 
-            <p className="text-sm text-[#4e655c] max-w-md mx-auto leading-relaxed">
+            <p className="text-sm text-[#17211D]/80 max-w-md mx-auto leading-relaxed">
               {t.trialModal.successDesc}
             </p>
 
-            <div className="p-4 rounded-2xl bg-[#faf9f5] border border-[#e5e3d7] max-w-md mx-auto text-xs text-left rtl:text-right space-y-2 text-[#13241d]">
+            <div className="p-4 rounded-2xl bg-[#F8F7F1] border border-[#DDE5DF] max-w-md mx-auto text-xs text-left rtl:text-right space-y-2 text-[#17211D]">
               <div><strong>{t.trialModal.fullName}:</strong> {studentName} {parentName ? `(Parent: ${parentName})` : ''}</div>
               <div><strong>{isArabic ? 'الدورة المطلوبة:' : isUrdu ? 'منتخب کورس:' : 'Requested Course:'}</strong> {COURSES_DATA.find((c) => c.id === courseInterest)?.title || courseInterest}</div>
               <div><strong>{isArabic ? 'وقت الحصة المفضل:' : isUrdu ? 'پسندیدہ وقت:' : 'Preferred Time:'}</strong> {preferredTime}</div>
@@ -489,7 +489,7 @@ ${notes ? `- Additional Notes: ${notes}` : ''}`;
                   setIsSubmitted(false);
                   onClose();
                 }}
-                className="px-5 py-3 rounded-xl font-medium text-xs sm:text-sm text-[#4e655c] hover:bg-black/5 cursor-pointer"
+                className="px-5 py-3 rounded-xl font-semibold text-xs sm:text-sm text-[#064E3B] hover:bg-[#064E3B]/10 cursor-pointer border border-[#DDE5DF]"
               >
                 {t.trialModal.close}
               </button>

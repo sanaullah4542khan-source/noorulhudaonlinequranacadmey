@@ -6,6 +6,8 @@ import { SafirTeachersSection } from './components/SafirTeachersSection';
 import { ClassExperience } from './components/ClassExperience';
 import { ParentsSection } from './components/ParentsSection';
 import { LibrarySection } from './components/LibrarySection';
+import { SafirContactSection } from './components/SafirContactSection';
+import { SafirFooter } from './components/SafirFooter';
 import { AdminLoginModal } from './components/AdminLoginModal';
 import { FreeTrialModal } from './components/FreeTrialModal';
 import { CourseDetailModal } from './components/CourseDetailModal';
@@ -38,7 +40,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen w-full overflow-x-hidden flex flex-col font-sans antialiased bg-[#faf9f5] text-[#13241d] selection:bg-[#064232] selection:text-white">
+    <div className="min-h-screen w-full overflow-x-hidden flex flex-col font-sans antialiased bg-[#F8F7F1] text-[#17211D] selection:bg-[#064E3B] selection:text-white">
       {/* 1. Header with TopBar & Navbar */}
       <Navbar
         onOpenFreeTrial={handleOpenFreeTrial}
@@ -62,20 +64,20 @@ export default function App() {
         </div>
 
         {/* 4. Courses Grid Section */}
-        <section id="courses" className="py-16 sm:py-20 bg-white border-b border-[#e5e3d7]">
+        <section id="courses" className="py-16 sm:py-20 bg-white border-b border-[#DDE5DF]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
-              <span className="px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-emerald-100 text-emerald-800 border border-emerald-200">
+              <span className="px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-[#064E3B]/10 text-[#064E3B] border border-[#064E3B]/20">
                 {isArabic ? 'المناهج والدورات' : isUrdu ? 'جامع قرآنی کورسز' : 'Our Academic Programs'}
               </span>
-              <h2 className="font-serif text-3xl sm:text-4xl font-bold text-[#064232] mt-3">
+              <h2 className="font-serif text-3xl sm:text-4xl font-bold text-[#064E3B] mt-3">
                 {isArabic
                   ? 'دورات تعليمية فردية مع نخبة القراء والمجازين'
                   : isUrdu
                   ? 'سند یافتہ اساتذہ کے ساتھ 1-آن-1 انفرادی آن لائن کلاسز'
                   : 'Tailored 1-on-1 Quran & Islamic Studies Courses'}
               </h2>
-              <p className="text-sm sm:text-base text-gray-600 mt-3 leading-relaxed">
+              <p className="text-sm sm:text-base text-[#17211D]/80 mt-3 leading-relaxed">
                 {isArabic
                   ? 'برامج مصممة للأطفال والكبار ومسلمي العالم مع مرونة تامة في الأوقات'
                   : isUrdu
@@ -88,50 +90,50 @@ export default function App() {
               {COURSES_DATA.map((course) => (
                 <div
                   key={course.id}
-                  className="bg-[#faf9f5] rounded-3xl border border-[#e5e3d7] p-6 shadow-sm hover:shadow-xl transition-all flex flex-col justify-between group hover:-translate-y-1"
+                  className="bg-[#F8F7F1] rounded-3xl border border-[#DDE5DF] p-6 shadow-xs hover:shadow-xl hover:border-[#D4AF37]/60 transition-all flex flex-col justify-between group hover:-translate-y-1"
                 >
                   <div className="space-y-3">
                     <div className="flex items-center justify-between">
-                      <span className="px-3 py-1 rounded-full text-[11px] font-bold bg-[#064232] text-[#facc15]">
+                      <span className="px-3 py-1 rounded-full text-[11px] font-bold bg-[#064E3B] text-[#D4AF37] border border-[#D4AF37]/30">
                         {course.badge}
                       </span>
                       {course.arabicTitle && (
-                        <span className="font-arabic text-sm text-[#064232] font-bold">
+                        <span className="font-arabic text-sm text-[#064E3B] font-bold">
                           {course.arabicTitle}
                         </span>
                       )}
                     </div>
 
-                    <h3 className="font-serif text-xl font-bold text-[#064232] group-hover:text-emerald-700 transition-colors">
+                    <h3 className="font-serif text-xl font-bold text-[#064E3B] group-hover:text-[#065F46] transition-colors">
                       {course.title}
                     </h3>
 
-                    <p className="text-xs sm:text-sm text-gray-600 leading-relaxed line-clamp-3">
+                    <p className="text-xs sm:text-sm text-[#17211D]/80 leading-relaxed line-clamp-3">
                       {course.summary || course.description}
                     </p>
 
-                    <div className="pt-2 text-xs text-gray-500 space-y-1">
+                    <div className="pt-2 text-xs text-[#17211D]/70 space-y-1">
                       <div className="flex justify-between">
                         <span>Duration:</span>
-                        <strong className="text-gray-700">{course.duration}</strong>
+                        <strong className="text-[#17211D]">{course.duration}</strong>
                       </div>
                       <div className="flex justify-between">
                         <span>For:</span>
-                        <strong className="text-gray-700">{course.studentCategory}</strong>
+                        <strong className="text-[#17211D]">{course.studentCategory}</strong>
                       </div>
                     </div>
                   </div>
 
-                  <div className="pt-6 mt-4 border-t border-[#f0eee4] flex items-center justify-between gap-2">
+                  <div className="pt-6 mt-4 border-t border-[#DDE5DF] flex items-center justify-between gap-2">
                     <button
                       onClick={() => setSelectedCourseDetail(course)}
-                      className="text-xs font-bold text-[#064232] hover:text-[#c69b32] transition-colors underline cursor-pointer"
+                      className="text-xs font-bold text-[#064E3B] hover:text-[#D4AF37] transition-colors underline cursor-pointer"
                     >
                       {isArabic ? 'تفاصيل الدورة' : isUrdu ? 'کورس کی تفصیل' : 'Course Details'}
                     </button>
                     <button
                       onClick={() => handleOpenFreeTrial(course.id)}
-                      className="px-4 py-2 rounded-xl bg-[#064232] text-white hover:bg-[#0a523f] text-xs font-bold transition-all shadow-xs active:scale-95 cursor-pointer"
+                      className="px-4 py-2 rounded-xl bg-[#064E3B] text-white hover:bg-[#065F46] border border-[#064E3B] text-xs font-bold transition-all shadow-xs active:scale-95 cursor-pointer"
                     >
                       {isArabic ? 'احجز تجربة' : isUrdu ? 'ٹرائل لیں' : 'Free Trial'}
                     </button>
@@ -159,22 +161,15 @@ export default function App() {
         <div id="library">
           <LibrarySection onOpenFreeTrial={handleOpenFreeTrial} />
         </div>
+
+        {/* 9. Contact & Admissions Section */}
+        <div id="contact">
+          <SafirContactSection />
+        </div>
       </main>
 
-      {/* Footer */}
-      <footer className="bg-[#04241b] text-white py-12 border-t border-[#0a523f]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
-          <p className="font-serif text-lg font-bold text-[#facc15]">
-            Noor Ul Huda Online Quran Academy
-          </p>
-          <p className="text-xs text-emerald-200 max-w-xl mx-auto">
-            Dedicated to spreading the authentic recitation, Tajweed, and profound wisdom of the Holy Quran to homes across the globe.
-          </p>
-          <div className="pt-4 text-xs text-emerald-300 border-t border-[#0a523f]">
-            &copy; {new Date().getFullYear()} Noor Ul Huda Online Quran Academy. All rights reserved.
-          </div>
-        </div>
-      </footer>
+      {/* 10. Premium Academy Footer */}
+      <SafirFooter onNavigateSection={handleScrollToSection} />
 
       {/* Modals */}
       {isTrialModalOpen && (

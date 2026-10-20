@@ -71,26 +71,26 @@ export const CourseDetailModal: React.FC<CourseDetailModalProps> = ({
           <X className="w-5 h-5" />
         </button>
 
-        {/* Top Hero Area with Bespoke Illustration, Dynamic Gradient & Calligraphy */}
-        <div className={`relative bg-gradient-to-br ${theme.gradient} text-white p-6 sm:p-8 flex-shrink-0 overflow-hidden`}>
+        {/* Top Hero Area with Bespoke Illustration, Deep Forest Green & Calligraphy */}
+        <div className="relative bg-[#022C22] border-b border-[#065F46] text-white p-6 sm:p-8 flex-shrink-0 overflow-hidden">
           {/* Subtle Ambient Radial Shimmers */}
-          <div className="absolute top-0 right-0 w-80 h-80 bg-white/10 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute top-0 right-0 w-80 h-80 bg-[#064E3B]/40 rounded-full blur-3xl pointer-events-none" />
 
           <div className="flex flex-col sm:flex-row items-center gap-6 relative z-10">
             {/* Themed SVG Illustration */}
-            <div className="w-full sm:w-56 flex-shrink-0 rounded-2xl overflow-hidden border border-white/20 shadow-xl">
+            <div className="w-full sm:w-56 flex-shrink-0 rounded-2xl overflow-hidden border border-[#D4AF37]/40 shadow-xl bg-[#064E3B]">
               <CourseIllustration slug={course.illustrationSlug} className="w-full h-36 sm:h-44" />
             </div>
 
             {/* Course Headline Info */}
             <div className="flex-1 text-center sm:text-left rtl:sm:text-right">
               <div className="flex flex-wrap items-center justify-center sm:justify-start rtl:sm:justify-start gap-2 mb-2.5">
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/35 text-amber-300 border border-amber-300/30 text-xs font-bold uppercase tracking-wider">
-                  <Sparkles className="w-3.5 h-3.5 text-amber-300" />
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#064E3B] text-[#D4AF37] border border-[#D4AF37]/40 text-xs font-bold uppercase tracking-wider">
+                  <Sparkles className="w-3.5 h-3.5 text-[#D4AF37]" />
                   <span>{course.badge}</span>
                 </span>
                 {theme.popularTag && (
-                  <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-amber-400 text-slate-900 text-xs font-bold tracking-wide shadow-sm">
+                  <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-[#D4AF37] text-[#17211D] text-xs font-bold tracking-wide shadow-sm">
                     <Star className="w-3 h-3 fill-current" />
                     <span>{theme.popularTag}</span>
                   </span>
@@ -99,7 +99,7 @@ export const CourseDetailModal: React.FC<CourseDetailModalProps> = ({
 
               {/* Arabic Calligraphy Watermark/Subtitle */}
               {course.arabicTitle && (
-                <div className="font-arabic text-xl sm:text-2xl text-amber-300/90 font-bold mb-1">
+                <div className="font-arabic text-xl sm:text-2xl text-[#D4AF37] font-bold mb-1">
                   {course.arabicTitle}
                 </div>
               )}
@@ -108,21 +108,21 @@ export const CourseDetailModal: React.FC<CourseDetailModalProps> = ({
                 {course.title}
               </h2>
 
-              <p className="text-white/90 text-xs sm:text-sm leading-relaxed">
+              <p className="text-emerald-100/90 text-xs sm:text-sm leading-relaxed">
                 {course.summary}
               </p>
 
               {/* Quick Specs Pill Badges */}
               <div className="flex flex-wrap items-center justify-center sm:justify-start rtl:sm:justify-start gap-2 mt-4 text-[11.5px]">
-                <span className="px-3 py-1 rounded-lg bg-white/15 text-white border border-white/20 flex items-center gap-1.5">
-                  <Clock className="w-3.5 h-3.5 text-amber-300" />
+                <span className="px-3 py-1 rounded-lg bg-white/10 text-white border border-white/20 flex items-center gap-1.5">
+                  <Clock className="w-3.5 h-3.5 text-[#D4AF37]" />
                   {course.duration}
                 </span>
-                <span className="px-3 py-1 rounded-lg bg-white/15 text-white border border-white/20 flex items-center gap-1.5">
-                  <Users className="w-3.5 h-3.5 text-amber-300" />
+                <span className="px-3 py-1 rounded-lg bg-white/10 text-white border border-white/20 flex items-center gap-1.5">
+                  <Users className="w-3.5 h-3.5 text-[#D4AF37]" />
                   {course.studentCategory}
                 </span>
-                <span className="px-3 py-1 rounded-lg bg-emerald-500/30 text-emerald-200 border border-emerald-400/40 font-bold">
+                <span className="px-3 py-1 rounded-lg bg-[#064E3B] text-[#D4AF37] border border-[#D4AF37]/50 font-bold">
                   {isArabic ? 'حصص فردية مباشرة (1-لـ-1)' : isUrdu ? 'ون آن ون لائیو کلاسز' : '1-on-1 Live Mentorship'}
                 </span>
               </div>
@@ -134,11 +134,11 @@ export const CourseDetailModal: React.FC<CourseDetailModalProps> = ({
         <div className="p-6 sm:p-8 overflow-y-auto space-y-7 text-left rtl:text-right flex-1 bg-white">
           {/* 1. Course Introduction (Expanded Description) */}
           <div>
-            <h3 className="font-serif text-lg font-bold text-[#064232] mb-2 flex items-center gap-2">
-              <Award className="w-5 h-5 text-amber-600" />
+            <h3 className="font-serif text-lg font-bold text-[#064E3B] mb-2 flex items-center gap-2">
+              <Award className="w-5 h-5 text-[#D4AF37]" />
               {isArabic ? 'التعريف بالدورة وأهدافها' : isUrdu ? 'کورس کا تعارف اور اہداف' : 'Course Introduction & Objectives'}
             </h3>
-            <p className="text-sm text-[#4e655c] leading-relaxed">
+            <p className="text-sm text-[#53655D] leading-relaxed">
               {course.description}
             </p>
           </div>
@@ -247,17 +247,17 @@ export const CourseDetailModal: React.FC<CourseDetailModalProps> = ({
           </div>
 
           {/* 6. Free Trial & Fee Banner */}
-          <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-[#063327] via-[#094635] to-[#042119] text-white flex flex-col sm:flex-row items-center justify-between gap-4 border border-amber-400/30 shadow-md">
+          <div className="p-4 sm:p-5 rounded-2xl bg-[#022C22] text-white flex flex-col sm:flex-row items-center justify-between gap-4 border border-[#D4AF37]/40 shadow-md">
             <div className="space-y-1 text-center sm:text-left rtl:sm:text-right">
-              <div className="flex items-center justify-center sm:justify-start rtl:sm:justify-start gap-2 text-amber-300 text-xs font-bold uppercase tracking-wider">
+              <div className="flex items-center justify-center sm:justify-start rtl:sm:justify-start gap-2 text-[#D4AF37] text-xs font-bold uppercase tracking-wider">
                 <Gift className="w-4 h-4" />
                 <span>{isArabic ? '3 أيام تجربة مجانية كاملة' : isRtl ? '3 دن کا مفت ٹرائل' : '3-Day Free Trial Class'}</span>
               </div>
               <p className="text-xs sm:text-sm text-emerald-100">
                 {isArabic ? 'جرّب الحصة الفردية المباشرة مجاناً دون أي التزام أو بطاقة ائتمانية.' : isRtl ? 'بغیر کسی فیس کے لائیو کلاس کا تجربہ کریں۔ کسی کریڈٹ کارڈ کی ضرورت نہیں۔' : 'Experience the live 1-on-1 session before committing. No credit card required.'}
               </p>
-              <div className="text-[11px] text-amber-200/90 pt-1 flex items-center justify-center sm:justify-start rtl:sm:justify-start gap-1">
-                <DollarSign className="w-3.5 h-3.5 text-amber-300" />
+              <div className="text-[11px] text-[#D4AF37]/90 pt-1 flex items-center justify-center sm:justify-start rtl:sm:justify-start gap-1">
+                <DollarSign className="w-3.5 h-3.5 text-[#D4AF37]" />
                 <span>{course.feeInfo}</span>
               </div>
             </div>
@@ -267,7 +267,7 @@ export const CourseDetailModal: React.FC<CourseDetailModalProps> = ({
                 onClose();
                 onSelectForTrial(course.id, course.title);
               }}
-              className="w-full sm:w-auto px-6 py-3 rounded-xl text-xs sm:text-sm font-bold text-[#064232] bg-gradient-to-r from-[#fde047] to-[#eab308] hover:brightness-105 transition-all shadow-md flex items-center justify-center gap-1.5 flex-shrink-0"
+              className="w-full sm:w-auto px-6 py-3 rounded-xl text-xs sm:text-sm font-bold text-[#17211D] bg-[#D4AF37] hover:bg-[#b89728] transition-all shadow-md flex items-center justify-center gap-1.5 flex-shrink-0 cursor-pointer"
             >
               <span>{isArabic ? 'احجز تجربة مجانية' : isUrdu ? 'مفت ٹرائل بک کریں' : 'Book Free Trial'}</span>
               <ArrowRight className="w-4 h-4 rtl:rotate-180" />
@@ -276,7 +276,7 @@ export const CourseDetailModal: React.FC<CourseDetailModalProps> = ({
         </div>
 
         {/* Modal Footer: Action CTAs */}
-        <div className="p-5 sm:p-6 bg-[#faf9f5] border-t border-[#e5e3d7] flex-shrink-0">
+        <div className="p-5 sm:p-6 bg-[#F8F7F1] border-t border-[#DDE5DF] flex-shrink-0">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {/* Strong Enroll Now CTA */}
             <button
@@ -285,10 +285,10 @@ export const CourseDetailModal: React.FC<CourseDetailModalProps> = ({
                 onClose();
                 onSelectForTrial(course.id, course.title);
               }}
-              className="w-full py-3.5 px-5 rounded-xl text-xs sm:text-sm font-bold text-white bg-gradient-to-r from-[#064e3b] via-[#096b52] to-[#043327] hover:brightness-110 active:scale-[0.98] shadow-md transition-all flex items-center justify-center gap-2"
+              className="w-full py-3.5 px-5 rounded-xl text-xs sm:text-sm font-bold text-white bg-[#064E3B] hover:bg-[#022C22] border border-[#065F46] hover:border-[#D4AF37] active:scale-[0.98] shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer"
             >
               <span>{isArabic ? `سجل الآن في ${course.titleAr || course.title}` : isUrdu ? `ابھی ${course.title} میں داخلہ لیں` : `Enroll in ${course.title} Now`}</span>
-              <ArrowRight className="w-4 h-4 text-amber-300 rtl:rotate-180" />
+              <ArrowRight className="w-4 h-4 text-[#D4AF37] rtl:rotate-180" />
             </button>
 
             {/* Dynamic WhatsApp Chat CTA */}
@@ -297,7 +297,7 @@ export const CourseDetailModal: React.FC<CourseDetailModalProps> = ({
               href={whatsAppUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full py-3.5 px-5 rounded-xl text-xs sm:text-sm font-bold text-white bg-gradient-to-r from-[#25d366] to-[#128c7e] hover:brightness-105 active:scale-[0.98] shadow-md transition-all flex items-center justify-center gap-2 text-center"
+              className="w-full py-3.5 px-5 rounded-xl text-xs sm:text-sm font-bold text-white bg-[#25D366] hover:bg-[#1faa4f] active:scale-[0.98] shadow-md transition-all flex items-center justify-center gap-2 text-center"
             >
               <MessageCircle className="w-4 h-4 fill-white" />
               <span>{isArabic ? 'تواصل عبر واتساب' : isUrdu ? 'واٹس ایپ پر رابطہ کریں' : 'Chat on WhatsApp'}</span>

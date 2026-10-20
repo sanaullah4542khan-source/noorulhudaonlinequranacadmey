@@ -28,7 +28,7 @@ export const SafirLogo: React.FC<SafirLogoProps> = ({
   return (
     <div className={`flex items-center gap-2 sm:gap-3 ${className}`}>
       {/* Official Academy Emblem Badge */}
-      <div className={`relative flex-shrink-0 ${dimensionClasses} rounded-xl sm:rounded-2xl p-0.5 sm:p-1 bg-white shadow-sm sm:shadow-md border-2 border-[#facc15]/70 hover:scale-105 transition-transform duration-300 flex items-center justify-center overflow-hidden`}>
+      <div className={`relative flex-shrink-0 ${dimensionClasses} rounded-xl sm:rounded-2xl p-0.5 sm:p-1 bg-white shadow-sm sm:shadow-md border-2 border-[#D4AF37] hover:scale-105 transition-transform duration-300 flex items-center justify-center overflow-hidden`}>
         <img
           src={logoSrc}
           onError={() => setLogoSrc('/noor-ul-huda-logo.png')}
@@ -46,7 +46,7 @@ export const SafirLogo: React.FC<SafirLogoProps> = ({
         <div className="flex flex-col text-left rtl:text-right min-w-0">
           <span
             className={`font-heading font-bold leading-none tracking-tight truncate ${
-              isLight ? 'text-white' : 'text-[#064232]'
+              isLight ? 'text-white' : 'text-[#064E3B]'
             } ${
               size === 'sm'
                 ? 'text-xs sm:text-sm'
@@ -59,7 +59,7 @@ export const SafirLogo: React.FC<SafirLogoProps> = ({
           </span>
           <span
             className={`font-nav tracking-wider sm:tracking-[0.14em] uppercase font-semibold text-[7.5px] sm:text-[9px] md:text-[9.5px] mt-0.5 sm:mt-1 truncate ${
-              isLight ? 'text-[#facc15]' : 'text-[#065f46]'
+              isLight ? 'text-[#D4AF37]' : 'text-[#065F46]'
             }`}
           >
             Online Quran Academy

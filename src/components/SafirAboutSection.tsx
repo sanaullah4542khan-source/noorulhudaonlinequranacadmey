@@ -18,15 +18,15 @@ export const SafirAboutSection: React.FC<SafirAboutSectionProps> = ({ onLearnMor
   };
 
   return (
-    <section id="about-us" className="py-14 sm:py-20 bg-[#faf9f5]">
+    <section id="about-us" className="py-14 sm:py-20 bg-[#F8F7F1]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-heading font-semibold text-[#064232] tracking-tight mb-2">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-heading font-semibold text-[#064E3B] tracking-tight mb-2">
             {t.about.title}
           </h2>
-          <div className="w-16 h-1 bg-[#eab308] mx-auto rounded-full mb-4"></div>
-          <p className="font-body font-normal text-sm sm:text-base text-gray-600">
+          <div className="w-16 h-1 bg-[#D4AF37] mx-auto rounded-full mb-4"></div>
+          <p className="font-body font-normal text-sm sm:text-base text-[#53655D]">
             {t.about.subtitle}
           </p>
         </div>
@@ -34,10 +34,10 @@ export const SafirAboutSection: React.FC<SafirAboutSectionProps> = ({ onLearnMor
         {/* Mission Block */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center mb-12 sm:mb-16">
           <div className="text-left rtl:text-right">
-            <h3 className="text-xl sm:text-2xl font-heading font-semibold text-[#064232] mb-4">
+            <h3 className="text-xl sm:text-2xl font-heading font-semibold text-[#064E3B] mb-4">
               {t.about.missionTitle}
             </h3>
-            <div className="space-y-4 font-body font-normal text-xs sm:text-sm text-gray-700 leading-relaxed">
+            <div className="space-y-4 font-body font-normal text-xs sm:text-sm text-[#17211D] leading-relaxed">
               <p>
                 {t.about.missionP1}
               </p>
@@ -46,7 +46,7 @@ export const SafirAboutSection: React.FC<SafirAboutSectionProps> = ({ onLearnMor
               </p>
             </div>
           </div>
-          <div className="rounded-2xl overflow-hidden shadow-md border border-gray-100 max-h-80">
+          <div className="rounded-2xl overflow-hidden shadow-md border border-[#DDE5DF] max-h-80 bg-white">
             <img
               src="/student-holding-quran.jpg"
               alt="Dedicated student of Noor Ul Huda Academy holding the Holy Quran with love and devotion"
@@ -62,7 +62,7 @@ export const SafirAboutSection: React.FC<SafirAboutSectionProps> = ({ onLearnMor
 
         {/* Vision Block */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center mb-14 sm:mb-16">
-          <div className="order-2 lg:order-1 rounded-2xl overflow-hidden shadow-md border border-gray-100 max-h-80">
+          <div className="order-2 lg:order-1 rounded-2xl overflow-hidden shadow-md border border-[#DDE5DF] max-h-80 bg-white">
             <img
               src="/student-pointing-quran.jpg"
               alt="Young student reading and pointing to Quran verses during one-on-one lesson"
@@ -75,10 +75,10 @@ export const SafirAboutSection: React.FC<SafirAboutSectionProps> = ({ onLearnMor
             />
           </div>
           <div className="order-1 lg:order-2 text-left rtl:text-right">
-            <h3 className="text-xl sm:text-2xl font-heading font-semibold text-[#064232] mb-4">
+            <h3 className="text-xl sm:text-2xl font-heading font-semibold text-[#064E3B] mb-4">
               {t.about.visionTitle}
             </h3>
-            <div className="space-y-4 font-body font-normal text-xs sm:text-sm text-gray-700 leading-relaxed">
+            <div className="space-y-4 font-body font-normal text-xs sm:text-sm text-[#17211D] leading-relaxed">
               <p>
                 {t.about.visionP1}
               </p>
@@ -96,17 +96,17 @@ export const SafirAboutSection: React.FC<SafirAboutSectionProps> = ({ onLearnMor
             return (
               <div
                 key={idx}
-                className="bg-white rounded-xl p-6 sm:p-7 border border-gray-100 shadow-sm hover:shadow-md transition-shadow text-left rtl:text-right"
+                className="bg-white rounded-2xl p-6 sm:p-7 border border-[#DDE5DF] shadow-sm hover:shadow-md transition-shadow text-left rtl:text-right"
               >
-                <div className="w-12 h-12 rounded-full bg-[#f0fdf4] text-[#064232] flex items-center justify-center mb-4">
-                  {pillar.iconName === 'book' && <BookOpen className="w-6 h-6" />}
-                  {pillar.iconName === 'graduation-cap' && <GraduationCap className="w-6 h-6" />}
-                  {pillar.iconName === 'globe' && <Globe className="w-6 h-6" />}
+                <div className="w-12 h-12 rounded-xl bg-[#064E3B]/10 text-[#064E3B] flex items-center justify-center mb-4">
+                  {pillar.iconName === 'book' && <BookOpen className="w-6 h-6 text-[#D4AF37]" />}
+                  {pillar.iconName === 'graduation-cap' && <GraduationCap className="w-6 h-6 text-[#D4AF37]" />}
+                  {pillar.iconName === 'globe' && <Globe className="w-6 h-6 text-[#D4AF37]" />}
                 </div>
-                <h4 className="text-base sm:text-lg font-bold text-[#064232] mb-2">
+                <h4 className="text-base sm:text-lg font-bold text-[#064E3B] mb-2 font-heading">
                   {info.title}
                 </h4>
-                <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
+                <p className="text-xs sm:text-sm text-[#53655D] leading-relaxed font-body">
                   {info.text}
                 </p>
               </div>
@@ -119,7 +119,7 @@ export const SafirAboutSection: React.FC<SafirAboutSectionProps> = ({ onLearnMor
           <div className="text-center">
             <button
               onClick={onLearnMore}
-              className="inline-flex items-center gap-2 px-8 py-3.5 bg-[#064232] hover:bg-[#0a523f] text-white font-semibold text-sm sm:text-base rounded-lg shadow hover:shadow-md transition-all duration-200"
+              className="inline-flex items-center gap-2 px-8 py-3.5 bg-[#064E3B] hover:bg-[#022C22] text-white font-semibold text-sm sm:text-base rounded-xl shadow-md hover:shadow-lg transition-all duration-200 cursor-pointer"
             >
               <span>{t.about.learnMoreBtn}</span>
               <ArrowRight className="w-4 h-4 rtl:rotate-180" />

@@ -112,6 +112,12 @@ export interface StudentScheduleItem {
   courseName: string;
   teacherName: string;
   link?: string;
+  focusTopic?: string;
+  name?: string;
+  duration?: string;
+  date?: string;
+  status?: string;
+  title?: string;
 }
 
 export interface HomeworkTask {
@@ -120,8 +126,16 @@ export interface HomeworkTask {
   courseName: string;
   assignedDate: string;
   dueDate: string;
-  status: 'pending' | 'submitted' | 'completed';
+  status: 'pending' | 'submitted' | 'completed' | 'graded';
   notes?: string;
+  teacherGrade?: string;
+  surahOrTopic?: string;
+  ayahRange?: string;
+  description?: string;
+  audioReferenceUrl?: string;
+  audioDuration?: string;
+  teacherRemarks?: string;
+  submittedDate?: string;
 }
 
 export interface StudentProfile {
@@ -133,9 +147,19 @@ export interface StudentProfile {
   phone: string;
   avatarUrl: string;
   enrolledCourse: string;
-  assignedTeacher: string;
+  assignedTeacher: any;
+  packageType?: string;
   juzProgress?: string;
   attendanceRate: number;
+  classesCompleted?: number;
+  totalClassesBooked?: number;
+  enrollmentDate?: string;
+  streakDays?: number;
+  currentSabaq?: any;
+  currentSabqi?: any;
+  currentManzil?: any;
+  overallProgressPercentage?: number;
+  timezone?: string;
   tajweedSkills: {
     skill: string;
     mastery: number;
@@ -166,4 +190,99 @@ export interface LibraryResource {
   fullContent?: string;
   keyPoints?: string[];
   recommendedCourseId?: string;
+}
+
+export interface FaqItem {
+  id: string;
+  category: string;
+  question: string;
+  answer: string;
+}
+
+export type NavigationTab = 'home' | 'about' | 'courses' | 'pricing' | 'payment' | 'testimonials' | 'contact' | 'why-choose-us' | 'teachers' | 'fees' | 'library' | 'how-it-works' | 'faq';
+
+export interface FeePackage {
+  id: string;
+  name: string;
+  badge?: string;
+  classesPerWeek: number;
+  classesPerMonth: number;
+  sessionDuration: string;
+  recommended: boolean;
+  prices: Record<string, number>;
+  popularTag?: string;
+  features?: string[];
+  summary?: string;
+  billingPeriod?: string;
+  idealFor?: string;
+}
+
+export interface PaymentMethod {
+  id: string;
+  name: string;
+  category: string;
+  badge: string;
+  tagline: string;
+  description: string;
+  supportedCurrencies: string[];
+  instructions: string;
+}
+
+export type UserRole = 'student' | 'parent' | 'teacher' | 'admin';
+
+export interface UserAccount {
+  id: string;
+  name: string;
+  email: string;
+  role: UserRole;
+  studentId?: string;
+  avatarUrl?: string;
+  urduName?: string;
+  phone?: string;
+  parentId?: string;
+  teacherId?: string;
+}
+
+export interface AudioSubmission {
+  id: string;
+  studentId: string;
+  surahOrTopic: string;
+  ayahRange?: string;
+  date: string;
+  audioBlobUrl?: string;
+  status: 'pending' | 'graded';
+  grade?: string;
+  teacherRemarks?: string;
+}
+
+export interface AttendanceItem {
+  id: string;
+  date: string;
+  status: 'present' | 'absent' | 'excused';
+  topicCovered: string;
+}
+
+export interface FeeRecord {
+  id: string;
+  month: string;
+  amount: string;
+  status: 'paid' | 'pending';
+  receiptUrl?: string;
+}
+
+export interface LearningPath {
+  id?: string;
+  title?: string;
+  targetAudience?: string;
+  estimatedWeeks?: number;
+  modules?: string[];
+  studentId?: string;
+  studentName?: string;
+  ageGroup?: string;
+  currentLevel?: string;
+  primaryGoal?: string;
+  daysPerWeek?: number | string;
+  recommendedCourse?: string;
+  milestones?: any[];
+  [key: string]: any;
 }

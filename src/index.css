@@ -3,6 +3,18 @@
 @variant dark (&:where(.dark, .dark *));
 
 @theme {
+  --color-primary-emerald: #064E3B;
+  --color-forest-deep: #022C22;
+  --color-secondary-green: #065F46;
+  --color-gold-accent: #D4AF37;
+  --color-gold-hover: #b89728;
+  --color-gold-soft: #fbf5df;
+  --color-white: #FFFFFF;
+  --color-ivory: #F8F7F1;
+  --color-dark-text: #17211D;
+  --color-muted-text: #53655D;
+  --color-subtle-border: #DDE5DF;
+
   --font-heading: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-nav: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -18,17 +30,17 @@
 
 @layer base {
   :root {
-    --color-emerald-deep: #064232;
-    --color-emerald-primary: #0b513f;
-    --color-emerald-surface: #0f634e;
-    --color-emerald-darkest: #04241b;
-    --color-gold-accent: #c69b32;
-    --color-gold-muted: #d9ad3d;
-    --color-gold-soft: #fdf6e2;
-    --color-ivory-bg: #faf9f5;
-    --color-ivory-card: #ffffff;
-    --color-text-main: #13241d;
-    --color-text-muted: #4e655c;
+    --color-emerald-primary: #064E3B;
+    --color-forest-deep: #022C22;
+    --color-emerald-secondary: #065F46;
+    --color-gold-accent: #D4AF37;
+    --color-gold-hover: #b89728;
+    --color-gold-soft: #fbf5df;
+    --color-ivory-bg: #F8F7F1;
+    --color-ivory-card: #FFFFFF;
+    --color-text-main: #17211D;
+    --color-text-muted: #53655D;
+    --color-border-subtle: #DDE5DF;
     
     /* Typography Tokens */
     --font-heading: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -45,17 +57,17 @@
   }
 
   .dark {
-    --color-emerald-deep: #04241b;
-    --color-emerald-primary: #06382b;
-    --color-emerald-surface: #0a4838;
-    --color-emerald-darkest: #02140f;
-    --color-gold-accent: #facc15;
-    --color-gold-muted: #eab308;
-    --color-gold-soft: #123326;
-    --color-ivory-bg: #041c15;
-    --color-ivory-card: #072a20;
-    --color-text-main: #f3f4f6;
-    --color-text-muted: #9fb3ab;
+    --color-emerald-primary: #064E3B;
+    --color-forest-deep: #022C22;
+    --color-emerald-secondary: #065F46;
+    --color-gold-accent: #D4AF37;
+    --color-gold-hover: #b89728;
+    --color-gold-soft: #082d22;
+    --color-ivory-bg: #022C22;
+    --color-ivory-card: #064E3B;
+    --color-text-main: #F8F7F1;
+    --color-text-muted: #A3B8AF;
+    --color-border-subtle: #065F46;
     color-scheme: dark;
   }
 
@@ -177,40 +189,96 @@
   box-shadow: 0 20px 40px -15px rgba(234, 88, 12, 0.25), 0 0 0 1px rgba(249, 115, 22, 0.3);
 }
 
-/* Subtle Islamic Star & Lattice Geometric Pattern */
+/* Subtle Islamic Geometric Lattice Patterns */
 .bg-islamic-pattern {
-  background-image: radial-gradient(circle at 50% 50%, rgba(198, 155, 50, 0.08) 1px, transparent 1px),
-                    radial-gradient(circle at 0% 100%, rgba(6, 66, 50, 0.04) 1px, transparent 1px);
+  background-image: radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.09) 1px, transparent 1px),
+                    radial-gradient(circle at 0% 100%, rgba(6, 78, 59, 0.05) 1px, transparent 1px);
   background-size: 28px 28px;
 }
 
-.bg-islamic-dark-pattern {
-  background-image: radial-gradient(circle at 50% 50%, rgba(217, 173, 61, 0.08) 1.2px, transparent 1.2px),
-                    linear-gradient(135deg, rgba(255, 255, 255, 0.02) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.02) 50%, rgba(255, 255, 255, 0.02) 75%, transparent 75%, transparent);
+.bg-islamic-forest {
+  background-color: #022C22;
+  background-image: radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.1) 1.2px, transparent 1.2px),
+                    linear-gradient(135deg, rgba(6, 78, 59, 0.25) 25%, transparent 25%, transparent 50%, rgba(6, 78, 59, 0.25) 50%, rgba(6, 78, 59, 0.25) 75%, transparent 75%, transparent);
   background-size: 32px 32px;
 }
 
-.islamic-arch-shape {
-  border-top-left-radius: 4rem;
-  border-top-right-radius: 4rem;
+.bg-islamic-emerald {
+  background-color: #064E3B;
+  background-image: radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.08) 1.2px, transparent 1.2px);
+  background-size: 28px 28px;
 }
 
-/* Subtle gold metallic shimmer text */
-.gold-gradient-text {
-  background: linear-gradient(135deg, #b38728 0%, #e6c564 45%, #b38728 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+.islamic-arch-frame {
+  border-top-left-radius: 3.5rem;
+  border-top-right-radius: 3.5rem;
 }
 
-.emerald-gradient {
-  background: linear-gradient(145deg, #073a2c 0%, #0c4d3b 50%, #062f23 100%);
+/* Tasteful Metallic Gold Details */
+.text-gold-accent {
+  color: #D4AF37;
 }
 
-/* Glassmorphic subtle card */
+.border-gold-accent {
+  border-color: #D4AF37;
+}
+
+/* Standardized Button Utility Classes */
+.btn-primary-emerald {
+  background-color: #064E3B;
+  color: #FFFFFF;
+  border: 1px solid #065F46;
+  transition: all 0.2s ease-in-out;
+}
+.btn-primary-emerald:hover {
+  background-color: #022C22;
+  border-color: #D4AF37;
+}
+.btn-primary-emerald:active {
+  transform: scale(0.98);
+}
+
+.btn-secondary-emerald {
+  background-color: transparent;
+  color: #064E3B;
+  border: 1.5px solid #064E3B;
+  transition: all 0.2s ease-in-out;
+}
+.btn-secondary-emerald:hover {
+  background-color: #064E3B;
+  color: #FFFFFF;
+}
+.btn-secondary-emerald:active {
+  transform: scale(0.98);
+}
+
+.btn-gold-cta {
+  background-color: #D4AF37;
+  color: #17211D;
+  border: 1px solid #c29d2b;
+  font-weight: 600;
+  transition: all 0.2s ease-in-out;
+}
+.btn-gold-cta:hover {
+  background-color: #c29d2b;
+  box-shadow: 0 4px 12px rgba(212, 175, 55, 0.35);
+  transform: translateY(-1px);
+}
+.btn-gold-cta:active {
+  transform: scale(0.98);
+}
+
+/* Subtle Glassmorphic cards */
 .glass-card {
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(12px);
-  border: 1px solid rgba(229, 227, 215, 0.7);
+  border: 1px solid #DDE5DF;
+}
+
+.glass-card-forest {
+  background: rgba(2, 44, 34, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(212, 175, 55, 0.25);
 }
 
 .glass-card-dark {
@@ -224,75 +292,82 @@
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #f1efe8;
+  background: #F8F7F1;
 }
 ::-webkit-scrollbar-thumb {
-  background: #0b513f44;
+  background: #064E3B44;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #0b513f88;
+  background: #064E3B88;
 }
 
 /* Dark Mode Comprehensive Styling & Islamic Aesthetics */
 html.dark,
 body.dark {
-  background-color: #041c15;
-  color: #f1f5f3;
+  background-color: #022C22;
+  color: #F8F7F1;
 }
 
 /* Light sections transform into rich Islamic dark backgrounds */
 .dark section.bg-white,
 .dark .bg-white {
-  background-color: #072c21;
-  color: #f1f5f3;
-  border-color: #0f4837;
+  background-color: #064E3B;
+  color: #F8F7F1;
+  border-color: #065F46;
 }
 
+.dark .bg-\[\#F8F7F1\],
 .dark .bg-\[\#faf9f5\],
 .dark .bg-\[\#f5f4ed\],
 .dark .bg-\[\#fafafa\],
 .dark .bg-gray-50,
 .dark .bg-slate-50 {
-  background-color: #05221a;
-  color: #f1f5f3;
-  border-color: #0f4837;
+  background-color: #022C22;
+  color: #F8F7F1;
+  border-color: #065F46;
 }
 
+.dark .text-\[\#064E3B\],
 .dark .text-\[\#064232\],
+.dark .text-\[\#17211D\],
 .dark .text-\[\#13241d\] {
-  color: #f1f5f3;
+  color: #F8F7F1;
 }
 
+.dark .text-\[\#53655D\],
 .dark .text-\[\#4e655c\],
 .dark .text-gray-600,
 .dark .text-gray-500 {
-  color: #9ab4aa;
+  color: #DDE5DF;
 }
 
+.dark .border-\[\#DDE5DF\],
 .dark .border-\[\#e5e3d7\],
 .dark .border-\[\#f0eee4\],
 .dark .border-gray-100,
 .dark .border-gray-200 {
-  border-color: #0e4535;
+  border-color: #065F46;
 }
 
 .dark input,
 .dark select,
 .dark textarea {
-  background-color: #05221a;
-  color: #ffffff;
-  border-color: #0e4535;
+  background-color: #022C22;
+  color: #FFFFFF;
+  border-color: #065F46;
 }
 
 .dark input::placeholder,
 .dark textarea::placeholder {
-  color: #6b8a7f;
+  color: #DDE5DF;
 }
 
+.dark .bg-\[\#D4AF37\],
 .dark .bg-\[\#facc15\],
+.dark .bg-\[\#D4AF37\] *,
 .dark .bg-\[\#facc15\] * {
-  color: #13241d !important;
+  color: #022C22 !important;
 }
 
 .dark .bg-\[\#25D366\],
