@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Menu, X, Phone, MessageCircle, ShieldCheck, Mail, Sparkles, BookOpen } from 'lucide-react';
 import { SafirLogo } from './SafirLogo';
 import { LanguageSwitcher } from './LanguageSwitcher';
+import { ThemeToggle } from './ThemeToggle';
 import { SAFIR_CONTACT, getSafirWhatsAppUrl } from '../data/safirData';
 import { useLanguage } from '../context/LanguageContext';
 
@@ -117,6 +118,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
           {/* Desktop CTA Button */}
           <div className="hidden lg:flex items-center gap-3">
+            <ThemeToggle variant="nav" />
             <button
               onClick={() => onOpenFreeTrial()}
               className="px-4 py-2 bg-[#D4AF37] hover:bg-[#b89728] text-[#17211D] font-bold text-xs rounded-lg shadow-md hover:shadow-lg transition-all cursor-pointer transform hover:scale-[1.02] active:scale-95"
@@ -127,6 +129,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
           {/* Mobile Right Controls */}
           <div className="lg:hidden flex items-center gap-1.5 sm:gap-2">
+            <ThemeToggle variant="nav" />
             <button
               onClick={() => onOpenFreeTrial()}
               className="px-3 py-1.5 bg-[#D4AF37] hover:bg-[#b89728] text-[#17211D] font-bold text-xs rounded-lg shadow-sm"
@@ -149,6 +152,10 @@ export const Navbar: React.FC<NavbarProps> = ({
           <div className="lg:hidden mt-3 pt-3 border-t border-[#065F46] bg-[#022C22] p-4 rounded-2xl shadow-xl space-y-2 animate-fade-in">
             <div className="pb-2 border-b border-[#065F46]">
               <LanguageSwitcher variant="drawer" />
+            </div>
+
+            <div className="pb-2 border-b border-[#065F46]">
+              <ThemeToggle variant="mobile" />
             </div>
 
             <div className="py-1 space-y-1">
