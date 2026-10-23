@@ -20,7 +20,7 @@ import { AdminLoginModal } from './components/AdminLoginModal';
 import { FreeTrialModal } from './components/FreeTrialModal';
 import { PwaInstallBanner } from './components/PwaInstallBanner';
 import { SAFIR_CONTACT, getSafirWhatsAppUrl } from './data/safirData';
-import { MessageCircle } from 'lucide-react';
+import { USER_IMAGES } from './data/userImages';
 
 export default function App() {
   const [isTrialModalOpen, setIsTrialModalOpen] = useState(false);
@@ -156,9 +156,11 @@ export default function App() {
           className="relative flex items-center group cursor-pointer"
           title={`Chat with Noor Ul Huda Online Quran Academy on WhatsApp (${SAFIR_CONTACT.phone})`}
         >
-          <span className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#25D366] text-white flex items-center justify-center shadow-2xl hover:scale-110 active:scale-95 transition-all">
-            <MessageCircle className="w-6 h-6 sm:w-7 sm:h-7" />
-          </span>
+          <img
+            src={USER_IMAGES.whatsapp}
+            alt="Chat with Noor Ul Huda Academy on WhatsApp"
+            className="w-12 h-12 sm:w-14 sm:h-14 rounded-full object-cover shadow-2xl hover:scale-110 active:scale-95 transition-all"
+          />
         </a>
       </aside>
     </div>

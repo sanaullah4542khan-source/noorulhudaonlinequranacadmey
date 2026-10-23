@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { PAYMENT_METHODS, PAYMENT_STEPS, PAYMENT_FAQS } from '../data/paymentData';
 import { ACADEMY_BANK_DETAILS, getSafirWhatsAppUrl } from '../data/safirData';
 import { useLanguage } from '../context/LanguageContext';
+import { USER_IMAGES } from '../data/userImages';
 import { useTheme } from '../context/ThemeContext';
 import { 
   CreditCard, 
@@ -80,7 +81,7 @@ export const PaymentMethodsSection: React.FC<PaymentMethodsSectionProps> = ({ on
     switch (id) {
       case 'bank-wire':
         return <Building2 className="w-6 h-6 text-[#064232] dark:text-[#facc15]" />;
-      case 'remitly-wu':
+      case 'visa-card':
         return <ArrowRight className="w-6 h-6 text-[#064232] dark:text-[#facc15]" />;
       case 'local-pakistan':
         return <Smartphone className="w-6 h-6 text-[#064232] dark:text-[#facc15]" />;
@@ -128,7 +129,7 @@ export const PaymentMethodsSection: React.FC<PaymentMethodsSectionProps> = ({ on
         >
           <div className="relative h-64 sm:h-80 md:h-96 w-full overflow-hidden bg-[#042018]">
             <img
-              src="/payment-details-banner.jpg"
+              src={USER_IMAGES.payment}
               alt="Noor Ul Huda Quran Academy Official Payment Assurance"
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
               loading="lazy"
@@ -461,7 +462,7 @@ export const PaymentMethodsSection: React.FC<PaymentMethodsSectionProps> = ({ on
                 className="w-full sm:w-auto px-5 py-3 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold text-xs sm:text-sm transition-all shadow-lg flex items-center justify-center gap-2 cursor-pointer"
               >
                 <img
-                  src="/whatsapp-circle-button.png"
+                  src={USER_IMAGES.whatsapp}
                   alt="WhatsApp"
                   className="w-4 h-4 rounded-full object-cover"
                 />
@@ -515,14 +516,14 @@ export const PaymentMethodsSection: React.FC<PaymentMethodsSectionProps> = ({ on
         {/* International Payment Methods Grid */}
         <div className="mb-14">
           <h3 className="font-serif text-xl sm:text-2xl font-bold text-[#064232] dark:text-white mb-2 text-center">
-            {isArabic ? 'القنوات المصرفية والتحويلات المالية الرسمية المعتمدة' : isUrdu ? 'سرکاری بینکنگ اور ترسیل زر کے طریقے' : 'Official Banking & Remittance Payment Channels'}
+            {isArabic ? 'قنوات الدفع الرسمية والآمنة المعتمدة' : isUrdu ? 'سرکاری اور محفوظ ادائیگی کے طریقے' : 'Official & Secure Payment Channels'}
           </h3>
           <p className="text-xs sm:text-sm text-[#4e655c] dark:text-emerald-200/80 text-center max-w-2xl mx-auto mb-8">
             {isArabic
-              ? 'التحويل المباشر عبر بنك ميزان، التحويل المصرفي الدولي بـ IBAN / SWIFT، وحوالات الصرافة السريعة (Remitly, Western Union, Ria) والمحافظ الإلكترونية.'
+              ? 'التحويل المباشر عبر بنك ميزان، الدفع ببطاقات Visa / Mastercard، والمحافظ الإلكترونية المحلية (RAAST / EasyPaisa / JazzCash).'
               : isUrdu 
-              ? 'میزان بینک براہ راست منتقلی، انٹرنیشنل وائر IBAN، فاسٹ ریمیٹنس (Remitly, Western Union, Ria) اور ملکی موبائل والٹس۔' 
-              : 'Direct Meezan Bank account transfer, international SWIFT/IBAN wire, fast global remittance (Remitly, Western Union, Ria), and Pakistani mobile wallets.'}
+              ? 'میزان بینک براہ راست منتقلی، Visa / Mastercard کارڈ ادائیگی، اور ملکی موبائل والٹس (RAAST / ایزی پیسہ / جاز کیش)۔'
+              : 'Direct Meezan Bank account transfer, secure Visa / Mastercard card payment, and Pakistani mobile wallets (RAAST / EasyPaisa / JazzCash).'}
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

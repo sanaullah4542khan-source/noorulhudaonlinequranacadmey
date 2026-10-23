@@ -12,14 +12,14 @@ export const PAYMENT_METHODS: PaymentMethod[] = [
     instructions: 'Bank: Meezan Bank (Meezan Digital Centre) | Title: SANAULLAH | Acc: 00300114398034 | IBAN: PK59MEZN0000300114398034'
   },
   {
-    id: 'remitly-wu',
-    name: 'Remitly / Western Union / Ria',
-    category: 'remittance',
-    badge: 'Fast Remittance',
-    tagline: 'Direct-to-bank remittance services widely used worldwide.',
-    description: 'Ideal for overseas families using fast bank deposit remittance apps like Remitly, Western Union, MoneyGram, or Ria Money Transfer directly to our Meezan Bank account.',
-    supportedCurrencies: ['USD', 'GBP', 'EUR', 'CAD', 'AUD', 'SAR', 'AED'],
-    instructions: 'Send directly to our Meezan Bank account (Title: SANAULLAH, IBAN: PK59MEZN0000300114398034) or request beneficiary details on WhatsApp (+92 313 0958451).'
+    id: 'visa-card',
+    name: 'Visa / Mastercard (Debit & Credit Cards)',
+    category: 'international',
+    badge: 'Secure Card Payment',
+    tagline: 'Pay online with any Visa or Mastercard debit or credit card.',
+    description: 'Local and international families can pay securely with a Visa or Mastercard through the official payment link shared by our billing team on WhatsApp or email after enrollment.',
+    supportedCurrencies: ['USD', 'GBP', 'EUR', 'CAD', 'AUD', 'AED', 'SAR', 'PKR'],
+    instructions: 'Request your secure Visa / Mastercard payment link on WhatsApp (+92 313 0958451). Card details are entered only on the secure checkout page — never share them in chat.'
   },
   {
     id: 'local-pakistan',
@@ -90,9 +90,9 @@ export const PAYMENT_FAQS: PaymentFaqItem[] = [
     questionEn: 'How long does payment confirmation take?',
     questionUr: 'فیس کی منتقلی کے بعد تصدیق میں کتنا وقت لگتا ہے؟',
     questionAr: 'كم يستغرق تأكيد استلام الرسوم الدراسية؟',
-    answerEn: 'Transfers via Meezan Bank (IBFT), RAAST, EasyPaisa, and JazzCash are confirmed almost immediately (within 10-15 minutes) once you send the payment receipt or transaction ID to our WhatsApp coordinator (+92 313 0958451). International Remittance (Remitly, Western Union, Ria) and direct SWIFT wire transfers take 1 to 2 banking business days depending on the sending provider.',
-    answerUr: 'میزان بینک (IBFT)، راست (RAAST)، ایزی پیسہ اور جاز کیش کے ذریعے ادائیگی کی تصدیق واٹس ایپ (+92 313 0958451) پر رسید بھیجتے ہی تقریباً فوری طور پر (10 سے 15 منٹ میں) ہو جاتی ہے۔ بین الاقوامی ترسیل زر (Remitly/Western Union/Ria) اور بینک وائر ٹرانسفر (SWIFT) پر متعلقہ بینکنگ نیٹ ورک کے مطابق 1 سے 2 کاروباری دن لگ سکتے ہیں۔',
-    answerAr: 'يتم تأكيد التحويلات المباشرة عبر بنك ميزان، وRAAST والمحافظ الإلكترونية فورياً (خلال 10-15 دقيقة) بمجرد إرسال صورة الإشعار لمنسق الحسابات عبر واتساب (+92 313 0958451). أما الحوالات الدولية المباشرة عبر شركات الصرافة الدولية مثل Remitly أو ويسترن يونيون أو السويفت البنكي فتستغرق من يوم إلى يومي عمل حسب شبكة البنك المرسل.'
+    answerEn: 'Transfers via Meezan Bank (IBFT), RAAST, EasyPaisa, and JazzCash are confirmed almost immediately (within 10-15 minutes) once you send the payment receipt or transaction ID to our WhatsApp coordinator (+92 313 0958451). International Visa / Mastercard payments and direct SWIFT wire transfers are confirmed within 1 banking business day.',
+    answerUr: 'میزان بینک (IBFT)، راست (RAAST)، ایزی پیسہ اور جاز کیش کے ذریعے ادائیگی کی تصدیق واٹس ایپ (+92 313 0958451) پر رسید بھیجتے ہی تقریباً فوری طور پر (10 سے 15 منٹ میں) ہو جاتی ہے۔ بین الاقوامی Visa / Mastercard ادائیگی اور بینک وائر ٹرانسفر (SWIFT) کی تصدیق 1 کاروباری دن میں ہو جاتی ہے۔',
+    answerAr: 'يتم تأكيد التحويلات المباشرة عبر بنك ميزان، وRAAST والمحافظ الإلكترونية فورياً (خلال 10-15 دقيقة) بمجرد إرسال صورة الإشعار لمنسق الحسابات عبر واتساب (+92 313 0958451). أما الدفع الدولي ببطاقات Visa / Mastercard أو التحويل البنكي SWIFT فيتم تأكيده خلال يوم عمل واحد.'
   },
   {
     id: 'refund-policy',
@@ -120,9 +120,9 @@ export const PAYMENT_FAQS: PaymentFaqItem[] = [
     questionEn: 'Which currencies and international payment methods do you accept?',
     questionUr: 'اکیڈمی کن ممالک اور کرنسیوں میں فیس قبول کرتی ہے؟',
     questionAr: 'ما هي العملات ووسائل الدفع الدولية المقبولة لدى الأكاديمية؟',
-    answerEn: 'We support international families in the USA, UK, Canada, Australia, Europe, GCC/Middle East, and Pakistan. Accepted currencies include USD ($), GBP (£), EUR (€), CAD ($), AUD ($), AED, SAR, and PKR. You can pay via direct Meezan Bank transfer, International SWIFT/IBAN wire, Remitly, Western Union, MoneyGram, Ria, or local wallets (RAAST, EasyPaisa, JazzCash).',
-    answerUr: 'ہم امریکہ، برطانیہ، کینیڈا، آسٹریلیا، یورپ، خلیجی ممالک اور پاکستان کے طلباء کی سہولت کے لیے تمام بڑی کرنسیاں (USD, GBP, EUR, CAD, AUD, AED, SAR, PKR) قبول کرتے ہیں۔ ادائیگی میزان بینک اکاؤنٹ، بین الاقوامی وائر ٹرانسفر (SWIFT)، ترسیل زر (Remitly/Western Union/Ria) یا موبائل بینکنگ (RAAST/EasyPaisa/JazzCash) کے ذریعے کی جا سکتی ہے۔',
-    answerAr: 'نقدم خدماتنا للعائلات في جميع أنحاء العالم (أمريكا، بريطانيا، كندا، أستراليا، أوروبا، دول الخليج العربي، وغيرها). نقبل الدفع بالدولار الأمريكي والجنيه الإسترليني واليورو والريال السعودي والدرهم الإماراتي والروبية الباكستانية، عبر التحويل المصرفي المباشر، أو شركات التحويل الدولية (Remitly, Western Union, Ria) أو التحويل البنكي الدولي SWIFT.'
+    answerEn: 'We support international families in the USA, UK, Canada, Australia, Europe, GCC/Middle East, and Pakistan. Accepted currencies include USD ($), GBP (£), EUR (€), CAD ($), AUD ($), AED, SAR, and PKR. You can pay via direct Meezan Bank transfer, Visa / Mastercard, International SWIFT/IBAN wire, or local wallets (RAAST, EasyPaisa, JazzCash).',
+    answerUr: 'ہم امریکہ، برطانیہ، کینیڈا، آسٹریلیا، یورپ، خلیجی ممالک اور پاکستان کے طلباء کی سہولت کے لیے تمام بڑی کرنسیاں (USD, GBP, EUR, CAD, AUD, AED, SAR, PKR) قبول کرتے ہیں۔ ادائیگی میزان بینک اکاؤنٹ، Visa / Mastercard، بین الاقوامی وائر ٹرانسفر (SWIFT) یا موبائل بینکنگ (RAAST/EasyPaisa/JazzCash) کے ذریعے کی جا سکتی ہے۔',
+    answerAr: 'نقدم خدماتنا للعائلات في جميع أنحاء العالم (أمريكا، بريطانيا، كندا، أستراليا، أوروبا، دول الخليج العربي، وغيرها). نقبل الدفع بالدولار الأمريكي والجنيه الإسترليني واليورو والريال السعودي والدرهم الإماراتي والروبية الباكستانية، عبر التحويل المصرفي المباشر، أو بطاقات Visa / Mastercard، أو التحويل البنكي الدولي SWIFT، أو المحافظ المحلية (RAAST / EasyPaisa / JazzCash).'
   },
   {
     id: 'receipt-proof',
