@@ -96,7 +96,7 @@ export const PaymentMethodsSection: React.FC<PaymentMethodsSectionProps> = ({ on
       className={`py-10 sm:py-16 lg:py-24 relative overflow-hidden border-t transition-colors duration-300 ${
         isDark 
           ? 'bg-[#031913] border-[#0d3b2e] text-[#f3f4f6]' 
-          : 'bg-[#f5f4ed] border-[#e5e3d7] text-[#13241d]'
+          : 'bg-white border-[#e5e3d7] text-[#13241d]'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

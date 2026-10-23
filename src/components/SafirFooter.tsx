@@ -28,7 +28,7 @@ export const SafirFooter: React.FC<SafirFooterProps> = ({
           {/* Col 1: Logo & About Tagline */}
           <div className="sm:col-span-2">
             <div className="mb-3 sm:mb-4">
-              <SafirLogo variant="dark" size="lg" />
+              <SafirLogo variant="light" size="lg" />
             </div>
             <p className="font-body font-normal text-xs sm:text-sm text-[#DDE5DF] max-w-sm mb-4 sm:mb-5 leading-relaxed">
               {t.footer.aboutText}

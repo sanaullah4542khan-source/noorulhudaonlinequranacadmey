@@ -18,7 +18,7 @@ export const SafirTeachersSection: React.FC<SafirTeachersSectionProps> = ({ onOp
   };
 
   return (
-    <section id="teachers" className="py-12 sm:py-16 lg:py-20 bg-[#F8F7F1]">
+    <section id="teachers" className="py-12 sm:py-16 lg:py-20 bg-white">
       <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-14">

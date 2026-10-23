@@ -122,7 +122,7 @@ export const SafirCoursesSection: React.FC<SafirCoursesSectionProps> = ({ onOpen
       className={`scroll-mt-24 sm:scroll-mt-28 py-10 sm:py-16 lg:py-24 relative overflow-hidden transition-colors duration-300 ${
         isDark 
           ? 'bg-[#031913] text-[#f3f4f6]' 
-          : 'bg-[#faf9f5] text-[#13241d]'
+          : 'bg-white text-[#13241d]'
       }`}
     >
       <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">

@@ -61,7 +61,7 @@ export const SafirContactSection: React.FC = () => {
   };
 
   return (
-    <section id="contact" className="py-12 sm:py-16 lg:py-24 bg-[#F8F7F1] border-b border-[#DDE5DF]">
+    <section id="contact" className="py-12 sm:py-16 lg:py-24 bg-white border-b border-[#DDE5DF]">
       <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-14">

@@ -99,7 +99,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             className="flex items-center text-left rtl:text-right focus:outline-none min-w-0"
             aria-label="Noor Ul Huda Online Quran Academy Home"
           >
-            <SafirLogo variant="dark" size="md" />
+            <SafirLogo variant="light" size="md" />
           </button>
 
           {/* Desktop Navigation Links: Clean White with Gold Hover */}
