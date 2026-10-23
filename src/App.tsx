@@ -6,13 +6,10 @@ import { SafirCoursesSection } from './components/SafirCoursesSection';
 import { WhyChooseUsSection } from './components/WhyChooseUsSection';
 import { SafirAboutSection } from './components/SafirAboutSection';
 import { SafirTeachersSection } from './components/SafirTeachersSection';
-import { ClassExperience } from './components/ClassExperience';
 import { SafirPricingSection } from './components/SafirPricingSection';
 import { PaymentMethodsSection } from './components/PaymentMethodsSection';
 import { ParentsSection } from './components/ParentsSection';
-import { LibrarySection } from './components/LibrarySection';
 import { SafirTestimonialsSection } from './components/SafirTestimonialsSection';
-import { FaqSection } from './components/FaqSection';
 import { SafirContactSection } from './components/SafirContactSection';
 import { SafirFooter } from './components/SafirFooter';
 import { RevealOnScroll } from './components/RevealOnScroll';
@@ -42,7 +39,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen w-full overflow-x-hidden flex flex-col font-sans antialiased bg-[#F8F7F1] text-[#17211D] selection:bg-[#064E3B] selection:text-white">
+    <div className="min-h-screen w-full overflow-x-hidden flex flex-col font-sans antialiased bg-white text-[#17211D] selection:bg-[#064E3B] selection:text-white">
       {/* 1. Header with TopBar & Navbar */}
       <Navbar
         onOpenFreeTrial={handleOpenFreeTrial}
@@ -85,10 +82,6 @@ export default function App() {
           <SafirTeachersSection onOpenFreeTrial={() => handleOpenFreeTrial()} />
         </div>
 
-        {/* 8. Live classroom experience */}
-        <RevealOnScroll direction="up" delay={40}>
-          <ClassExperience onOpenFreeTrial={() => handleOpenFreeTrial()} />
-        </RevealOnScroll>
 
         {/* 9. Transparent monthly plans, presented before payment details */}
         <RevealOnScroll direction="up" delay={40}>
@@ -103,20 +96,12 @@ export default function App() {
         {/* 11. Parent guidance and progress visibility */}
         <ParentsSection onOpenFreeTrial={() => handleOpenFreeTrial()} />
 
-        {/* 12. Islamic digital library */}
-        <div id="library">
-          <LibrarySection onOpenFreeTrial={handleOpenFreeTrial} />
-        </div>
 
         {/* 13. Student and parent testimonials */}
         <RevealOnScroll direction="up" delay={40}>
           <SafirTestimonialsSection />
         </RevealOnScroll>
 
-        {/* 14. Frequently asked questions */}
-        <RevealOnScroll direction="up" delay={40}>
-          <FaqSection />
-        </RevealOnScroll>
 
         {/* 9. Contact & Admissions Section */}
         <div id="contact">
