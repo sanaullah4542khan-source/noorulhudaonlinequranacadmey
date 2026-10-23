@@ -32,7 +32,7 @@ export const COURSES_DATA: Course[] = [
     duration: '3–6 months, flexible',
     timing: 'Classes available 24/7 across time zones',
     teacherInfo: 'Taught by certified male & female Qaris/Qariras',
-    feeInfo: 'Starting from $36/month — flexible packages available',
+    feeInfo: 'Starting from $45/month — flexible packages available',
     colorTheme: {
       accent: '#059669',
       gradient: 'from-[#064e3b] via-[#096b52] to-[#043327]',
@@ -108,7 +108,7 @@ export const COURSES_DATA: Course[] = [
     duration: '6–12 months, flexible',
     timing: 'Classes available 24/7 across time zones',
     teacherInfo: 'Taught by Ijazah-certified male & female Qaris',
-    feeInfo: 'Starting from $36/month — flexible packages available',
+    feeInfo: 'Starting from $45/month — flexible packages available',
     colorTheme: {
       accent: '#2563eb',
       gradient: 'from-[#1e3a8a] via-[#1e40af] to-[#0f172a]',
@@ -184,7 +184,7 @@ export const COURSES_DATA: Course[] = [
     duration: '1–3 years, self-paced',
     timing: 'Flexible slots morning, evening & weekends',
     teacherInfo: 'Taught by certified Huffaz with chain of transmission (Sanad)',
-    feeInfo: 'Starting from $36/month — flexible packages available',
+    feeInfo: 'Starting from $45/month — flexible packages available',
     colorTheme: {
       accent: '#7c3aed',
       gradient: 'from-[#4c1d95] via-[#5b21b6] to-[#2e1065]',
@@ -260,7 +260,7 @@ export const COURSES_DATA: Course[] = [
     duration: '4–8 months, flexible',
     timing: 'Classes available 24/7 across time zones',
     teacherInfo: 'Taught by certified Islamic Studies graduates & scholars',
-    feeInfo: 'Starting from $36/month — flexible packages available',
+    feeInfo: 'Starting from $45/month — flexible packages available',
     colorTheme: {
       accent: '#0d9488',
       gradient: 'from-[#0f766e] via-[#115e59] to-[#042f2e]',
@@ -336,7 +336,7 @@ export const COURSES_DATA: Course[] = [
     duration: '6–18 months, modular',
     timing: 'Classes available 24/7 across time zones',
     teacherInfo: 'Taught by qualified Alim / Alimah scholars with Tafsir credentials',
-    feeInfo: 'Starting from $36/month — flexible packages available',
+    feeInfo: 'Starting from $45/month — flexible packages available',
     colorTheme: {
       accent: '#be123c',
       gradient: 'from-[#881337] via-[#9f1239] to-[#4c0519]',
@@ -412,7 +412,7 @@ export const COURSES_DATA: Course[] = [
     duration: '6–12 months, comprehensive',
     timing: 'Classes available 24/7 across time zones',
     teacherInfo: 'Taught by native Arabic speakers and university-trained linguists',
-    feeInfo: 'Starting from $36/month — flexible packages available',
+    feeInfo: 'Starting from $45/month — flexible packages available',
     colorTheme: {
       accent: '#4338ca',
       gradient: 'from-[#3730a3] via-[#4338ca] to-[#1e1b4b]',
@@ -488,7 +488,7 @@ export const COURSES_DATA: Course[] = [
     duration: '2–4 months, practical',
     timing: 'Classes available 24/7 across time zones',
     teacherInfo: 'Taught by compassionate male & female teachers',
-    feeInfo: 'Starting from $36/month — flexible packages available',
+    feeInfo: 'Starting from $45/month — flexible packages available',
     colorTheme: {
       accent: '#4f46e5',
       gradient: 'from-[#312e81] via-[#3730a3] to-[#1e1b4b]',

@@ -5,7 +5,6 @@ import { ThreeStepsSection } from './components/ThreeStepsSection';
 import { SafirCoursesSection } from './components/SafirCoursesSection';
 import { WhyChooseUsSection } from './components/WhyChooseUsSection';
 import { SafirAboutSection } from './components/SafirAboutSection';
-import { SafirTeachersSection } from './components/SafirTeachersSection';
 import { SafirPricingSection } from './components/SafirPricingSection';
 import { PaymentMethodsSection } from './components/PaymentMethodsSection';
 import { ParentsSection } from './components/ParentsSection';
@@ -77,10 +76,6 @@ export default function App() {
           <SafirAboutSection onOpenFreeTrial={() => handleOpenFreeTrial()} />
         </div>
 
-        {/* 7. Qualified teachers */}
-        <div id="teachers">
-          <SafirTeachersSection onOpenFreeTrial={() => handleOpenFreeTrial()} />
-        </div>
 
 
         {/* 9. Transparent monthly plans, presented before payment details */}

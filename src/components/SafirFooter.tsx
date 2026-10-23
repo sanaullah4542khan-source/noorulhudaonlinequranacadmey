@@ -133,14 +133,6 @@ export const SafirFooter: React.FC<SafirFooterProps> = ({
               </li>
               <li>
                 <button
-                  onClick={() => onNavigateSection('teachers')}
-                  className="hover:text-[#D4AF37] transition-colors cursor-pointer"
-                >
-                  {t.nav.teachers}
-                </button>
-              </li>
-              <li>
-                <button
                   onClick={() => onNavigateSection('contact')}
                   className="hover:text-[#D4AF37] transition-colors cursor-pointer"
                 >

@@ -246,7 +246,7 @@ export const CourseTemplateCard: React.FC<CourseTemplateCardProps> = ({
           {/* Pricing & Trial Trust Ribbon */}
           <div className="flex items-center justify-between py-2 px-3 rounded-xl bg-[#faf9f5] border border-[#e5e3d7] text-xs">
             <span className="font-bold text-[#064232] text-xs">
-              From $36/mo <span className="font-normal text-[#4e655c]">• 1-on-1 Classes</span>
+              From $45/mo <span className="font-normal text-[#4e655c]">• 1-on-1 Classes</span>
             </span>
             <span className="px-2 py-0.5 rounded-md bg-emerald-100 text-emerald-800 font-bold text-[10.5px]">
               3-Day Free Trial
