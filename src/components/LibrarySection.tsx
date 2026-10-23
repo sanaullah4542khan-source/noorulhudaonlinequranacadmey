@@ -153,7 +153,7 @@ export const LibrarySection: React.FC<LibrarySectionProps> = ({ onOpenFreeTrial 
                     Topics Included:
                   </span>
                   <ul className="space-y-1.5 text-xs text-[#17211D]">
-                    {res.contentSummary.slice(0, 3).map((pt, i) => (
+                    {(res.contentSummary ?? res.keyPoints).slice(0, 3).map((pt, i) => (
                       <li key={i} className="flex items-start gap-1.5">
                         <Check className="w-3.5 h-3.5 text-[#064E3B] flex-shrink-0 mt-0.5" />
                         <span className="line-clamp-1">{pt}</span>
