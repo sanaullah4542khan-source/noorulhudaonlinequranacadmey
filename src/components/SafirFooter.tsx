@@ -28,7 +28,7 @@ export const SafirFooter: React.FC<SafirFooterProps> = ({
           {/* Col 1: Logo & About Tagline */}
           <div className="sm:col-span-2">
             <div className="mb-3 sm:mb-4">
-              <SafirLogo variant="light" size="lg" />
+              <SafirLogo variant="dark" size="lg" />
             </div>
             <p className="font-body font-normal text-xs sm:text-sm text-[#DDE5DF] max-w-sm mb-4 sm:mb-5 leading-relaxed">
               {t.footer.aboutText}
@@ -137,14 +137,6 @@ export const SafirFooter: React.FC<SafirFooterProps> = ({
                   className="hover:text-[#D4AF37] transition-colors cursor-pointer"
                 >
                   {t.nav.teachers}
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => onNavigateSection('library')}
-                  className="hover:text-[#D4AF37] transition-colors cursor-pointer"
-                >
-                  {t.nav.library || 'Digital Library'}
                 </button>
               </li>
               <li>
