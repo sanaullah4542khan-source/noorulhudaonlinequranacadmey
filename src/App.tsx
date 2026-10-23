@@ -1,28 +1,30 @@
 import React, { useState } from 'react';
 import { Navbar } from './components/Navbar';
 import { SafirHero } from './components/SafirHero';
+import { ThreeStepsSection } from './components/ThreeStepsSection';
+import { SafirCoursesSection } from './components/SafirCoursesSection';
+import { WhyChooseUsSection } from './components/WhyChooseUsSection';
 import { SafirAboutSection } from './components/SafirAboutSection';
 import { SafirTeachersSection } from './components/SafirTeachersSection';
 import { ClassExperience } from './components/ClassExperience';
+import { SafirPricingSection } from './components/SafirPricingSection';
+import { PaymentMethodsSection } from './components/PaymentMethodsSection';
 import { ParentsSection } from './components/ParentsSection';
 import { LibrarySection } from './components/LibrarySection';
+import { SafirTestimonialsSection } from './components/SafirTestimonialsSection';
+import { FaqSection } from './components/FaqSection';
 import { SafirContactSection } from './components/SafirContactSection';
 import { SafirFooter } from './components/SafirFooter';
+import { RevealOnScroll } from './components/RevealOnScroll';
 import { AdminLoginModal } from './components/AdminLoginModal';
 import { FreeTrialModal } from './components/FreeTrialModal';
-import { CourseDetailModal } from './components/CourseDetailModal';
 import { PwaInstallBanner } from './components/PwaInstallBanner';
-import { COURSES_DATA } from './data/coursesData';
-import { Course } from './types';
 import { SAFIR_CONTACT, getSafirWhatsAppUrl } from './data/safirData';
-import { useLanguage } from './context/LanguageContext';
-import { Sparkles, MessageCircle, BookOpen, Award, CheckCircle2, Star, ArrowRight, ShieldCheck } from 'lucide-react';
+import { MessageCircle } from 'lucide-react';
 
 export default function App() {
-  const { isArabic, isUrdu, isRtl } = useLanguage();
   const [isTrialModalOpen, setIsTrialModalOpen] = useState(false);
   const [selectedCourseForTrial, setSelectedCourseForTrial] = useState<string | undefined>(undefined);
-  const [selectedCourseDetail, setSelectedCourseDetail] = useState<Course | null>(null);
   const [isAdminLoginOpen, setIsAdminLoginOpen] = useState(false);
 
   const handleOpenFreeTrial = (courseId?: string) => {
@@ -58,109 +60,63 @@ export default function App() {
           />
         </div>
 
-        {/* 3. About Us Section */}
+        {/* 3. Start learning in three simple steps */}
+        <RevealOnScroll direction="up" delay={40}>
+          <ThreeStepsSection onOpenEnrollment={() => handleOpenFreeTrial()} />
+        </RevealOnScroll>
+
+        {/* 4. Complete course catalogue with search, filters and details */}
+        <RevealOnScroll direction="up" delay={40}>
+          <SafirCoursesSection onOpenFreeTrial={handleOpenFreeTrial} />
+        </RevealOnScroll>
+
+        {/* 5. Trust, academy strengths and learning outcomes */}
+        <RevealOnScroll direction="up" delay={40}>
+          <WhyChooseUsSection onOpenDemo={() => handleOpenFreeTrial()} />
+        </RevealOnScroll>
+
+        {/* 6. Academy introduction */}
         <div id="about-us">
           <SafirAboutSection onOpenFreeTrial={() => handleOpenFreeTrial()} />
         </div>
 
-        {/* 4. Courses Grid Section */}
-        <section id="courses" className="py-16 sm:py-20 bg-white border-b border-[#DDE5DF]">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
-              <span className="px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-[#064E3B]/10 text-[#064E3B] border border-[#064E3B]/20">
-                {isArabic ? 'المناهج والدورات' : isUrdu ? 'جامع قرآنی کورسز' : 'Our Academic Programs'}
-              </span>
-              <h2 className="font-serif text-3xl sm:text-4xl font-bold text-[#064E3B] mt-3">
-                {isArabic
-                  ? 'دورات تعليمية فردية مع نخبة القراء والمجازين'
-                  : isUrdu
-                  ? 'سند یافتہ اساتذہ کے ساتھ 1-آن-1 انفرادی آن لائن کلاسز'
-                  : 'Tailored 1-on-1 Quran & Islamic Studies Courses'}
-              </h2>
-              <p className="text-sm sm:text-base text-[#17211D]/80 mt-3 leading-relaxed">
-                {isArabic
-                  ? 'برامج مصممة للأطفال والكبار ومسلمي العالم مع مرونة تامة في الأوقات'
-                  : isUrdu
-                  ? 'بچوں، خواتین اور نو مسلم بھائی بہنوں کے لیے خصوصی نصاب اور 24 گھنٹے لچکدار اوقات'
-                  : 'Comprehensive curricula tailored for children, adult brothers and sisters, and new Muslims worldwide.'}
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-              {COURSES_DATA.map((course) => (
-                <div
-                  key={course.id}
-                  className="bg-[#F8F7F1] rounded-3xl border border-[#DDE5DF] p-6 shadow-xs hover:shadow-xl hover:border-[#D4AF37]/60 transition-all flex flex-col justify-between group hover:-translate-y-1"
-                >
-                  <div className="space-y-3">
-                    <div className="flex items-center justify-between">
-                      <span className="px-3 py-1 rounded-full text-[11px] font-bold bg-[#064E3B] text-[#D4AF37] border border-[#D4AF37]/30">
-                        {course.badge}
-                      </span>
-                      {course.arabicTitle && (
-                        <span className="font-arabic text-sm text-[#064E3B] font-bold">
-                          {course.arabicTitle}
-                        </span>
-                      )}
-                    </div>
-
-                    <h3 className="font-serif text-xl font-bold text-[#064E3B] group-hover:text-[#065F46] transition-colors">
-                      {course.title}
-                    </h3>
-
-                    <p className="text-xs sm:text-sm text-[#17211D]/80 leading-relaxed line-clamp-3">
-                      {course.summary || course.description}
-                    </p>
-
-                    <div className="pt-2 text-xs text-[#17211D]/70 space-y-1">
-                      <div className="flex justify-between">
-                        <span>Duration:</span>
-                        <strong className="text-[#17211D]">{course.duration}</strong>
-                      </div>
-                      <div className="flex justify-between">
-                        <span>For:</span>
-                        <strong className="text-[#17211D]">{course.studentCategory}</strong>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="pt-6 mt-4 border-t border-[#DDE5DF] flex items-center justify-between gap-2">
-                    <button
-                      onClick={() => setSelectedCourseDetail(course)}
-                      className="text-xs font-bold text-[#064E3B] hover:text-[#D4AF37] transition-colors underline cursor-pointer"
-                    >
-                      {isArabic ? 'تفاصيل الدورة' : isUrdu ? 'کورس کی تفصیل' : 'Course Details'}
-                    </button>
-                    <button
-                      onClick={() => handleOpenFreeTrial(course.id)}
-                      className="px-4 py-2 rounded-xl bg-[#064E3B] text-white hover:bg-[#065F46] border border-[#064E3B] text-xs font-bold transition-all shadow-xs active:scale-95 cursor-pointer"
-                    >
-                      {isArabic ? 'احجز تجربة' : isUrdu ? 'ٹرائل لیں' : 'Free Trial'}
-                    </button>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* 5. Teachers Section */}
+        {/* 7. Qualified teachers */}
         <div id="teachers">
           <SafirTeachersSection onOpenFreeTrial={() => handleOpenFreeTrial()} />
         </div>
 
-        {/* 6. Learning Experience & Classroom */}
-        <div id="why-choose-us">
+        {/* 8. Live classroom experience */}
+        <RevealOnScroll direction="up" delay={40}>
           <ClassExperience onOpenFreeTrial={() => handleOpenFreeTrial()} />
-        </div>
+        </RevealOnScroll>
 
-        {/* 7. Parents Section */}
+        {/* 9. Transparent monthly plans, presented before payment details */}
+        <RevealOnScroll direction="up" delay={40}>
+          <SafirPricingSection onSelectPlan={() => handleOpenFreeTrial()} />
+        </RevealOnScroll>
+
+        {/* 10. Secure payment options for local and international families */}
+        <RevealOnScroll direction="up" delay={40}>
+          <PaymentMethodsSection onOpenFreeTrial={() => handleOpenFreeTrial()} />
+        </RevealOnScroll>
+
+        {/* 11. Parent guidance and progress visibility */}
         <ParentsSection onOpenFreeTrial={() => handleOpenFreeTrial()} />
 
-        {/* 8. Islamic Digital Library & Knowledge Vault */}
+        {/* 12. Islamic digital library */}
         <div id="library">
           <LibrarySection onOpenFreeTrial={handleOpenFreeTrial} />
         </div>
+
+        {/* 13. Student and parent testimonials */}
+        <RevealOnScroll direction="up" delay={40}>
+          <SafirTestimonialsSection />
+        </RevealOnScroll>
+
+        {/* 14. Frequently asked questions */}
+        <RevealOnScroll direction="up" delay={40}>
+          <FaqSection />
+        </RevealOnScroll>
 
         {/* 9. Contact & Admissions Section */}
         <div id="contact">
@@ -177,17 +133,6 @@ export default function App() {
           isOpen={isTrialModalOpen}
           onClose={() => setIsTrialModalOpen(false)}
           initialCourseId={selectedCourseForTrial}
-        />
-      )}
-
-      {selectedCourseDetail && (
-        <CourseDetailModal
-          course={selectedCourseDetail}
-          onClose={() => setSelectedCourseDetail(null)}
-          onOpenFreeTrial={(id) => {
-            setSelectedCourseDetail(null);
-            handleOpenFreeTrial(id);
-          }}
         />
       )}
 
