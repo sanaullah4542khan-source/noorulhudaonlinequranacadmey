@@ -102,6 +102,7 @@ export const WHY_CHOOSE_FEATURES = [
 
 export interface SafirCourse {
   id: string;
+  image: string;
   title: string;
   titleAr?: string;
   titleUr?: string;
@@ -124,6 +125,7 @@ export interface SafirCourse {
 export const SAFIR_COURSES: SafirCourse[] = [
   {
     id: 'nazra-recitation',
+    image: '/course-nazra.jpg',
     title: 'Nazra Quran Reading',
     titleAr: 'تلاوة القرآن الكريم (نظرة)',
     titleUr: 'ناظرہ قرآن کریم',
@@ -140,6 +142,7 @@ export const SAFIR_COURSES: SafirCourse[] = [
   },
   {
     id: 'quran-tajweed',
+    image: '/course-tajweed.jpg',
     title: 'Tajweed Rules & Perfection',
     titleAr: 'أحكام التجويد والإتقان',
     titleUr: 'تجوید و حسن قرات',
@@ -156,6 +159,7 @@ export const SAFIR_COURSES: SafirCourse[] = [
   },
   {
     id: 'hifz-ul-quran',
+    image: '/course-hifz.jpg',
     title: 'Quran Memorization (Hifz)',
     titleAr: 'تحفيظ القرآن الكريم',
     titleUr: 'حفظ القرآن الکریم',
@@ -172,6 +176,7 @@ export const SAFIR_COURSES: SafirCourse[] = [
   },
   {
     id: 'basic-islamic-studies',
+    image: '/course-islamic-studies.jpg',
     title: 'Islamic Studies & Aqeedah',
     titleAr: 'الدراسات الإسلامية والعقيدة',
     titleUr: 'بنیادی دینی تعلیمات و عقائد',
@@ -188,6 +193,7 @@ export const SAFIR_COURSES: SafirCourse[] = [
   },
   {
     id: 'daily-supplications-duas',
+    image: '/course-duas.jpg',
     title: 'Masnoon Duas & Daily Adhkar',
     titleAr: 'الأدعية المأثورة والأذكار اليومية',
     titleUr: 'مسنون دعائیں اور اذکار',
