@@ -10,19 +10,19 @@
   --color-gold-hover: #b89728;
   --color-gold-soft: #fbf5df;
   --color-white: #FFFFFF;
-  --color-ivory: #F8F7F1;
+  --color-ivory: #FFFFFF;
   --color-dark-text: #17211D;
   --color-muted-text: #53655D;
   --color-subtle-border: #DDE5DF;
 
-  --font-heading: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-nav: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-button: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-serif: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-poppins: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-inter: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-heading: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-body: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-nav: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-button: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-sans: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-serif: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-poppins: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-inter: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-arabic: 'Cairo', 'Amiri', 'Traditional Arabic', serif;
   --font-cairo: 'Cairo', sans-serif;
   --font-nastaliq: 'Noto Nastaliq Urdu', 'Amiri', 'Traditional Arabic', serif;
@@ -36,21 +36,21 @@
     --color-gold-accent: #D4AF37;
     --color-gold-hover: #b89728;
     --color-gold-soft: #fbf5df;
-    --color-ivory-bg: #F8F7F1;
+    --color-ivory-bg: #FFFFFF;
     --color-ivory-card: #FFFFFF;
     --color-text-main: #17211D;
     --color-text-muted: #53655D;
     --color-border-subtle: #DDE5DF;
     
     /* Typography Tokens */
-    --font-heading: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    --font-nav: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    --font-button: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    --font-serif: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    --font-poppins: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    --font-inter: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-heading: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-body: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-nav: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-button: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-sans: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-serif: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-poppins: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-inter: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     --font-arabic: 'Amiri', 'Traditional Arabic', serif;
     --font-cinzel: 'Cinzel', Georgia, serif;
     --font-outfit: 'Outfit', sans-serif;
@@ -429,3 +429,72 @@ html[lang="ur"] .font-heading {
   line-height: 2.1;
 }
 
+
+/* ============================================================
+   OWNER REQUEST (2026-10-23): "green color ko white karein"
+   Every dark-green surface of the site (#022C22, #064E3B,
+   #065F46, #064232, emerald-900/950) is rendered WHITE.
+   Text that sat on green is set dark so it stays readable;
+   green text accents are set dark as well. Gold is unchanged.
+   ============================================================ */
+.bg-\[\#022C22\],
+.bg-\[\#064E3B\],
+.bg-\[\#065F46\],
+.bg-\[\#064232\],
+.bg-emerald-950,
+.bg-emerald-900 {
+  background-color: #ffffff !important;
+  color: #17211d;
+}
+.hover\:bg-\[\#022C22\]:hover,
+.hover\:bg-\[\#064E3B\]:hover,
+.hover\:bg-\[\#065F46\]:hover,
+.hover\:bg-\[\#064232\]:hover {
+  background-color: #ffffff !important;
+  color: #17211d;
+}
+.bg-emerald-50,
+.bg-emerald-100 {
+  background-color: #ffffff !important;
+}
+:is(.bg-\[\#022C22\], .bg-\[\#064E3B\], .bg-\[\#065F46\], .bg-\[\#064232\], .bg-emerald-950, .bg-emerald-900)
+  :is(.text-white, .text-white\/90, .text-white\/80, .text-white\/70, .text-white\/60, .text-white\/50,
+      .text-\[\#DDE5DF\], .text-\[\#F8F7F1\], .text-\[\#e8f5e9\], .text-\[\#a7d7c5\]) {
+  color: #17211d !important;
+}
+.text-\[\#064E3B\],
+.text-\[\#065F46\],
+.text-\[\#064232\],
+.text-\[\#022C22\],
+.text-emerald-600,
+.text-emerald-700,
+.text-emerald-800,
+.text-emerald-900 {
+  color: #17211d !important;
+}
+.border-\[\#065F46\],
+.border-\[\#022C22\],
+.border-\[\#064E3B\] {
+  border-color: #e5e7eb !important;
+}
+.from-\[\#022C22\], .from-\[\#064E3B\], .from-\[\#065F46\], .from-\[\#064232\],
+.via-\[\#022C22\], .via-\[\#064E3B\], .via-\[\#065F46\], .via-\[\#064232\],
+.to-\[\#022C22\], .to-\[\#064E3B\], .to-\[\#065F46\], .to-\[\#064232\] {
+  --tw-gradient-from: #ffffff !important;
+  --tw-gradient-via: #ffffff !important;
+  --tw-gradient-to: #ffffff !important;
+}
+.bg-islamic-emerald,
+.bg-islamic-forest,
+.btn-primary-emerald,
+.btn-primary-emerald:hover,
+.btn-secondary-emerald:hover {
+  background-color: #ffffff !important;
+  background-image: none !important;
+  color: #17211d !important;
+  border-color: #e5e7eb !important;
+}
+.btn-secondary-emerald {
+  color: #17211d !important;
+  border-color: #17211d !important;
+}
