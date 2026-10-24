@@ -102,7 +102,7 @@ export const SafirHero: React.FC<SafirHeroProps> = ({
                 </>
               ) : (
                 <>
-                  Learn the Holy Quran Online with <span className="text-[#D4AF37] relative inline-block">
+                  Learn Quran Online for Kids &amp; Adults with <span className="text-[#D4AF37] relative inline-block">
                     World-Class Tutors
                     <svg className="absolute -bottom-1 left-0 w-full h-2 text-[#D4AF37]/40" viewBox="0 0 100 10" preserveAspectRatio="none">
                       <path d="M0 5 Q 50 10, 100 5" stroke="currentColor" strokeWidth="3" fill="none" />
