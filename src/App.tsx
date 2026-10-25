@@ -9,6 +9,7 @@ import { SafirPricingSection } from './components/SafirPricingSection';
 import { PaymentMethodsSection } from './components/PaymentMethodsSection';
 import { ParentsSection } from './components/ParentsSection';
 import { SafirTestimonialsSection } from './components/SafirTestimonialsSection';
+import { ParentGuideSection } from './components/ParentGuideSection';
 import { SafirContactSection } from './components/SafirContactSection';
 import { SafirFooter } from './components/SafirFooter';
 import { RevealOnScroll } from './components/RevealOnScroll';
@@ -95,6 +96,11 @@ export default function App() {
         {/* 13. Student and parent testimonials */}
         <RevealOnScroll direction="up" delay={40}>
           <SafirTestimonialsSection />
+        </RevealOnScroll>
+
+        {/* 14. Parent guide: choosing online Quran classes for kids */}
+        <RevealOnScroll direction="up" delay={40}>
+          <ParentGuideSection onOpenFreeTrial={() => handleOpenFreeTrial()} />
         </RevealOnScroll>
 
 
