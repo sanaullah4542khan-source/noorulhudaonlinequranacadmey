@@ -2,7 +2,7 @@ import React from 'react';
 import { UserCheck, Clock, BookOpen, ArrowRight, ShieldCheck, CheckCircle2, FileCheck } from 'lucide-react';
 import { THREE_STEPS } from '../data/safirData';
 import { useLanguage } from '../context/LanguageContext';
-import { USER_IMAGES } from '../data/userImages';
+import { STEP_REGISTER_IMAGE, STEP_SCHEDULE_IMAGE, STEP_START_IMAGE } from '../data/userImagesLazy';
 
 interface ThreeStepsSectionProps {
   onOpenEnrollment: () => void;
@@ -12,9 +12,9 @@ export const ThreeStepsSection: React.FC<ThreeStepsSectionProps> = ({ onOpenEnro
   const { t, isRtl, isArabic, isUrdu } = useLanguage();
 
   const stepImages: Record<number, string> = {
-    1: USER_IMAGES.stepRegister,
-    2: USER_IMAGES.stepSchedule,
-    3: USER_IMAGES.stepStart
+    1: STEP_REGISTER_IMAGE,
+    2: STEP_SCHEDULE_IMAGE,
+    3: STEP_START_IMAGE
   };
 
   const getStepTitle = (stepId: number, defaultTitle: string) => {
@@ -71,7 +71,7 @@ export const ThreeStepsSection: React.FC<ThreeStepsSectionProps> = ({ onOpenEnro
             {/* Left Column: Official Assurance Image */}
             <div className="md:col-span-5 relative h-44 sm:h-56 md:h-full min-h-[170px] overflow-hidden">
               <img
-                src={USER_IMAGES.stepRegister}
+                src={STEP_REGISTER_IMAGE}
                 alt="Official Academy Registration Assurance and Verified Agreement"
                 className="w-full h-full object-cover"
                 loading="lazy"
@@ -133,7 +133,7 @@ export const ThreeStepsSection: React.FC<ThreeStepsSectionProps> = ({ onOpenEnro
                 {/* Step Card Visual Thumbnail */}
                 <div className="w-full aspect-[16/10] overflow-hidden bg-gray-100 relative">
                   <img
-                    src={stepImages[step.id] || USER_IMAGES.stepRegister}
+                    src={stepImages[step.id] || STEP_REGISTER_IMAGE}
                     alt={getStepTitle(step.id, step.title)}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     loading="lazy"

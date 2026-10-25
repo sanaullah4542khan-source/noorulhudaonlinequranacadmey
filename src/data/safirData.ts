@@ -1,4 +1,3 @@
-import { USER_IMAGES } from './userImages';
 /**
  * Noor Ul Huda Online Quran Academy - Contact & Brand Configuration
  */
@@ -126,7 +125,7 @@ export interface SafirCourse {
 export const SAFIR_COURSES: SafirCourse[] = [
   {
     id: 'nazra-recitation',
-    image: USER_IMAGES.courseNazra,
+    image: 'courseNazra',
     title: 'Nazra Quran Reading',
     titleAr: 'تلاوة القرآن الكريم (نظرة)',
     titleUr: 'ناظرہ قرآن کریم',
@@ -143,7 +142,7 @@ export const SAFIR_COURSES: SafirCourse[] = [
   },
   {
     id: 'quran-tajweed',
-    image: USER_IMAGES.courseTajweed,
+    image: 'courseTajweed',
     title: 'Tajweed Rules & Perfection',
     titleAr: 'أحكام التجويد والإتقان',
     titleUr: 'تجوید و حسن قرات',
@@ -177,7 +176,7 @@ export const SAFIR_COURSES: SafirCourse[] = [
   },
   {
     id: 'basic-islamic-studies',
-    image: USER_IMAGES.courseIslamic,
+    image: 'courseIslamic',
     title: 'Islamic Studies & Aqeedah',
     titleAr: 'الدراسات الإسلامية والعقيدة',
     titleUr: 'بنیادی دینی تعلیمات و عقائد',
@@ -194,7 +193,7 @@ export const SAFIR_COURSES: SafirCourse[] = [
   },
   {
     id: 'daily-supplications-duas',
-    image: USER_IMAGES.courseDuas,
+    image: 'courseDuas',
     title: 'Masnoon Duas & Daily Adhkar',
     titleAr: 'الأدعية المأثورة والأذكار اليومية',
     titleUr: 'مسنون دعائیں اور اذکار',

@@ -1,7 +1,7 @@
 import React from 'react';
 import { BookOpen, Sparkles, CheckCircle2, ArrowRight, ShieldCheck, Award, Star, Users, Video, MessageCircle } from 'lucide-react';
 import { SAFIR_CONTACT, getSafirWhatsAppUrl } from '../data/safirData';
-import { USER_IMAGES } from '../data/userImages';
+import { HERO_IMAGE } from '../data/userImagesEager';
 import { useLanguage } from '../context/LanguageContext';
 
 interface SafirHeroProps {
@@ -228,7 +228,7 @@ export const SafirHero: React.FC<SafirHeroProps> = ({
               <div className="relative rounded-t-[3.5rem] rounded-b-2xl overflow-hidden bg-[#022C22] border-2 border-[#D4AF37]/60 shadow-2xl group">
                 {/* Visual Image: Holy Quran on Wooden Rehal */}
                 <img
-                  src={USER_IMAGES.hero}
+                  src={HERO_IMAGE}
                   alt="Holy Quran on wooden Rehal being studied with Tajweed at Noor Ul Huda Academy"
                   className="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-700"
                   fetchPriority="high"

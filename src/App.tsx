@@ -1,23 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, lazy, Suspense } from 'react';
 import { Navbar } from './components/Navbar';
 import { SafirHero } from './components/SafirHero';
-import { ThreeStepsSection } from './components/ThreeStepsSection';
-import { SafirCoursesSection } from './components/SafirCoursesSection';
-import { WhyChooseUsSection } from './components/WhyChooseUsSection';
-import { SafirAboutSection } from './components/SafirAboutSection';
-import { SafirPricingSection } from './components/SafirPricingSection';
-import { PaymentMethodsSection } from './components/PaymentMethodsSection';
-import { ParentsSection } from './components/ParentsSection';
-import { SafirTestimonialsSection } from './components/SafirTestimonialsSection';
-import { ParentGuideSection } from './components/ParentGuideSection';
-import { SafirContactSection } from './components/SafirContactSection';
-import { SafirFooter } from './components/SafirFooter';
 import { RevealOnScroll } from './components/RevealOnScroll';
-import { AdminLoginModal } from './components/AdminLoginModal';
-import { FreeTrialModal } from './components/FreeTrialModal';
 import { PwaInstallBanner } from './components/PwaInstallBanner';
 import { SAFIR_CONTACT, getSafirWhatsAppUrl } from './data/safirData';
-import { USER_IMAGES } from './data/userImages';
+import { WHATSAPP_IMAGE } from './data/userImagesEager';
+
+// Below-fold sections load in their own chunks after the first paint, so the
+// header + hero appear fast instead of waiting for the whole page bundle.
+const ThreeStepsSection = lazy(() => import('./components/ThreeStepsSection').then(m => ({ default: m.ThreeStepsSection })));
+const SafirCoursesSection = lazy(() => import('./components/SafirCoursesSection').then(m => ({ default: m.SafirCoursesSection })));
+const WhyChooseUsSection = lazy(() => import('./components/WhyChooseUsSection').then(m => ({ default: m.WhyChooseUsSection })));
+const SafirAboutSection = lazy(() => import('./components/SafirAboutSection').then(m => ({ default: m.SafirAboutSection })));
+const SafirPricingSection = lazy(() => import('./components/SafirPricingSection').then(m => ({ default: m.SafirPricingSection })));
+const PaymentMethodsSection = lazy(() => import('./components/PaymentMethodsSection').then(m => ({ default: m.PaymentMethodsSection })));
+const ParentsSection = lazy(() => import('./components/ParentsSection').then(m => ({ default: m.ParentsSection })));
+const SafirTestimonialsSection = lazy(() => import('./components/SafirTestimonialsSection').then(m => ({ default: m.SafirTestimonialsSection })));
+const ParentGuideSection = lazy(() => import('./components/ParentGuideSection').then(m => ({ default: m.ParentGuideSection })));
+const SafirContactSection = lazy(() => import('./components/SafirContactSection').then(m => ({ default: m.SafirContactSection })));
+const SafirFooter = lazy(() => import('./components/SafirFooter').then(m => ({ default: m.SafirFooter })));
+const AdminLoginModal = lazy(() => import('./components/AdminLoginModal').then(m => ({ default: m.AdminLoginModal })));
+const FreeTrialModal = lazy(() => import('./components/FreeTrialModal').then(m => ({ default: m.FreeTrialModal })));
 
 export default function App() {
   const [isTrialModalOpen, setIsTrialModalOpen] = useState(false);
@@ -59,74 +62,100 @@ export default function App() {
 
         {/* 3. Start learning in three simple steps */}
         <RevealOnScroll direction="up" delay={40}>
-          <ThreeStepsSection onOpenEnrollment={() => handleOpenFreeTrial()} />
+          <Suspense fallback={null}>
+            <ThreeStepsSection onOpenEnrollment={() => handleOpenFreeTrial()} />
+          </Suspense>
         </RevealOnScroll>
 
         {/* 4. Complete course catalogue with search, filters and details */}
         <RevealOnScroll direction="up" delay={40}>
-          <SafirCoursesSection onOpenFreeTrial={handleOpenFreeTrial} />
+          <Suspense fallback={null}>
+            <SafirCoursesSection onOpenFreeTrial={handleOpenFreeTrial} />
+          </Suspense>
         </RevealOnScroll>
 
         {/* 5. Trust, academy strengths and learning outcomes */}
         <RevealOnScroll direction="up" delay={40}>
-          <WhyChooseUsSection onOpenDemo={() => handleOpenFreeTrial()} />
+          <Suspense fallback={null}>
+            <WhyChooseUsSection onOpenDemo={() => handleOpenFreeTrial()} />
+          </Suspense>
         </RevealOnScroll>
 
         {/* 6. Academy introduction */}
         <div id="about-us">
-          <SafirAboutSection onOpenFreeTrial={() => handleOpenFreeTrial()} />
+          <Suspense fallback={null}>
+            <SafirAboutSection onOpenFreeTrial={() => handleOpenFreeTrial()} />
+          </Suspense>
         </div>
 
 
 
         {/* 9. Transparent monthly plans, presented before payment details */}
         <RevealOnScroll direction="up" delay={40}>
-          <SafirPricingSection onSelectPlan={() => handleOpenFreeTrial()} />
+          <Suspense fallback={null}>
+            <SafirPricingSection onSelectPlan={() => handleOpenFreeTrial()} />
+          </Suspense>
         </RevealOnScroll>
 
         {/* 10. Secure payment options for local and international families */}
         <RevealOnScroll direction="up" delay={40}>
-          <PaymentMethodsSection onOpenFreeTrial={() => handleOpenFreeTrial()} />
+          <Suspense fallback={null}>
+            <PaymentMethodsSection onOpenFreeTrial={() => handleOpenFreeTrial()} />
+          </Suspense>
         </RevealOnScroll>
 
         {/* 11. Parent guidance and progress visibility */}
-        <ParentsSection onOpenFreeTrial={() => handleOpenFreeTrial()} />
+        <Suspense fallback={null}>
+          <ParentsSection onOpenFreeTrial={() => handleOpenFreeTrial()} />
+        </Suspense>
 
 
         {/* 13. Student and parent testimonials */}
         <RevealOnScroll direction="up" delay={40}>
-          <SafirTestimonialsSection />
+          <Suspense fallback={null}>
+            <SafirTestimonialsSection />
+          </Suspense>
         </RevealOnScroll>
 
         {/* 14. Parent guide: choosing online Quran classes for kids */}
         <RevealOnScroll direction="up" delay={40}>
-          <ParentGuideSection onOpenFreeTrial={() => handleOpenFreeTrial()} />
+          <Suspense fallback={null}>
+            <ParentGuideSection onOpenFreeTrial={() => handleOpenFreeTrial()} />
+          </Suspense>
         </RevealOnScroll>
 
 
         {/* 9. Contact & Admissions Section */}
         <div id="contact">
-          <SafirContactSection />
+          <Suspense fallback={null}>
+            <SafirContactSection />
+          </Suspense>
         </div>
       </main>
 
       {/* 10. Premium Academy Footer */}
-      <SafirFooter onNavigateSection={handleScrollToSection} />
+      <Suspense fallback={null}>
+        <SafirFooter onNavigateSection={handleScrollToSection} />
+      </Suspense>
 
       {/* Modals */}
       {isTrialModalOpen && (
-        <FreeTrialModal
-          isOpen={isTrialModalOpen}
-          onClose={() => setIsTrialModalOpen(false)}
-          initialCourseId={selectedCourseForTrial}
-        />
+        <Suspense fallback={null}>
+          <FreeTrialModal
+            isOpen={isTrialModalOpen}
+            onClose={() => setIsTrialModalOpen(false)}
+            initialCourseId={selectedCourseForTrial}
+          />
+        </Suspense>
       )}
 
       {isAdminLoginOpen && (
-        <AdminLoginModal
-          isOpen={isAdminLoginOpen}
-          onClose={() => setIsAdminLoginOpen(false)}
-        />
+        <Suspense fallback={null}>
+          <AdminLoginModal
+            isOpen={isAdminLoginOpen}
+            onClose={() => setIsAdminLoginOpen(false)}
+          />
+        </Suspense>
       )}
 
       {/* PWA Install Banner */}
@@ -143,7 +172,7 @@ export default function App() {
           title={`Chat with Noor Ul Huda Online Quran Academy on WhatsApp (${SAFIR_CONTACT.phone})`}
         >
           <img
-            src={USER_IMAGES.whatsapp}
+            src={WHATSAPP_IMAGE}
             alt="Chat with Noor Ul Huda Academy on WhatsApp"
             className="w-12 h-12 sm:w-14 sm:h-14 rounded-full object-cover shadow-2xl hover:scale-110 active:scale-95 transition-all"
           />

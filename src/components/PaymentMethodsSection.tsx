@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { PAYMENT_METHODS, PAYMENT_STEPS, PAYMENT_FAQS } from '../data/paymentData';
 import { ACADEMY_BANK_DETAILS, getSafirWhatsAppUrl } from '../data/safirData';
 import { useLanguage } from '../context/LanguageContext';
-import { USER_IMAGES } from '../data/userImages';
+import { PAYMENT_IMAGE } from '../data/userImagesLazy';
+import { WHATSAPP_IMAGE } from '../data/userImagesEager';
 import { useTheme } from '../context/ThemeContext';
 import { 
   CreditCard, 
@@ -129,7 +130,7 @@ export const PaymentMethodsSection: React.FC<PaymentMethodsSectionProps> = ({ on
         >
           <div className="relative h-64 sm:h-80 md:h-96 w-full overflow-hidden bg-[#042018]">
             <img
-              src={USER_IMAGES.payment}
+              src={PAYMENT_IMAGE}
               alt="Noor Ul Huda Quran Academy Official Payment Assurance"
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
               loading="lazy"
@@ -462,7 +463,7 @@ export const PaymentMethodsSection: React.FC<PaymentMethodsSectionProps> = ({ on
                 className="w-full sm:w-auto px-5 py-3 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold text-xs sm:text-sm transition-all shadow-lg flex items-center justify-center gap-2 cursor-pointer"
               >
                 <img
-                  src={USER_IMAGES.whatsapp}
+                  src={WHATSAPP_IMAGE}
                   alt="WhatsApp"
                   className="w-4 h-4 rounded-full object-cover"
                 />

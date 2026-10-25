@@ -28,9 +28,17 @@
     <link rel="preload" as="image" href="/noor-ul-huda-logo.svg" />
     <link rel="preload" as="image" href="/hero-online-classroom.jpg" fetchpriority="high" />
     <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Cairo:wght@400;500;600;700;800;900&family=Manrope:wght@400;500;600;700;800&family=Noto+Nastaliq+Urdu:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <!-- Instant splash: shows before any JavaScript loads, so visitors never stare at a blank white page -->
+    <style>
+      #boot-splash { position: fixed; inset: 0; z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; background: #064232; color: #fff; font-family: system-ui, -apple-system, "Segoe UI", sans-serif; text-align: center; padding: 24px; }
+      #boot-splash .boot-name { font-size: 26px; font-weight: 800; letter-spacing: 0.2px; line-height: 1.25; }
+      #boot-splash .boot-sub { font-size: 15px; opacity: 0.85; }
+      #boot-splash .boot-ring { width: 34px; height: 34px; border-radius: 50%; border: 3px solid rgba(255,255,255,0.25); border-top-color: #facc15; animation: boot-spin 0.9s linear infinite; margin-top: 6px; }
+      @keyframes boot-spin { to { transform: rotate(360deg); } }
+    </style>
   </head>
   <body class="bg-white text-[#1c2e28] font-sans antialiased selection:bg-[#064e3b] selection:text-[#fefefe]">
-    <div id="root"></div>
+    <div id="root"><div id="boot-splash"><div class="boot-name">Noor Ul Huda<br />Online Quran Academy</div><div class="boot-sub">1-on-1 Quran Classes for Kids &amp; Adults</div><div class="boot-ring" aria-hidden="true"></div></div></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

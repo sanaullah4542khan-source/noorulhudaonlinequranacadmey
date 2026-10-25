@@ -1,5 +1,16 @@
 import React, { useState, useMemo } from 'react';
 import { SAFIR_COURSES, SafirCourse } from '../data/safirData';
+import { COURSE_NAZRA_IMAGE, COURSE_TAJWEED_IMAGE, COURSE_ISLAMIC_IMAGE, COURSE_DUAS_IMAGE } from '../data/userImagesLazy';
+
+// Course images live as keys in safirData so the heavy photo bytes stay out of
+// the first-load bundle; resolve them here, inside the lazily loaded section.
+const COURSE_IMAGES: Record<string, string> = {
+  courseNazra: COURSE_NAZRA_IMAGE,
+  courseTajweed: COURSE_TAJWEED_IMAGE,
+  courseIslamic: COURSE_ISLAMIC_IMAGE,
+  courseDuas: COURSE_DUAS_IMAGE,
+};
+const resolveCourseImage = (image: string) => COURSE_IMAGES[image] ?? image;
 import { COURSES_DATA } from '../data/coursesData';
 import { CourseDetailModal } from './CourseDetailModal';
 import { Course } from '../types';
@@ -309,7 +320,7 @@ export const SafirCoursesSection: React.FC<SafirCoursesSectionProps> = ({ onOpen
                   {/* Course Top Image & Badges */}
                   <div className="relative h-44 sm:h-52 w-full overflow-hidden bg-gray-900/10">
                     <img
-                      src={course.image}
+                      src={resolveCourseImage(course.image)}
                       alt={courseTitle}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       loading="lazy"
