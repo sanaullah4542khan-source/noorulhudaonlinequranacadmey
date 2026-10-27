@@ -98,12 +98,12 @@ export const SafirHero: React.FC<SafirHeroProps> = ({
                 </>
               ) : isUrdu ? (
                 <>
-                  گھر بیٹھے مستند اساتذہ سے <span className="text-[#D4AF37]">قرآن مجید</span> تجوید کے ساتھ سیکھیں
+                  ون ٹو ون آن لائن قرآن کلاسز — جہاں آپ کا بچہ <span className="text-[#D4AF37]">واقعی ترقی کرے</span>
                 </>
               ) : (
                 <>
-                  Learn Quran Online for Kids &amp; Adults with <span className="text-[#D4AF37] relative inline-block">
-                    World-Class Tutors
+                  1-on-1 Online Quran Classes Where Your Child <span className="text-[#D4AF37] relative inline-block">
+                    Actually Progresses
                     <svg className="absolute -bottom-1 left-0 w-full h-2 text-[#D4AF37]/40" viewBox="0 0 100 10" preserveAspectRatio="none">
                       <path d="M0 5 Q 50 10, 100 5" stroke="currentColor" strokeWidth="3" fill="none" />
                     </svg>
@@ -117,8 +117,8 @@ export const SafirHero: React.FC<SafirHeroProps> = ({
               {isArabic
                 ? 'حصص تفاعلية فردية ومباشرة (1-لـ-1) للأطفال والكبار والمهتدين الجدد. أتقن تلاوة القرآن بأحكام التجويد ومخارج الحروف، واحفظ السور وفق جدول منظم بأوقات مرنة على مدار 24 ساعة من راحة منزلك.'
                 : isUrdu
-                ? 'بچوں، بڑوں اور ابتدائی طلباء کے لیے ون ٹو ون انٹرایکٹو کلاسز۔ اپنی پسند کے اوقات میں نورانی قاعدہ، ناظرہ، تجوید، حفظ اور بنیادی اسلامی علوم میں مہارت حاصل کریں۔'
-                : 'Personalized 1-on-1 private classes for kids, adults, and beginners. Master Noorani Qaida, Tajweed, Hifz, and Islamic Studies at your preferred time from the comfort of your home.'}
+                ? 'بچوں اور بڑوں کے لیے سند یافتہ مرد و خواتین اساتذہ کے ساتھ لائیو ون ٹو ون کلاسز، آپ کے اپنے ٹائم زون میں۔ مفت ٹرائل سے شروع کریں، پھر ہر ہفتے واٹس ایپ پر بچے کی ترقی کی رپورٹ پائیں۔'
+                : 'Live 1-on-1 classes for kids and adults with certified male and female teachers, at your time zone in the USA, UK, Canada and Australia. Start with a free trial, then get a weekly progress report on WhatsApp, so you always know what your child learned.'}
             </p>
 
             {/* 4 Feature Points Layout */}
@@ -130,13 +130,13 @@ export const SafirHero: React.FC<SafirHeroProps> = ({
                   ar: 'حصص فيديو تفاعلية فردية ومباشرة 100%'
                 },
                 {
-                  en: 'Certified Male & Female Native Tutors',
-                  ur: 'مستند اور تجربہ کار مرد و خواتین قراء',
+                  en: 'Certified Male & Female Teachers',
+                  ur: 'سند یافتہ مرد و خواتین اساتذہ',
                   ar: 'معلمون ومعلمات من الحفاظ وأصحاب الإجازات'
                 },
                 {
-                  en: 'Flexible 24/7 Scheduling Across Time Zones',
-                  ur: 'چوبیس گھنٹے اپنی مرضی کے لچکدار اوقات',
+                  en: 'Weekly Progress Report on WhatsApp',
+                  ur: 'ہر ہفتے واٹس ایپ پر ترقی کی رپورٹ',
                   ar: 'مواعيد مرنة 24/7 تلائم كافة الدول والمناطق'
                 },
                 {
