@@ -61,8 +61,8 @@ const translations = {
       "tag3": "Instant Start"
     },
     "courses": {
-      "title": "Our Featured Courses",
-      "subtitle": "Comprehensive Quranic, Tajweed, and Islamic curricula designed for kids, adults, and beginners worldwide.",
+      "title": "Pick the Right Course for Your Child — From Qaida to Hifz",
+      "subtitle": "Every course is 1-on-1, with a certified male or female teacher, at your time zone. Start with a free trial, and follow your child's progress with a weekly WhatsApp report.",
       "enrollNow": "Enroll Now",
       "viewDetails": "View Details",
       "exploreAll": "Explore All Courses",
@@ -323,8 +323,8 @@ const translations = {
       "tag3": "فوری آغاز"
     },
     "courses": {
-      "title": "ہمارے مقبول کورسز",
-      "subtitle": "بچوں، خواتین اور ہر عمر کے افراد کے لیے مکمل، مستند اور جامع قرآنی و اسلامی نصاب۔",
+      "title": "اپنے بچے کے لیے صحیح کورس چنیں — قاعدہ سے حفظ تک",
+      "subtitle": "ہر کورس ون ٹو ون ہے، سند یافتہ مرد یا خاتون استاد کے ساتھ، آپ کے اپنے ٹائم زون میں۔ مفت ٹرائل سے شروع کریں، اور ہر ہفتے واٹس ایپ رپورٹ سے اپنے بچے کی ترقی دیکھیں۔",
       "enrollNow": "داخلہ لیں",
       "viewDetails": "تفصیلات دیکھیں",
       "exploreAll": "تمام کورسز دیکھیں",
