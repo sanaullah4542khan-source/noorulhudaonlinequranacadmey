@@ -229,7 +229,7 @@ export const SafirHero: React.FC<SafirHeroProps> = ({
                 {/* Visual Image: Holy Quran on Wooden Rehal */}
                 <img
                   src={HERO_IMAGE}
-                  alt="Holy Quran on wooden Rehal being studied with Tajweed at Noor Ul Huda Academy"
+                  alt="Mother and child in a live online Quran class for kids at Noor Ul Huda Online Quran Academy"
                   className="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-700"
                   fetchPriority="high"
                   loading="eager"
