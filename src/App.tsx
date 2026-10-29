@@ -17,6 +17,7 @@ const PaymentMethodsSection = lazy(() => import('./components/PaymentMethodsSect
 const ParentsSection = lazy(() => import('./components/ParentsSection').then(m => ({ default: m.ParentsSection })));
 const SafirTestimonialsSection = lazy(() => import('./components/SafirTestimonialsSection').then(m => ({ default: m.SafirTestimonialsSection })));
 const ParentGuideSection = lazy(() => import('./components/ParentGuideSection').then(m => ({ default: m.ParentGuideSection })));
+const TajweedGuideSection = lazy(() => import('./components/TajweedGuideSection').then(m => ({ default: m.TajweedGuideSection })));
 const SafirContactSection = lazy(() => import('./components/SafirContactSection').then(m => ({ default: m.SafirContactSection })));
 const SafirFooter = lazy(() => import('./components/SafirFooter').then(m => ({ default: m.SafirFooter })));
 const AdminLoginModal = lazy(() => import('./components/AdminLoginModal').then(m => ({ default: m.AdminLoginModal })));
@@ -121,6 +122,13 @@ export default function App() {
         <RevealOnScroll direction="up" delay={40}>
           <Suspense fallback={null}>
             <ParentGuideSection onOpenFreeTrial={() => handleOpenFreeTrial()} />
+          </Suspense>
+        </RevealOnScroll>
+
+        {/* 15. Tajweed guide: beginner Tajweed basics for parents learning Quran online */}
+        <RevealOnScroll direction="up" delay={40}>
+          <Suspense fallback={null}>
+            <TajweedGuideSection onOpenFreeTrial={() => handleOpenFreeTrial()} />
           </Suspense>
         </RevealOnScroll>
 
