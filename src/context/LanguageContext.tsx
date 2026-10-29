@@ -69,8 +69,8 @@ const translations = {
       "closeModal": "Close"
     },
     "whyChooseUs": {
-      "title": "Why Choose Us",
-      "subtitle": "Trusted by hundreds of families worldwide for authentic, reliable, and engaging Quran education.",
+      "title": "Why Parents Choose Us",
+      "subtitle": "One teacher, one child, at your family's time — with a weekly WhatsApp progress report, so you can see your child's Quran progress instead of wondering about it.",
       "ctaDemo": "Book Your Free Demo Today",
       "stats": {
         "courses": "COURSES",
@@ -331,8 +331,8 @@ const translations = {
       "closeModal": "بند کریں"
     },
     "whyChooseUs": {
-      "title": "ہمیں کیوں منتخب کریں؟",
-      "subtitle": "مستند، محفوظ اور بااعتماد قرآنی تعلیم کے لیے دنیا بھر کے سینکڑوں خاندانوں کا اولین انتخاب۔",
+      "title": "والدین ہمیں کیوں منتخب کرتے ہیں؟",
+      "subtitle": "ایک استاد، ایک بچہ، آپ کے خاندان کے وقت پر — اور ہفتہ وار واٹس ایپ پیشرفت رپورٹ، تاکہ آپ بچے کی قرآنی ترقی خود دیکھ سکیں، اندازہ نہ لگانا پڑے۔",
       "ctaDemo": "آج ہی اپنا مفت ڈیمو بک کریں",
       "stats": {
         "courses": "کورسز",
