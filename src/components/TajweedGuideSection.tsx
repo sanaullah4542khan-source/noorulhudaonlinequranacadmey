@@ -42,7 +42,8 @@ export const TajweedGuideSection: React.FC<TajweedGuideSectionProps> = ({ onOpen
         ],
         note: 'ہماری کلاس میں ہر قاعدہ عملی مشق کے ساتھ سکھایا جاتا ہے، اور ہفتہ وار واٹس ایپ رپورٹ سے والدین دیکھ سکتے ہیں کہ بچے نے کیا سیکھا۔',
         ctaHint: 'پہلے خود دیکھیں — بچے کے لیے مفت ٹرائل کلاس بک کریں۔',
-        cta: 'مفت ٹرائل کلاس بک کریں'
+        cta: 'مفت ٹرائل کلاس بک کریں',
+        coursesLink: 'بچوں کے لیے ہماری آن لائن قرآن کلاسز دیکھیں — تجوید، حفظ، قاعدہ اور اسلامیات، سب ون آن ون۔'
       }
     : {
         eyebrow: 'Tajweed Guide',
@@ -73,7 +74,8 @@ export const TajweedGuideSection: React.FC<TajweedGuideSectionProps> = ({ onOpen
         ],
         note: 'In our classes each rule is taught with live practice and correction, and the weekly WhatsApp report shows parents exactly what their child learned.',
         ctaHint: 'See it for yourself — book a free trial class for your child today.',
-        cta: 'Book a Free Trial Class'
+        cta: 'Book a Free Trial Class',
+        coursesLink: 'Browse our online Quran classes for kids — Tajweed, Hifz, Qaida and Islamic Studies, all 1-on-1.'
       };
 
   return (
@@ -119,6 +121,11 @@ export const TajweedGuideSection: React.FC<TajweedGuideSectionProps> = ({ onOpen
             {content.cta}
             <ArrowRight className="w-4 h-4" />
           </button>
+          <p className="mt-5 text-sm sm:text-base">
+            <a href="#courses" className="font-semibold text-[#064E3B] underline underline-offset-4 hover:text-[#04382b]">
+              {content.coursesLink}
+            </a>
+          </p>
         </div>
       </div>
     </section>
