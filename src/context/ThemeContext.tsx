@@ -12,18 +12,10 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [theme, setThemeState] = useState<Theme>(() => {
-    if (typeof window !== 'undefined') {
-      const stored = localStorage.getItem('noor_ul_huda_theme');
-      if (stored === 'dark' || stored === 'light') {
-        return stored;
-      }
-      if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        return 'dark';
-      }
-    }
-    return 'light';
-  });
+  // Day mode is the default for every visitor: the site always opens in
+  // light mode, even on a phone set to dark mode. The toggle still works
+  // during a visit, but the next visit starts in day mode again.
+  const [theme, setThemeState] = useState<Theme>('light');
 
   const isDark = theme === 'dark';
 
