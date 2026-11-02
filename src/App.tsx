@@ -18,6 +18,7 @@ const ParentsSection = lazy(() => import('./components/ParentsSection').then(m =
 const SafirTestimonialsSection = lazy(() => import('./components/SafirTestimonialsSection').then(m => ({ default: m.SafirTestimonialsSection })));
 const ParentGuideSection = lazy(() => import('./components/ParentGuideSection').then(m => ({ default: m.ParentGuideSection })));
 const TajweedGuideSection = lazy(() => import('./components/TajweedGuideSection').then(m => ({ default: m.TajweedGuideSection })));
+const FemaleTeacherGuideSection = lazy(() => import('./components/FemaleTeacherGuideSection').then(m => ({ default: m.FemaleTeacherGuideSection })));
 const SafirContactSection = lazy(() => import('./components/SafirContactSection').then(m => ({ default: m.SafirContactSection })));
 const SafirFooter = lazy(() => import('./components/SafirFooter').then(m => ({ default: m.SafirFooter })));
 const AdminLoginModal = lazy(() => import('./components/AdminLoginModal').then(m => ({ default: m.AdminLoginModal })));
@@ -129,6 +130,13 @@ export default function App() {
         <RevealOnScroll direction="up" delay={40}>
           <Suspense fallback={null}>
             <TajweedGuideSection onOpenFreeTrial={() => handleOpenFreeTrial()} />
+          </Suspense>
+        </RevealOnScroll>
+
+        {/* 16. Female teacher guide: choosing a female Quran teacher online */}
+        <RevealOnScroll direction="up" delay={40}>
+          <Suspense fallback={null}>
+            <FemaleTeacherGuideSection onOpenFreeTrial={() => handleOpenFreeTrial()} />
           </Suspense>
         </RevealOnScroll>
 
