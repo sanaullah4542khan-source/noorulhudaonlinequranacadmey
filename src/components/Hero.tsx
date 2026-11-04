@@ -99,7 +99,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenFreeTrial, onExploreCourses })
                 <div className="overflow-hidden rounded-2xl relative aspect-[4/3] sm:aspect-[16/11] bg-[#04241b]">
                   <img
                     src={heroImage}
-                    alt="Quran on a wooden rehal stand with a tablet for 1-on-1 online Quran classes for kids"
+                    alt="Holy Quran on wooden rehal stand with interactive tablet learning setup"
                     className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700"
                     referrerPolicy="no-referrer"
                   />

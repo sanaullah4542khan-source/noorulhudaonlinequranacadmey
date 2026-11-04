@@ -57,7 +57,7 @@ export const WhyChooseUsSection: React.FC<WhyChooseUsSectionProps> = ({ onOpenDe
                   <div className="relative w-full aspect-[4/3] overflow-hidden bg-gray-100">
                     <img
                       src={stat.image}
-                      alt={`${stat.number} ${info.label}`}
+                      alt={`${stat.number} ${info.label} — ${info.desc}`}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       loading="lazy"
                       decoding="async"
