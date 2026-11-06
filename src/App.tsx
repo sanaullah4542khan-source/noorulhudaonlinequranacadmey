@@ -19,6 +19,7 @@ const SafirTestimonialsSection = lazy(() => import('./components/SafirTestimonia
 const ParentGuideSection = lazy(() => import('./components/ParentGuideSection').then(m => ({ default: m.ParentGuideSection })));
 const TajweedGuideSection = lazy(() => import('./components/TajweedGuideSection').then(m => ({ default: m.TajweedGuideSection })));
 const FemaleTeacherGuideSection = lazy(() => import('./components/FemaleTeacherGuideSection').then(m => ({ default: m.FemaleTeacherGuideSection })));
+const AdultLearnerGuideSection = lazy(() => import('./components/AdultLearnerGuideSection').then(m => ({ default: m.AdultLearnerGuideSection })));
 const SafirContactSection = lazy(() => import('./components/SafirContactSection').then(m => ({ default: m.SafirContactSection })));
 const SafirFooter = lazy(() => import('./components/SafirFooter').then(m => ({ default: m.SafirFooter })));
 const AdminLoginModal = lazy(() => import('./components/AdminLoginModal').then(m => ({ default: m.AdminLoginModal })));
@@ -137,6 +138,13 @@ export default function App() {
         <RevealOnScroll direction="up" delay={40}>
           <Suspense fallback={null}>
             <FemaleTeacherGuideSection onOpenFreeTrial={() => handleOpenFreeTrial()} />
+          </Suspense>
+        </RevealOnScroll>
+
+        {/* 17. Adult learner guide: learn Quran online as an adult */}
+        <RevealOnScroll direction="up" delay={40}>
+          <Suspense fallback={null}>
+            <AdultLearnerGuideSection onOpenFreeTrial={() => handleOpenFreeTrial()} />
           </Suspense>
         </RevealOnScroll>
 
