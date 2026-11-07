@@ -15,11 +15,6 @@ const SafirAboutSection = lazy(() => import('./components/SafirAboutSection').th
 const SafirPricingSection = lazy(() => import('./components/SafirPricingSection').then(m => ({ default: m.SafirPricingSection })));
 const PaymentMethodsSection = lazy(() => import('./components/PaymentMethodsSection').then(m => ({ default: m.PaymentMethodsSection })));
 const ParentsSection = lazy(() => import('./components/ParentsSection').then(m => ({ default: m.ParentsSection })));
-const SafirTestimonialsSection = lazy(() => import('./components/SafirTestimonialsSection').then(m => ({ default: m.SafirTestimonialsSection })));
-const ParentGuideSection = lazy(() => import('./components/ParentGuideSection').then(m => ({ default: m.ParentGuideSection })));
-const TajweedGuideSection = lazy(() => import('./components/TajweedGuideSection').then(m => ({ default: m.TajweedGuideSection })));
-const FemaleTeacherGuideSection = lazy(() => import('./components/FemaleTeacherGuideSection').then(m => ({ default: m.FemaleTeacherGuideSection })));
-const AdultLearnerGuideSection = lazy(() => import('./components/AdultLearnerGuideSection').then(m => ({ default: m.AdultLearnerGuideSection })));
 const SafirContactSection = lazy(() => import('./components/SafirContactSection').then(m => ({ default: m.SafirContactSection })));
 const SafirFooter = lazy(() => import('./components/SafirFooter').then(m => ({ default: m.SafirFooter })));
 const AdminLoginModal = lazy(() => import('./components/AdminLoginModal').then(m => ({ default: m.AdminLoginModal })));
@@ -111,42 +106,6 @@ export default function App() {
         <Suspense fallback={null}>
           <ParentsSection onOpenFreeTrial={() => handleOpenFreeTrial()} />
         </Suspense>
-
-
-        {/* 13. Student and parent testimonials */}
-        <RevealOnScroll direction="up" delay={40}>
-          <Suspense fallback={null}>
-            <SafirTestimonialsSection />
-          </Suspense>
-        </RevealOnScroll>
-
-        {/* 14. Parent guide: choosing online Quran classes for kids */}
-        <RevealOnScroll direction="up" delay={40}>
-          <Suspense fallback={null}>
-            <ParentGuideSection onOpenFreeTrial={() => handleOpenFreeTrial()} />
-          </Suspense>
-        </RevealOnScroll>
-
-        {/* 15. Tajweed guide: beginner Tajweed basics for parents learning Quran online */}
-        <RevealOnScroll direction="up" delay={40}>
-          <Suspense fallback={null}>
-            <TajweedGuideSection onOpenFreeTrial={() => handleOpenFreeTrial()} />
-          </Suspense>
-        </RevealOnScroll>
-
-        {/* 16. Female teacher guide: choosing a female Quran teacher online */}
-        <RevealOnScroll direction="up" delay={40}>
-          <Suspense fallback={null}>
-            <FemaleTeacherGuideSection onOpenFreeTrial={() => handleOpenFreeTrial()} />
-          </Suspense>
-        </RevealOnScroll>
-
-        {/* 17. Adult learner guide: learn Quran online as an adult */}
-        <RevealOnScroll direction="up" delay={40}>
-          <Suspense fallback={null}>
-            <AdultLearnerGuideSection onOpenFreeTrial={() => handleOpenFreeTrial()} />
-          </Suspense>
-        </RevealOnScroll>
 
 
         {/* 9. Contact & Admissions Section */}

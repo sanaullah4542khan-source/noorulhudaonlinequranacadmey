@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { PAYMENT_METHODS, PAYMENT_STEPS, PAYMENT_FAQS } from '../data/paymentData';
+import { PAYMENT_METHODS, PAYMENT_STEPS } from '../data/paymentData';
 import { ACADEMY_BANK_DETAILS, getSafirWhatsAppUrl } from '../data/safirData';
 import { useLanguage } from '../context/LanguageContext';
 import { PAYMENT_IMAGE } from '../data/userImagesLazy';
@@ -18,8 +18,6 @@ import {
   Check,
   Sparkles,
   BadgeCheck,
-  HelpCircle,
-  ChevronDown,
   Wallet,
   Landmark,
   FileCheck2
@@ -35,7 +33,6 @@ export const PaymentMethodsSection: React.FC<PaymentMethodsSectionProps> = ({ on
   const { t, isRtl, isArabic, isUrdu } = useLanguage();
   const { isDark } = useTheme();
   const [copiedField, setCopiedField] = useState<CopiedField>(null);
-  const [openFaqId, setOpenFaqId] = useState<string | null>('confirmation-time');
 
   const handleCopy = (text: string, field: CopiedField) => {
     navigator.clipboard.writeText(text);
@@ -61,10 +58,6 @@ export const PaymentMethodsSection: React.FC<PaymentMethodsSectionProps> = ({ on
       `--------------------------------------------------\n` +
       `Please send your transaction receipt or screenshot to WhatsApp (+92 313 0958451) for immediate confirmation.`
     );
-  };
-
-  const toggleFaq = (id: string) => {
-    setOpenFaqId((prev) => (prev === id ? null : id));
   };
 
   const receiptWhatsAppMessage = encodeURIComponent(
@@ -588,89 +581,6 @@ export const PaymentMethodsSection: React.FC<PaymentMethodsSectionProps> = ({ on
                 </div>
               </div>
             ))}
-          </div>
-        </div>
-
-        {/* 🌟 PAYMENT ACCORDION & FAQ SECTION */}
-        <div 
-          id="payment-faq-accordion" 
-          className={`rounded-3xl p-6 sm:p-9 border shadow-sm mb-14 transition-colors ${
-            isDark 
-              ? 'bg-[#062c21] border-[#0e4e3c]' 
-              : 'bg-white border-[#e5e3d7]'
-          }`}
-        >
-          <div className="text-center max-w-2xl mx-auto mb-10">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#064232]/10 dark:bg-[#facc15]/10 border border-[#064232]/20 dark:border-[#facc15]/30 mb-3">
-              <HelpCircle className="w-4 h-4 text-[#064232] dark:text-[#facc15]" />
-              <span className="text-xs font-semibold uppercase tracking-wider text-[#064232] dark:text-[#facc15]">
-                {t.payment.faqTag}
-              </span>
-            </div>
-            <h3 className="font-serif text-2xl sm:text-3xl font-bold text-[#064232] dark:text-white mb-3">
-              {t.payment.faqTitle} <span className="text-[#c69b32] dark:text-[#facc15] font-serif italic">Payment Questions</span>
-            </h3>
-            <p className="text-xs sm:text-sm text-[#4e655c] dark:text-emerald-200/80 leading-relaxed">
-              {t.payment.faqSubtitle}
-            </p>
-          </div>
-
-          <div className="max-w-3xl mx-auto space-y-3.5">
-            {PAYMENT_FAQS.map((faq) => {
-              const isOpen = openFaqId === faq.id;
-              const question = isArabic ? (faq.questionAr || faq.questionUr) : isUrdu ? faq.questionUr : faq.questionEn;
-              const answer = isArabic ? (faq.answerAr || faq.answerUr) : isUrdu ? faq.answerUr : faq.answerEn;
-
-              return (
-                <div
-                  key={faq.id}
-                  id={`faq-item-${faq.id}`}
-                  className={`rounded-2xl border transition-all duration-200 overflow-hidden ${
-                    isOpen
-                      ? isDark
-                        ? 'bg-[#073629] border-[#facc15]/50 shadow-md'
-                        : 'bg-[#faf9f5] border-[#c69b32] shadow-sm'
-                      : isDark
-                        ? 'bg-[#042018] border-[#0a4233] hover:border-[#facc15]/30'
-                        : 'bg-white border-[#e5e3d7] hover:border-[#c69b32]/40'
-                  }`}
-                >
-                  <button
-                    id={`faq-toggle-${faq.id}`}
-                    onClick={() => toggleFaq(faq.id)}
-                    aria-expanded={isOpen}
-                    className="w-full py-4 px-5 sm:px-6 flex items-center justify-between text-left rtl:text-right gap-4 cursor-pointer focus:outline-none"
-                  >
-                    <span className="font-serif text-base sm:text-lg font-bold text-[#064232] dark:text-white leading-snug">
-                      {question}
-                    </span>
-                    <div
-                      className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-transform duration-200 ${
-                        isOpen
-                          ? isDark
-                            ? 'bg-[#facc15] text-[#064232] rotate-180'
-                            : 'bg-[#064232] text-[#facc15] rotate-180'
-                          : isDark
-                            ? 'bg-white/10 text-gray-300'
-                            : 'bg-gray-100 text-gray-600'
-                      }`}
-                    >
-                      <ChevronDown className="w-4 h-4" />
-                    </div>
-                  </button>
-
-                  {isOpen && (
-                    <div className={`px-5 sm:px-6 pb-5 pt-1 text-xs sm:text-sm leading-relaxed border-t ${
-                      isDark 
-                        ? 'border-white/5 text-emerald-100/90' 
-                        : 'border-[#f0eee4] text-[#4e655c]'
-                    }`}>
-                      <p>{answer}</p>
-                    </div>
-                  )}
-                </div>
-              );
-            })}
           </div>
         </div>
 
