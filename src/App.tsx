@@ -14,7 +14,6 @@ const WhyChooseUsSection = lazy(() => import('./components/WhyChooseUsSection').
 const SafirAboutSection = lazy(() => import('./components/SafirAboutSection').then(m => ({ default: m.SafirAboutSection })));
 const SafirPricingSection = lazy(() => import('./components/SafirPricingSection').then(m => ({ default: m.SafirPricingSection })));
 const PaymentMethodsSection = lazy(() => import('./components/PaymentMethodsSection').then(m => ({ default: m.PaymentMethodsSection })));
-const ParentsSection = lazy(() => import('./components/ParentsSection').then(m => ({ default: m.ParentsSection })));
 const SafirContactSection = lazy(() => import('./components/SafirContactSection').then(m => ({ default: m.SafirContactSection })));
 const SafirFooter = lazy(() => import('./components/SafirFooter').then(m => ({ default: m.SafirFooter })));
 const AdminLoginModal = lazy(() => import('./components/AdminLoginModal').then(m => ({ default: m.AdminLoginModal })));
@@ -101,11 +100,6 @@ export default function App() {
             <PaymentMethodsSection onOpenFreeTrial={() => handleOpenFreeTrial()} />
           </Suspense>
         </RevealOnScroll>
-
-        {/* 11. Parent guidance and progress visibility */}
-        <Suspense fallback={null}>
-          <ParentsSection onOpenFreeTrial={() => handleOpenFreeTrial()} />
-        </Suspense>
 
 
         {/* 9. Contact & Admissions Section */}
