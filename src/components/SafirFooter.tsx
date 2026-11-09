@@ -139,6 +139,14 @@ export const SafirFooter: React.FC<SafirFooterProps> = ({
                   {t.nav.contact}
                 </button>
               </li>
+              <li>
+                <a
+                  href="/guides/online-quran-classes-for-kids.html"
+                  className="hover:text-[#D4AF37] transition-colors cursor-pointer"
+                >
+                  Parent Guide
+                </a>
+              </li>
             </ul>
           </div>
 
